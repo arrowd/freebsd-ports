@@ -1,0 +1,3 @@
+This port provides FreeBSD libc compiled into LLVM IR bitcode archive (.bca)
+
+WWW: https://FreeBSD.org/

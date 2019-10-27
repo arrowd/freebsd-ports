@@ -1,0 +1,7 @@
+libc++ is a new implementation of the C++ standard library, targeting C++11
+and above. It features correctness as defined by the C++11 standard, fast
+execution, minimal memory use and fast compile times.
+
+This port provides libc++ compiled into LLVM IR bitcode archive (.bca)
+
+WWW: https://libcxx.llvm.org/

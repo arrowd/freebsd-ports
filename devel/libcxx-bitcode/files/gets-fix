@@ -1,0 +1,27 @@
+--- include/cstdio.orig	2017-04-07 05:20:52.000000000 +0300
++++ include/cstdio	2019-10-26 10:04:58.689743000 +0400
+@@ -153,7 +153,7 @@
+ 
+ #ifndef _LIBCPP_HAS_NO_STDIN
+ using ::getchar;
+-#if _LIBCPP_STD_VER <= 11 && !defined(_LIBCPP_MSVCRT)
++#if _LIBCPP_STD_VER <= 11 && !defined(_LIBCPP_C_HAS_NO_GETS)
+ using ::gets;
+ #endif
+ using ::scanf;
+--- include/__config.orig	2019-01-16 05:51:12.000000000 +0400
++++ include/__config	2019-10-26 10:07:53.988084000 +0400
+@@ -1203,6 +1203,13 @@
+ #define _LIBCPP_HAS_NO_STDOUT
+ #endif
+ 
++// Some systems do not provide gets() in their C library, for security reasons.
++#ifndef _LIBCPP_C_HAS_NO_GETS
++#  if defined(_LIBCPP_MSVCRT) || (defined(__FreeBSD__) && __FreeBSD__ >= 13)
++#    define _LIBCPP_C_HAS_NO_GETS
++#  endif
++#endif
++
+ #if defined(__BIONIC__) || defined(__CloudABI__) ||                            \
+     defined(__Fuchsia__) || defined(_LIBCPP_HAS_MUSL_LIBC)
+ #define _LIBCPP_PROVIDES_DEFAULT_RUNE_TABLE
