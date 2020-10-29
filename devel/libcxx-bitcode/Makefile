@@ -25,8 +25,10 @@ CXX=		${LOCALBASE}/bin/gclang++
 MY_MAKE_ENV=	LLVM_CC_NAME=clang${LLVM_SUFFIX} \
 		LLVM_CXX_NAME=clang++${LLVM_SUFFIX} \
 		GLLVM_OBJCOPY=${LOCALBASE}/bin/objcopy \
+		WLLVM_OUTPUT_LEVEL=DEBUG \
+		WLLVM_OUTPUT_FILE=/tmp/gllvm.log \
 		CC=${CC} \
-		CCX=${CCX} \
+		CXX=${CXX} \
 		LD=${LD} \
 		PATH=${PATH} \
 		MAKEOBJDIRPREFIX=${WRKDIR}
