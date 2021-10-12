@@ -1,11 +1,7 @@
 PORTNAME=	sddm
-PORTVERSION=	0.19.0
+PORTVERSION=	0.19.99
 DISTVERSIONPREFIX=	v
-PORTREVISION=	8
 CATEGORIES=	x11
-
-PATCH_SITES=	https://github.com/sddm/sddm/commit/
-PATCHFILES=	e93bf95c54ad8c2a1604f8d7be05339164b19308.patch:-p1
 
 MAINTAINER=	kde@FreeBSD.org
 COMMENT=	QML based login manager
@@ -28,10 +24,12 @@ RUN_DEPENDS=	dbus-run-session:devel/dbus \
 USES=		cmake compiler:c++11-lang cpe kde:5 pkgconfig python:build qt:5 xorg
 CPE_VENDOR=	${PORTNAME}_project
 USE_GITHUB=	yes
+GH_TAGNAME=	5341b0660d729fa300a9e03a66185e99098fceaf
 USE_KDE=	ecm:build
 USE_QT=		core declarative dbus gui network \
-		buildtools:build linguisttools:build qmake:build testlib:build
-USE_XORG=	xcb
+		buildtools:build linguisttools:build declarative-test:build \
+		qmake:build testlib:build
+USE_XORG=	xau xcb
 
 CONFLICTS_INSTALL=	lightdm
 
@@ -39,7 +37,8 @@ CMAKE_ON=	BUILD_MAN_PAGES
 CMAKE_ARGS=	-DUID_MIN=1000 \
 		-DUID_MAX=65000 \
 		-DCMAKE_INSTALL_SYSCONFDIR:PATH=${LOCALBASE}/etc \
-		-DRST2MAN_EXECUTABLE=${LOCALBASE}/bin/rst2man.py-${PYTHON_VER}
+		-DRST2MAN_EXECUTABLE=${LOCALBASE}/bin/rst2man.py-${PYTHON_VER} \
+		-DSDDM_INITIAL_VT=7
 
 USE_RC_SUBR=	sddm
 SUB_FILES=	xinitrc.desktop
