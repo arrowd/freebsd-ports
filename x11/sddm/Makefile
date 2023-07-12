@@ -1,5 +1,5 @@
 PORTNAME=	sddm
-PORTVERSION=	0.19.99
+PORTVERSION=	0.20.0
 DISTVERSIONPREFIX=	v
 CATEGORIES=	x11
 
@@ -24,7 +24,6 @@ RUN_DEPENDS=	dbus-run-session:devel/dbus \
 USES=		cmake compiler:c++11-lang cpe kde:5 pkgconfig python:build qt:5 xorg
 CPE_VENDOR=	${PORTNAME}_project
 USE_GITHUB=	yes
-GH_TAGNAME=	5341b0660d729fa300a9e03a66185e99098fceaf
 USE_KDE=	ecm:build
 USE_QT=		core declarative dbus gui network \
 		buildtools:build linguisttools:build declarative-test:build \
