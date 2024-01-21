@@ -1,6 +1,6 @@
 PORTNAME=	pam_ssh_agent_auth
 PORTVERSION=	0.10.4
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	security
 
 MAINTAINER=	matthew@FreeBSD.org
@@ -27,7 +27,7 @@ CONFIGURE_ARGS=	--libexecdir=${LOCALBASE}/lib \
 		--without-openssl-header-check
 
 PLIST_FILES=	lib/pam_ssh_agent_auth.so \
-		man/man8/pam_ssh_agent_auth.8.gz
+		share/man/man8/pam_ssh_agent_auth.8.gz
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/pam_ssh_agent_auth.so
