@@ -14,7 +14,7 @@ PLIST_FILES=	bin/bar1
 DESCR=		Makefile
 
 do-build:
-	#${ECHO_CMD} fails with new libdep && ${FALSE}
+	${ECHO_CMD} fails with new libdep && ${FALSE}
 	${CC} ${CFLAGS} ${LDFLAGS} -ldep -o ${WRKDIR}/bar1 ${.CURDIR}/bar.c
 
 do-install:
