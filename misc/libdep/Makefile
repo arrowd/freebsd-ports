@@ -1,10 +1,11 @@
 PORTNAME=	libdep
-PORTVERSION=	1
+PORTVERSION=	2
 CATEGORIES=	misc
 DISTFILES=
 
 PLIST_FILES=	lib/libdep.so \
-		lib/libdep.so.1
+		lib/libdep.so.1 \
+		share/foo
 
 DESCR=		Makefile
 
@@ -14,5 +15,6 @@ do-build:
 do-install:
 	${INSTALL_PROGRAM} ${WRKDIR}/libdep.so.1 ${STAGEDIR}${PREFIX}/lib/
 	${LN} -s libdep.so.1 ${STAGEDIR}${PREFIX}/lib/libdep.so
+	${TOUCH} ${STAGEDIR}${PREFIX}/share/foo
 
 .include <bsd.port.mk>

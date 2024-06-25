@@ -1,5 +1,5 @@
 PORTNAME=	foo
-PORTVERSION=	1
+PORTVERSION=	2
 CATEGORIES=	misc
 DISTFILES=
 
@@ -9,8 +9,7 @@ LIB_DEPENDS=	libdep.so:misc/libdep
 
 USES=	localbase:ldflags
 
-PLIST_FILES=	bin/foo1 \
-		share/foo
+PLIST_FILES=	bin/foo1
 
 DESCR=		Makefile
 
