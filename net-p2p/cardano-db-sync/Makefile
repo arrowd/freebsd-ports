@@ -1,5 +1,5 @@
 PORTNAME=	cardano-db-sync
-PORTVERSION=	13.3.0.0
+PORTVERSION=	13.4.0.1
 CATEGORIES=	net-p2p databases
 MASTER_SITES=	https://chap.intersectmbo.org/package/:chap
 
@@ -10,7 +10,8 @@ WWW=		https://cardano.org/
 LICENSE=	APACHE20
 
 LIB_DEPENDS=	libsecp256k1.so:math/secp256k1 \
-		libblst.so:security/blst
+		libblst.so:security/blst \
+		libicuuc.so:devel/icu
 RUN_DEPENDS=	cardano-node:net-p2p/cardano-node \
 		bash:shells/bash \
 		${LOCALBASE}/share/rc-subr-jail/rc.subr.jail:ports-mgmt/rc-subr-jail
@@ -23,17 +24,19 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	IntersectMBO
 
 GH_TUPLE=	IntersectMBO:libsodium:${LIBSODIUM_HASH}:sodium	\
-		IntersectMBO:cardano-node:2820a63dc934c6d5b5f450b6c2543b81c6476696:cardano_node/dist-newstyle/src/cardano-n_-5bf92c55f9471797 \
+		IntersectMBO:cardano-node:176f99e51155cb3eaa0711db1c3c969d67438958:cardano_node/dist-newstyle/src/cardano-n_-5bf92c55f9471797 \
                 input-output-hk:persistent-documentation:0e95dbb144b02a2e6bf3a8a7531f4ad2f7d64ce5:persistent_documentation/dist-newstyle/src/persisten_-a1243ced6d6a0f35
 
-CARDANO_DB_SYNC_HASH=	d21895fec3a9445493b6ff4aa61b8dcb5153de1e
+CARDANO_DB_SYNC_HASH=	dbea349bfee8159bf443ce6fdeec4d3670ac3e70
 LIBSODIUM_HASH=		dbb48cce5429cb6585c9034f002568964f1ce567
 
 USE_RC_SUBR=		cardano_db_sync
 LIBS_PREFIX=		${WRKDIR}/libs_install
 BINARY_ALIAS=		git=true
 
-USE_CABAL=	Diff-0.5_1 \
+USE_CABAL=	Cabal-3.10.3.0 \
+		Cabal-syntax-3.10.3.0 \
+		Diff-0.5_1 \
 		FailT-0.1.2.0 \
 		Glob-0.10.2_3 \
 		HUnit-1.6.2.0 \
@@ -48,8 +51,9 @@ USE_CABAL=	Diff-0.5_1 \
 		Unique-0.4.7.9_1 \
 		Win32-network-0.2.0.0:chap \
 		adjunctions-4.4.2_2 \
-		aeson-2.2.3.0 \
+		aeson-2.2.3.0_1 \
 		aeson-pretty-0.8.10 \
+		alex-3.5.1.0 \
 		algebraic-graphs-0.7_3 \
 		ansi-terminal-1.1 \
 		ansi-terminal-types-1.1 \
@@ -96,9 +100,9 @@ USE_CABAL=	Diff-0.5_1 \
 		cabal-doctest-1.0.9_3 \
 		call-stack-0.4.0 \
 		canonical-json-0.6.0.1_1 \
-		cardano-api-9.0.0.0:chap \
+		cardano-api-9.1.0.0:chap \
 		cardano-binary-1.7.1.0:chap \
-		cardano-cli-9.0.0.0:chap \
+		cardano-cli-9.2.1.0:chap \
 		cardano-client-0.3.1.2_3:chap \
 		cardano-crypto-1.1.2:chap \
 		cardano-crypto-class-2.1.5.0:chap \
@@ -179,6 +183,7 @@ USE_CABAL=	Diff-0.5_1 \
 		deriving-compat-0.6.6 \
 		dictionary-sharing-0.1.0.0_4 \
 		digest-0.0.2.1 \
+		directory-1.3.8.5 \
 		distributive-0.6.2.1_1 \
 		dlist-1.0_2 \
 		dns-4.2.0 \
@@ -193,11 +198,13 @@ USE_CABAL=	Diff-0.5_1 \
 		erf-2.0.0.0 \
 		errors-2.3.0_5 \
 		esqueleto-3.5.11.2 \
+		exceptions-0.10.8_1 \
 		extra-1.7.16 \
 		fast-logger-3.2.3 \
 		fgl-5.8.2.0 \
 		file-embed-0.0.16.0 \
 		filelock-0.1.1.7 \
+		filepath-1.4.300.2 \
 		fin-0.3.1 \
 		fingertree-0.1.5.0 \
 		flat-0.6 \
@@ -218,6 +225,7 @@ USE_CABAL=	Diff-0.5_1 \
 		half-0.3.1_2 \
 		happy-1.20.1.1 \
 		hashable-1.4.6.0 \
+		haskeline-0.8.2.1_2 \
 		haskell-lexer-1.1.1 \
 		heapwords-0.1.0.2:chap \
 		hedgehog-1.4_8 \
@@ -230,7 +238,7 @@ USE_CABAL=	Diff-0.5_1 \
 		hspec-core-2.11.9 \
 		hspec-discover-2.11.9 \
 		hspec-expectations-0.8.4_2 \
-		http-api-data-0.6.1 \
+		http-api-data-0.6.1_1 \
 		http-client-0.7.17 \
 		http-client-tls-0.3.6.3 \
 		http-conduit-2.3.8.3 \
@@ -277,6 +285,7 @@ USE_CABAL=	Diff-0.5_1 \
 		megaparsec-9.6.1 \
 		memory-0.18.0 \
 		microlens-0.4.13.1_1 \
+		microlens-aeson-2.5.2 \
 		microlens-mtl-0.2.0.3_1 \
 		microlens-th-0.4.3.15 \
 		microstache-1.0.3 \
@@ -304,7 +313,7 @@ USE_CABAL=	Diff-0.5_1 \
 		old-time-1.1.0.4 \
 		openssl-streams-1.2.3.0_3 \
 		optics-core-0.4.1.1_1 \
-		optics-extra-0.4.2.1_3 \
+		optics-extra-0.4.2.1_4 \
 		optics-th-0.4.1_8 \
 		optparse-applicative-0.18.1.0 \
 		optparse-applicative-fork-0.18.1.0:chap \
@@ -334,7 +343,7 @@ USE_CABAL=	Diff-0.5_1 \
 		plutus-tx-1.30.0.0:chap \
 		polyparse-1.13_9 \
 		postgresql-libpq-0.10.1.0_1 \
-		postgresql-simple-0.7.0.0_1 \
+		postgresql-simple-0.7.0.0_2 \
 		pretty-show-1.10 \
 		pretty-simple-4.1.2.0 \
 		prettyprinter-1.7.1 \
@@ -342,10 +351,11 @@ USE_CABAL=	Diff-0.5_1 \
 		prettyprinter-compat-ansi-wl-pprint-1.0.2 \
 		prettyprinter-configurable-1.30.0.0:chap \
 		primitive-0.9.0.0_1 \
+		process-1.6.20.0_1 \
 		profunctors-5.6.2_3 \
 		prometheus-2.2.4_1 \
 		psqueues-0.2.8.0 \
-		quickcheck-instances-0.3.31_1 \
+		quickcheck-instances-0.3.31_2 \
 		quickcheck-io-0.2.0 \
 		quickcheck-monoids-0.1.0.0:chap \
 		quickcheck-state-machine-0.9.0 \
@@ -368,7 +378,7 @@ USE_CABAL=	Diff-0.5_1 \
 		safe-wild-cards-1.0.0.2_1 \
 		scientific-0.3.8.0_1 \
 		selective-0.5 \
-		semialign-1.3.1 \
+		semialign-1.3.1_1 \
 		semigroupoids-6.0.1_1 \
 		semigroups-0.20 \
 		serialise-0.2.6.1_3 \
@@ -395,6 +405,7 @@ USE_CABAL=	Diff-0.5_1 \
 		splitmix-0.1.0.5_1 \
 		statistics-0.16.2.1 \
 		statistics-linreg-0.3 \
+		stm-2.5.3.1 \
 		stm-chans-3.0.0.9 \
 		streaming-0.2.4.0 \
 		streaming-binary-0.3.0.1 \
@@ -439,7 +450,7 @@ USE_CABAL=	Diff-0.5_1 \
 		th-orphans-0.13.14_3 \
 		th-reify-many-0.1.10 \
 		th-utilities-0.2.5.0 \
-		these-1.2.1 \
+		these-1.2.1_1 \
 		time-compat-1.9.7_2 \
 		time-manager-0.1.0 \
 		time-units-1.0.0 \
@@ -448,7 +459,7 @@ USE_CABAL=	Diff-0.5_1 \
 		transformers-base-0.4.6 \
 		transformers-compat-0.7.2 \
 		transformers-except-0.1.4_1 \
-		tree-diff-0.3.1 \
+		tree-diff-0.3.1_1 \
 		typed-process-0.2.11.1 \
 		typed-protocols-0.1.1.0_3:chap \
 		typed-protocols-cborg-0.1.0.4:chap \
@@ -456,12 +467,13 @@ USE_CABAL=	Diff-0.5_1 \
 		unagi-chan-0.4.1.4 \
 		unbounded-delays-0.1.1.1 \
 		universe-base-1.1.4 \
+		unix-2.8.5.1 \
 		unix-bytestring-0.4.0.1_1 \
 		unix-compat-0.7.1 \
 		unix-time-0.4.15 \
 		unliftio-0.2.25.0 \
 		unliftio-core-0.2.1.0_4 \
-		unordered-containers-0.2.20_2 \
+		unordered-containers-0.2.20_3 \
 		utf8-string-1.0.2 \
 		uuid-types-1.0.6_1 \
 		validation-selective-0.2.0.0.0.0.0.0.1:chap \
@@ -484,7 +496,7 @@ USE_CABAL=	Diff-0.5_1 \
 		warp-3.4.1_1 \
 		wide-word-0.1.6.0_2 \
 		with-utf8-1.1.0.0_1 \
-		witherable-0.5 \
+		witherable-0.5_1 \
 		wl-pprint-annotated-0.1.0.1_3 \
 		wl-pprint-text-1.2.0.2_2 \
 		word-wrap-0.5 \
