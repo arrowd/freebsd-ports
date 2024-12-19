@@ -1,5 +1,6 @@
 PORTNAME=	xrootd
 DISTVERSION=	5.6.9
+PORTREVISION=	1
 CATEGORIES=	databases
 MASTER_SITES=	https://xrootd.slac.stanford.edu/download/v${DISTVERSION}/
 
@@ -17,7 +18,7 @@ BROKEN_armv7=	compilation fails: non-constant-expression cannot be narrowed from
 BUILD_DEPENDS=	bash:shells/bash
 LIB_DEPENDS=	libcurl.so:ftp/curl \
 		libtinyxml.so:textproc/tinyxml \
-		libuuid.so:misc/e2fsprogs-libuuid
+		libuuid.so:misc/libuuid
 
 USES=		cmake:testing compiler:c++14-lang cpe gnome localbase:ldflags pkgconfig readline shebangfix ssl
 SHEBANG_GLOB=	*.sh

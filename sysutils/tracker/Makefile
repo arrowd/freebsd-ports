@@ -1,6 +1,6 @@
 PORTNAME=	tracker
 PORTVERSION=	2.3.4
-PORTREVISION=	12
+PORTREVISION=	13
 CATEGORIES=	sysutils gnome
 MASTER_SITES=	GNOME
 
@@ -14,7 +14,7 @@ WWW=		https://wiki.gnome.org/Projects/Tracker
 LICENSE=	LGPL21
 LICENSE_FILE=	${WRKSRC}/COPYING.LGPL
 
-LIB_DEPENDS=	libuuid.so:misc/e2fsprogs-libuuid \
+LIB_DEPENDS=	libuuid.so:misc/libuuid \
 		libsoup-2.4.so:devel/libsoup \
 		libdbus-1.so:devel/dbus \
 		libjson-glib-1.0.so:devel/json-glib \

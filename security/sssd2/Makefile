@@ -1,5 +1,6 @@
 PORTNAME=	sssd
 PORTVERSION=	2.9.6
+PORTREVISION=	1
 CATEGORIES=	security
 PKGNAMESUFFIX=	2
 
@@ -44,7 +45,7 @@ LIB_DEPENDS=	libcares.so:dns/c-ares \
 		libtdb.so:databases/tdb \
 		libtevent.so:devel/tevent \
 		libunistring.so:devel/libunistring \
-		libuuid.so:misc/e2fsprogs-libuuid
+		libuuid.so:misc/libuuid
 
 RUN_DEPENDS=	adcli:net-mgmt/adcli \
 		cyrus-sasl-gssapi>0:security/cyrus-sasl2-gssapi

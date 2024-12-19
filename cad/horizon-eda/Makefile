@@ -1,7 +1,7 @@
 PORTNAME=	horizon-eda
 DISTVERSIONPREFIX=	v
 DISTVERSION=	2.6.0
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	cad
 
 PATCH_SITES=	https://github.com/${GH_ACCOUNT}/${GH_PROJECT}/commit/
@@ -28,7 +28,7 @@ LIB_DEPENDS=	libcurl.so:ftp/curl \
 		libpodofo09.so:graphics/podofo09 \
 		libspnav.so:misc/libspnav \
 		libTKDESTEP.so:cad/opencascade \
-		libuuid.so:misc/e2fsprogs-libuuid \
+		libuuid.so:misc/libuuid \
 		libzmq.so:net/libzmq4
 
 USES=		desktop-file-utils gnome libarchive localbase meson pkgconfig python:build sqlite

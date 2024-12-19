@@ -1,6 +1,6 @@
 PORTNAME=	opensips31
 DISTVERSION=	3.1.11
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	net
 MASTER_SITES=	https://opensips.org/pub/opensips/${DISTVERSION}/
 DISTNAME=	opensips-${DISTVERSION}
@@ -19,7 +19,7 @@ LIB_DEPENDS=	libconfuse.so:devel/libconfuse \
 		libjson-c.so:devel/json-c \
 		libjwt.so:www/libjwt \
 		libpcre.so:devel/pcre \
-		libuuid.so:misc/e2fsprogs-libuuid
+		libuuid.so:misc/libuuid
 
 USES=		gettext-runtime gmake gnome localbase:ldflags ncurses perl5 \
 		pkgconfig shebangfix ssl

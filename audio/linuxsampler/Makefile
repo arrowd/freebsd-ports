@@ -1,5 +1,6 @@
 PORTNAME=	linuxsampler
 DISTVERSION=	2.3.1
+PORTREVISION=	1
 CATEGORIES=	audio
 MASTER_SITES=	https://download.linuxsampler.org/packages/
 
@@ -16,7 +17,7 @@ ONLY_FOR_ARCHS_REASON=	not yet ported to this architecture
 BUILD_DEPENDS=	lv2>0:audio/lv2
 LIB_DEPENDS=	libgig.so:audio/libgig \
 		libsndfile.so:audio/libsndfile \
-		libuuid.so:misc/e2fsprogs-libuuid
+		libuuid.so:misc/libuuid
 
 USES=		bison:wrapper compiler:c++14-lang gmake libtool localbase pathfix pkgconfig sqlite:3 tar:bzip2
 USE_LDCONFIG=	${PREFIX}/lib/linuxsampler

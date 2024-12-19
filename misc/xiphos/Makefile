@@ -1,6 +1,6 @@
 PORTNAME=	xiphos
 DISTVERSION=	4.2.1
-PORTREVISION=	12
+PORTREVISION=	13
 CATEGORIES=	misc gnome
 # Don't use USE_GITHUB: the sources downloaded by USE_GITHUB cannot be
 # built as they miss the file ${WRKSRC}/cmake/source_version.txt.
@@ -25,7 +25,7 @@ LIB_DEPENDS=	libbiblesync.so:misc/biblesync \
 		libicui18n.so:devel/icu \
 		libsoup-2.4.so:devel/libsoup \
 		libsword.so:misc/sword \
-		libuuid.so:misc/e2fsprogs-libuuid \
+		libuuid.so:misc/libuuid \
 		libwebkit2gtk-4.0.so:www/webkit2-gtk3
 
 # gettext is always needed, even if NLS is off

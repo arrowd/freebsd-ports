@@ -1,6 +1,6 @@
 PORTNAME=	gnome-terminal
 DISTVERSION=	3.44.2
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	x11 gnome
 MASTER_SITES=	GNOME
 DIST_SUBDIR=	gnome
@@ -19,7 +19,7 @@ BUILD_DEPENDS=	docbook-xsl>0:textproc/docbook-xsl \
 LIB_DEPENDS=	libfribidi.so:converters/fribidi \
 		libgnutls.so:security/gnutls \
 		libpcre2-8.so:devel/pcre2 \
-		libuuid.so:misc/e2fsprogs-libuuid
+		libuuid.so:misc/libuuid
 RUN_DEPENDS=	gsettings-desktop-schemas>=0:devel/gsettings-desktop-schemas
 
 PORTSCOUT=	limitw:1,even

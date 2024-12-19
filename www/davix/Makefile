@@ -1,6 +1,7 @@
 PORTNAME=	davix
 DISTVERSIONPREFIX=	R_
 DISTVERSION=	0_8_7
+PORTREVISION=	1
 CATEGORIES=	www
 
 MAINTAINER=	yuri@FreeBSD.org
@@ -11,7 +12,7 @@ LICENSE=	LGPL21
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 LIB_DEPENDS=	libcurl.so:ftp/curl \
-		libuuid.so:misc/e2fsprogs-libuuid
+		libuuid.so:misc/libuuid
 
 USES=		cmake:testing compiler:c++11-lang gnome localbase:ldflags python:build shebangfix ssl
 SHEBANG_GLOB=	*.py
