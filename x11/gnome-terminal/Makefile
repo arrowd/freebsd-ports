@@ -1,5 +1,6 @@
 PORTNAME=	gnome-terminal
 DISTVERSION=	3.54.4
+PORTREVISION=	1
 CATEGORIES=	x11 gnome
 MASTER_SITES=	GNOME
 DIST_SUBDIR=	gnome
@@ -16,8 +17,8 @@ BUILD_DEPENDS=	docbook-xsl>0:textproc/docbook-xsl \
 		itstool:textproc/itstool \
 		xsltproc:textproc/libxslt
 LIB_DEPENDS=	libpcre2-8.so:devel/pcre2 \
-		libuuid.so:misc/e2fsprogs-libuuid \
-		libhandy-1.so:x11-toolkits/libhandy
+		libhandy-1.so:x11-toolkits/libhandy \
+		libuuid.so:misc/libuuid
 RUN_DEPENDS=	gsettings-desktop-schemas>=0:devel/gsettings-desktop-schemas
 
 PORTSCOUT=	limitw:1,even

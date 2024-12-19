@@ -1,6 +1,6 @@
 PORTNAME=	gnote
 PORTVERSION=	42.1
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	deskutils gnome
 MASTER_SITES=	GNOME/sources/${PORTNAME}/${PORTVERSION:C/^([0-9]+)\..*/\1/}
 
@@ -15,7 +15,7 @@ BUILD_DEPENDS=	itstool:textproc/itstool
 LIB_DEPENDS=	libenchant.so:textproc/enchant \
 		libgtkspell3-3.so:textproc/gtkspell3 \
 		libsecret-1.so:security/libsecret \
-		libuuid.so:misc/e2fsprogs-libuuid
+		libuuid.so:misc/libuuid
 
 PORTSCOUT=	limitw:1,even
 
