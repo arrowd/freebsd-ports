@@ -1,6 +1,6 @@
 PORTNAME=	biboumi
 DISTVERSION=	9.0
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	net-im
 MASTER_SITES=	https://git.louiz.org/biboumi/snapshot/
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
@@ -12,7 +12,7 @@ WWW=		https://biboumi.louiz.org/
 LICENSE=	ZLIB
 
 LIB_DEPENDS=	libexpat.so:textproc/expat2 \
-		libuuid.so:misc/e2fsprogs-libuuid
+		libuuid.so:misc/libuuid
 
 USES=		cmake iconv localbase:ldflags pkgconfig python:build tar:xz
 
