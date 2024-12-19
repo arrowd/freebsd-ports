@@ -1,0 +1,11 @@
+--- meson_options.txt.orig	2024-12-06 09:03:41 UTC
++++ meson_options.txt
+@@ -255,6 +255,8 @@ option('build-hexdump', type : 'feature',
+        description : 'build pylibmount')
+ option('build-hexdump', type : 'feature',
+        description : 'build hexdump')
++option('build-findfs', type : 'feature',
++       description : 'build findfs')
+ 
+ # static programs
+ 
