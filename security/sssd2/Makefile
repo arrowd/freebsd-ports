@@ -1,6 +1,5 @@
 PORTNAME=	sssd
-PORTVERSION=	2.9.6
-PORTREVISION=	4
+PORTVERSION=	2.10.2
 CATEGORIES=	security
 PKGNAMESUFFIX=	2
 
@@ -45,10 +44,12 @@ LIB_DEPENDS=	libcares.so:dns/c-ares \
 		libtdb.so:${SAMBA_TDB_PORT} \
 		libtevent.so:${SAMBA_TEVENT_PORT} \
 		libunistring.so:devel/libunistring \
-		libuuid.so:misc/libuuid
+		libuuid.so:misc/libuuid \
+		libutf8proc.so:textproc/utf8proc
 
 RUN_DEPENDS=	adcli:net-mgmt/adcli \
-		cyrus-sasl-gssapi>0:security/cyrus-sasl2-gssapi
+		cyrus-sasl-gssapi>0:security/cyrus-sasl2-gssapi \
+		nsupdate:dns/bind-tools
 
 USES=	autoreconf cpe gettext gmake gssapi:flags,mit iconv ldap \
 	libtool localbase:ldflags pathfix pkgconfig python:3.9+ samba:env \
@@ -61,10 +62,9 @@ INSTALL_TARGET=	install-strip
 CPE_VENDOR=	fedoraproject
 
 CONFIGURE_ARGS=	--disable-dependency-tracking \
-		--datadir=${DATADIR} \
-		--localstatedir=/var \
 		--disable-nls \
 		--disable-cifs-idmap-plugin \
+		--disable-linux-caps \
 		--disable-valgrind \
 		--disable-systemtap \
 		--enable-pammoddir=${PREFIX}/lib \
@@ -88,10 +88,8 @@ CONFIGURE_ARGS=	--disable-dependency-tracking \
 		--with-winbind-plugin-path=${LOCALBASE}/lib/samba4/modules/idmap \
 		--without-selinux \
 		--with-gpo-cache-path=/var/db/sss/gpo_cache  \
-		--without-semanage \
 		--with-app-libs=${LOCALBASE}/lib/sssd/modules \
 		--without-autofs \
-		--with-files-provider \
 		--with-passkey \
 		--with-samba \
 		--without-nfsv4-idmapd-plugin \
@@ -101,7 +99,6 @@ CONFIGURE_ARGS=	--disable-dependency-tracking \
 		--with-ldb-lib-dir=${LOCALBASE}/lib/shared-modules/ldb \
 		--with-smb-idmap-interface-version=6 \
 		--without-libnl \
-		--with-nscd-conf=/etc/nscd.conf \
 		--with-python_prefix=${PREFIX}
 CONFIGURE_ENV=	KRB5_CONFIG="${KRB5CONFIG}"
 
@@ -138,27 +135,20 @@ USE_RC_SUBR=	${PORTNAME}
 
 USE_GITHUB=yes
 GH_ACCOUNT=sssd
+GH_TAGNAME=ac9fd622bbcc1034b771eda4607e5bd8917812f6
 
 post-patch:
 	@${REINPLACE_CMD} -e 's|/usr/bin/|${PREFIX}/bin/|g' \
 		-e 's|/var/lib/sss/pubconf/|/var/db/sss/pubconf/|g' \
-		${WRKSRC}/src/man/sss_ssh_knownhostsproxy.1.xml \
 		${WRKSRC}/src/man/po/*.po || true
 	@${REINPLACE_CMD} -e 's|/etc/sssd/|${ETCDIR}/|g' \
 		-e 's|/etc/openldap/|${LOCALBASE}/etc/openldap/|g' \
 		${WRKSRC}/src/man/*xml || true
-	@${CP} ${FILESDIR}/sss_bsd_errno.h ${WRKSRC}/src/util/sss_bsd_errno.h
 	@${CP} ${FILESDIR}/bsdnss.c ${WRKSRC}/src/sss_client/bsdnss.c
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/src/examples/sssd-example.conf \
 		${STAGEDIR}${ETCDIR}/sssd.conf.sample
-	${MKDIR} ${STAGEDIR}${PREFIX}/share/dbus-1/system.d
-	${INSTALL_DATA} ${WRKSRC}/src/responder/ifp/org.freedesktop.sssd.infopipe.conf \
-		${STAGEDIR}${PREFIX}/share/dbus-1/system.d/org.freedesktop.sssd.infopipe.conf
-	${MKDIR} ${STAGEDIR}${PREFIX}/share/dbus-1/system-services
-	${INSTALL_DATA} ${WRKSRC}/src/responder/ifp/org.freedesktop.sssd.infopipe.service \
-		${STAGEDIR}${PREFIX}/share/dbus-1/system-services/org.freedesktop.sssd.infopipe.service
 	${LN} -sf libnss_sss.so.2 ${STAGEDIR}${PREFIX}/lib/nss_sss.so.1
 
 .include <bsd.port.mk>
