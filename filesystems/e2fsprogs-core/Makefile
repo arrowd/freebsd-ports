@@ -249,29 +249,6 @@ _staticlibs+=${LOCALBASE}/lib/libunwind.a /usr/lib/liblzma.a /usr/lib/libmd.a
 .endif
 
 post-build:
-# Relink e2fsck statically - We need to make sure that tools for the root file
-# system are statically linked against anything that is outside the root fs,
-# else we're in trouble if e2fsck is needed for boot:
-# (we don't use e2fsck.static, since we can link libc.so dynamically)
-# NOTE: we need to link libgcc statically, it might be under /usr/local!
-# => do not add a -Bdynamic - but instead list the dynamic libraries
-# before the -Bstatic
-	cd ${WRKSRC}/e2fsck && ${RM} -f e2fsck \
-		&& ${MAKE_CMD} e2fsck V=1 \
-		LIBS="-static-libgcc -lc -Bstatic ../lib/libsupport.a ../lib/libext2fs.a ../lib/libcom_err.a \
-		${_staticlibs} /usr/lib/libexecinfo.a /usr/lib/libelf.a \
-		${LOCALBASE}/lib/libblkid.a ${LOCALBASE}/lib/libuuid.a ${libintl} ../lib/libe2p.a " \
-		&& ${STRIP_CMD} e2fsck
-# Regression check: avoid a port (not upstream!) regression from 1.40.5,
-# check that e2fsck isn't dynalinked against anything but libc.so:
-	@${ECHO_CMD} -n "===>  checking that e2fsck depends on no shared objects outside /lib: "
-	@a="$$(ldd ${WRKSRC}/e2fsck/e2fsck 2>/dev/null \
-	    | ${GREP} -v 'not a dynamic executable' \
-	    | ${GREP} '=>' \
-	    | ${AWK}  '{print $$3;}' \
-	    | ${EGREP} -v '^/lib/lib.*\.so\.' || :)"; \
-	if test "x$$a" = "x" ; then echo 'PASS' ; else \
-	    echo 'FAIL' ; echo '===>  e2fsck depends on:' ; echo "$$a" ; exit 1 ; fi
 # Update translation binary files
 .if ${PORT_OPTIONS:MNLS}
 	cd ${WRKSRC}/po && ${MAKE_CMD} update-gmo
