@@ -1,6 +1,5 @@
 PORTNAME=	squashfuse
-DISTVERSION=	0.5.2
-PORTREVISION=	2
+DISTVERSION=	0.6.0
 CATEGORIES=	filesystems
 MASTER_SITES=	https://github.com/vasi/${PORTNAME}/releases/download/${DISTVERSION}/
 PKGNAMEPREFIX=	fusefs-
@@ -23,7 +22,7 @@ GNU_CONFIGURE=	yes
 
 INSTALL_TARGET=	install-strip
 
-CONFIGURE_ARGS=	--disable-static \
-		--with-pkgconfigdir=${PREFIX}/libdata/pkgconfig
+# static libs required for devel/appimage-type2-runtime
+CONFIGURE_ARGS=	--with-pkgconfigdir=${PREFIX}/libdata/pkgconfig
 
 .include <bsd.port.mk>
