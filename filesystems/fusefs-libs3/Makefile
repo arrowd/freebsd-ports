@@ -1,5 +1,6 @@
 PORTNAME=	fusefs-libs3
 DISTVERSION=	3.17.1
+PORTREVISION=	1
 CATEGORIES=	filesystems sysutils
 MASTER_SITES=	https://github.com/libfuse/libfuse/releases/download/fuse-${DISTVERSION}/
 DISTNAME=	fuse-${DISTVERSION}
@@ -14,6 +15,9 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 USES=		compiler iconv meson ninja
 USE_LDCONFIG=	yes
+
+# static library is required for devel/appimage-type2-runtime
+MESON_ARGS=	-Ddefault_library=both
 
 LDFLAGS+=	-L${LOCALBASE}/lib ${ICONV_LIB}
 
