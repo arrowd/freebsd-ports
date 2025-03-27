@@ -1,0 +1,7 @@
+AppImage is an application package format that provides a way for upstream
+developers to provide all the dependencies that cannot be assumed to be part of
+each target system in a recent enough version.
+
+This package provdes the AppImage runtime, which is a statically-linked
+executable part of every AppImage. It mounts the payload via FUSE and executes
+the entrypoint.
