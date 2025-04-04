@@ -34,11 +34,22 @@ CFLAGS_F2018=	-I${LOCALBASE}/include/gcc${_GCC_VER}
 .    if ${ARCH} == "riscv64"
 FCFLAGS+=  -B${LOCALBASE}/lib/gcc${_GCC_VER}
 .    endif
+
+USE_BINUTILS=	yes
+.  elif ${fortran_ARGS} == flang
+_FORTRAN_LLVM_VER=	21
+BUILD_DEPENDS+=	flang${_FORTRAN_LLVM_VER}:devel/llvm${_FORTRAN_LLVM_VER}
+RUN_DEPENDS+=	flang${_FORTRAN_LLVM_VER}:devel/llvm${_FORTRAN_LLVM_VER}
+F77=		flang${_FORTRAN_LLVM_VER}
+F90=		flang${_FORTRAN_LLVM_VER}
+FC=		flang${_FORTRAN_LLVM_VER}
+CC=		${LOCALBASE}/llvm${_FORTRAN_LLVM_VER}/bin/clang
+CXX=		${LOCALBASE}/llvm${_FORTRAN_LLVM_VER}/bin/clang++
+CPP=		${LOCALBASE}/llvm${_FORTRAN_LLVM_VER}/bin/clang-cpp
 .  else
 IGNORE=		USES=fortran: invalid arguments: ${fortran_ARGS}
 .  endif
 
-USE_BINUTILS=	yes
 CONFIGURE_ENV+=	F77="${F77}" F90="${FC}" FC="${FC}"	\
 		FFLAGS="${FFLAGS}" F90FLAGS="${FFLAGS}" FCFLAGS="${FCFLAGS}"
 MAKE_ENV+=	F77="${F77}" F90="${FC}" FC="${FC}"	\
