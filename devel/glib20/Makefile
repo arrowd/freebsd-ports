@@ -1,5 +1,6 @@
 PORTNAME=	glib
 DISTVERSION=	2.82.4
+PORTREVISION=	1
 PORTEPOCH=	2
 CATEGORIES=	devel
 MASTER_SITES=	GNOME
@@ -26,11 +27,9 @@ FLAVORS=	default bootstrap
 FLAVOR?=	${FLAVORS:[1]}
 FLAVORS_SUB=	yes
 
-default_CONFLICTS_INSTALL=	glib-bootstrap
 default_BUILD_DEPENDS=	g-ir-scanner:devel/gobject-introspection@bootstrap
 
 bootstrap_PKGNAMESUFFIX=	-bootstrap
-bootstrap_CONFLICTS_INSTALL=	glib
 
 # iconv:wchar_t - our iconv in base doesn't support utf-8 -> wchar_t (boooo)
 # (wchar_t is used by glibmm, rawtherapee triggered this)
@@ -79,8 +78,10 @@ MESON_ARGS+=	-Ddtrace=disabled
 TRIGGERS=
 MESON_ARGS+=	-Dintrospection=disabled -Ddocumentation=false -Dman-pages=disabled
 OPTIONS_DEFINE=
+PREFIX=		${LOCALBASE}/glib-bootstrap
 PLIST_SUB+=	PORTDOCS='@comment ' NLS='@comment ' MANPAGES='@comment '
-PLIST_FILES+=	'@dir share/pkg/triggers'
+PLIST_FILES+=	'@dir ${LOCALBASE}/share/pkg/' \
+		'@dir ${LOCALBASE}/share/pkg/triggers'
 .else
 TRIGGERS=	gio-modules glib-schemas
 MESON_ARGS+=	-Dintrospection=enabled
