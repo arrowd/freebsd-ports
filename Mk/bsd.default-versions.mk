@@ -48,8 +48,8 @@ EBUR128_DEFAULT?=	legacy
 #EMACS_DEFAULT?=	let the flavor be the default if not explicitly set
 # Possible values: 3.0, 4.0
 FIREBIRD_DEFAULT?=	3.0
-# Possible values: gfortran
-FORTRAN_DEFAULT?=	gfortran
+# Possible values: flang gfortran
+FORTRAN_DEFAULT?=	flang
 # Possible values: 3.2.3, 3.3.1
 .  if (defined(WANT_FPC_DEVEL) && !empty(WANT_FPC_DEVEL)) || ${ARCH:Maarch64}
 FPC_DEFAULT?=		3.3.1
