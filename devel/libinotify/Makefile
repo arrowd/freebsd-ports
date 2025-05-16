@@ -13,9 +13,16 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 USES=		libtool
 
-CONFIGURE_ARGS=	--enable-skip-subfiles=fusefs,smbfs
+CONFIGURE_ARGS=	--enable-skip-subfiles=fusefs,smbfs \
+		--enable-debug \
+		--enable-perrors
 GNU_CONFIGURE=	yes
-INSTALL_TARGET=	install-strip
+#INSTALL_TARGET=	install-strip
+TEST_TARGET=	test
 USE_LDCONFIG=	yes
+
+WITH_DEBUG=	yes
+CFLAGS=		-DWITH_NATIVE_INOTIFY
+CPPFLAGS=	-DWITH_NATIVE_INOTIFY
 
 .include <bsd.port.mk>
