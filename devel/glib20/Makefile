@@ -1,6 +1,6 @@
 PORTNAME=	glib
 DISTVERSION=	2.84.1
-PORTREVISION=	2
+PORTREVISION=	3
 PORTEPOCH=	2
 CATEGORIES=	devel
 MASTER_SITES=	GNOME
@@ -14,7 +14,6 @@ LICENSE=	LGPL20
 
 BUILD_DEPENDS=	${PYTHON_PKGNAMEPREFIX}packaging>0:devel/py-packaging@${PY_FLAVOR}
 LIB_DEPENDS=	libffi.so:devel/libffi \
-		libinotify.so:devel/libinotify \
 		libpcre2-8.so:devel/pcre2
 RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}packaging>0:devel/py-packaging@${PY_FLAVOR}
 TEST_DEPENDS=	dbus-uuidgen:devel/dbus \
@@ -24,6 +23,8 @@ TEST_DEPENDS=	dbus-uuidgen:devel/dbus \
 FLAVORS=	default bootstrap
 FLAVOR?=	${FLAVORS:[1]}
 FLAVORS_SUB=	yes
+
+WITH_DEBUG=	yes
 
 default_EXTRACT_DEPENDS=	${LOCALBASE}/gobject-introspection-bootstrap/bin/g-ir-scanner:devel/gobject-introspection@bootstrap
 default_USES=		trigger
@@ -40,8 +41,9 @@ USE_PYTHON=	py3kplist
 TRIGGERS=	gio-modules glib-schemas
 MESON_ARGS=	-Db_lundef=false \
 		-Ddefault_library=both \
-		-Dfile_monitor_backend='libinotify-kqueue' \
+		-Dfile_monitor_backend='inotify' \
 		-Dinstalled_tests=false \
+		-Dtests=true \
 		-Dlibelf=disabled \
 		-Dlibmount=disabled \
 		-Druntime_dir=/var/run \
@@ -58,7 +60,7 @@ CONFLICTS_INSTALL=	p5-Giovanni
 _LIBVERSION=	0.${DISTVERSION:R:E}00.${DISTVERSION:E}
 PLIST_SUB=	LIBVERSION=${_LIBVERSION}
 
-OPTIONS_DEFINE=		DOCS FAM_ALTBACKEND MANPAGES NLS TEST
+OPTIONS_DEFINE=		DOCS MANPAGES NLS
 OPTIONS_DEFAULT=	MANPAGES
 OPTIONS_SUB=		yes
 
@@ -70,8 +72,6 @@ FAM_ALTBACKEND_DESC=	Alternate file monitor backend
 
 MANPAGES_BUILD_DEPENDS=	rst2man:textproc/py-docutils
 MANPAGES_MESON_ENABLED=	man-pages
-
-TEST_MESON_TRUE=	tests
 
 # doesn't build yet
 MESON_ARGS+=	-Ddtrace=disabled
@@ -91,15 +91,6 @@ post-extract:
 	${CP} -r ${LOCALBASE}/gobject-introspection-bootstrap/libdata/pkgconfig ${PKGCONFIG_LINKDIR}
 	${CP} ${LOCALBASE}/glib-bootstrap/libdata/pkgconfig/* ${PKGCONFIG_LINKDIR}
 .endif
-
-pre-configure-FAM_ALTBACKEND-on:
-	@${REINPLACE_CMD} -e 's|kqueue-helper.c|kqueue_fnm.c|g ; \
-		s|.*kqueue-missing.c.*||g ; \
-		s|.*dep-list.c.*||g' \
-		${WRKSRC}/gio/kqueue/meson.build
-	@${CP} -f ${FILESDIR}/gkqueuefilemonitor.c ${WRKSRC}/gio/kqueue/gkqueuefilemonitor.c
-	@${CP} ${FILESDIR}/kqueue_fnm.c ${WRKSRC}/gio/kqueue/kqueue_fnm.c
-	@${CP} ${FILESDIR}/kqueue_fnm.h ${WRKSRC}/gio/kqueue/kqueue_fnm.h
 
 post-patch:
 	${REINPLACE_CMD} -e 's|@PYTHON@|${PYTHON_CMD}|g' \
