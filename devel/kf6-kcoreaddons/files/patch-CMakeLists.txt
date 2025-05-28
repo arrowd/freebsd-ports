@@ -1,0 +1,11 @@
+--- CMakeLists.txt.orig	2025-05-02 14:16:38 UTC
++++ CMakeLists.txt
+@@ -64,7 +64,7 @@ if(ENABLE_INOTIFY)
+     find_package(Inotify)
+     set_package_properties(Inotify PROPERTIES
+         PURPOSE "Filesystem alteration notifications using inotify")
+-    set(HAVE_SYS_INOTIFY_H ${Inotify_FOUND})
++    set(HAVE_SYS_INOTIFY_H 1)
+     # If we're using libinotify-kqueue, check for the direct mode support
+     if(Inotify_FOUND)
+         set(CMAKE_REQUIRED_INCLUDES ${Inotify_INCLUDE_DIRS})

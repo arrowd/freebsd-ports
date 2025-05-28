@@ -10,13 +10,10 @@ USE_KDE=	ecm:build
 USE_QT=		base declarative tools
 
 # Requires PySide and Shiboken.
+CMAKE_ON=	CMAKE_DISABLE_FIND_PACKAGE_INOTIFY BUILD_TESTING
 CMAKE_OFF=	BUILD_PYTHON_BINDINGS
 
-OPTIONS_DEFINE=		INOTIFY
-OPTIONS_DEFAULT=	INOTIFY
-
-INOTIFY_DESC=		Filesystem alteration notifications using inotify
-INOTIFY_LIB_DEPENDS=	libinotify.so:devel/libinotify
-INOTIFY_CMAKE_BOOL_OFF=	CMAKE_DISABLE_FIND_PACKAGE_INOTIFY
+ALL_TARGET=	kdirwatch_inotify_benchmarktest
+TEST_TARGET=	test
 
 .include <bsd.port.mk>
