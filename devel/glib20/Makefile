@@ -1,6 +1,6 @@
 PORTNAME=	glib
 DISTVERSION=	2.84.1
-PORTREVISION=	3
+PORTREVISION=	4
 PORTEPOCH=	2
 CATEGORIES=	devel
 MASTER_SITES=	GNOME
@@ -24,8 +24,6 @@ FLAVORS=	default bootstrap
 FLAVOR?=	${FLAVORS:[1]}
 FLAVORS_SUB=	yes
 
-WITH_DEBUG=	yes
-
 default_EXTRACT_DEPENDS=	${LOCALBASE}/gobject-introspection-bootstrap/bin/g-ir-scanner:devel/gobject-introspection@bootstrap
 default_USES=		trigger
 
@@ -43,7 +41,7 @@ MESON_ARGS=	-Db_lundef=false \
 		-Ddefault_library=both \
 		-Dfile_monitor_backend='inotify' \
 		-Dinstalled_tests=false \
-		-Dtests=true \
+		-Dtests=false \
 		-Dlibelf=disabled \
 		-Dlibmount=disabled \
 		-Druntime_dir=/var/run \

@@ -1,13 +1,11 @@
 PORTNAME=	base
 DISTVERSION=	${QT6_VERSION}
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	devel
 PKGNAMEPREFIX=	qt6-
 
 MAINTAINER=	kde@FreeBSD.org
 COMMENT=	Qt base (core, gui, widgets, network,...)
-
-WITH_DEBUG=	yes
 
 BUILD_DEPENDS=	${LOCALBASE}/include/vulkan/vulkan.h:graphics/vulkan-headers \
 		${LOCALBASE}/include/linux/input.h:devel/evdev-proto
@@ -37,7 +35,7 @@ LIB_DEPENDS=	libatk-1.0.so:accessibility/at-spi2-core \
 		libxkbcommon.so:x11/libxkbcommon \
 		libzstd.so:archivers/zstd
 
-USES=		cmake:testing compiler:c++17-lang gl gnome jpeg perl5 pkgconfig python \
+USES=		cmake compiler:c++17-lang gl gnome jpeg perl5 pkgconfig python \
 		qt-dist:6 shebangfix ssl
 USE_GL=		egl opengl
 USE_GNOME=	cairo gdkpixbuf glib20 gtk30 pango
@@ -54,8 +52,7 @@ CMAKE_ARGS=	-DOPENSSL_ROOT_DIR="${OPENSSLBASE}"
 CMAKE_ON=	CMAKE_DISABLE_FIND_PACKAGE_LTTngUST \
 		QT_AVOID_CMAKE_ARCHIVING_API \
 		QT_FIND_ALL_PACKAGES_ALWAYS \
-		QT_FEATURE_openssl_linked \
-		QT_BUILD_TESTS
+		QT_FEATURE_openssl_linked
 CMAKE_OFF=	QT_FEATURE_eglfs \
 		QT_FEATURE_gssapi
 # sql drivers are handled in the databases/qt6-base_sqldriver port
