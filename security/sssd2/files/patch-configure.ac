@@ -1,0 +1,13 @@
+Can be removed in FreeBSD 15
+
+--- configure.ac.orig	2025-06-24 10:24:24 UTC
++++ configure.ac
+@@ -118,6 +118,8 @@ AC_CHECK_FUNC([timegm], [], [AC_MSG_ERROR([timegm() fu
+ # Check for the timegm() function (not part of POSIX / Open Group specs)
+ AC_CHECK_FUNC([timegm], [], [AC_MSG_ERROR([timegm() function not found])])
+ 
++AC_CHECK_FUNCS([timezone clearenv])
++
+ # Check for endian headers
+ AC_CHECK_HEADERS([endian.h sys/endian.h byteswap.h])
+ 
