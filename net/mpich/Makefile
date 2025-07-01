@@ -17,7 +17,7 @@ LIB_DEPENDS=	libhwloc.so:devel/hwloc2	\
 		libfabric.so:net/libfabric	\
 		libepoll-shim.so:devel/libepoll-shim
 
-USES=		compiler:c11 libtool localbase perl5 pkgconfig python:build
+USES=		autoreconf compiler:c11 libtool localbase perl5 pkgconfig python:build
 USE_LDCONFIG=	yes
 
 GNU_CONFIGURE=	yes
