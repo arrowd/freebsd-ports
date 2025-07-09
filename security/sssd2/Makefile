@@ -1,5 +1,5 @@
 PORTNAME=	sssd
-PORTVERSION=	2.10.2
+PORTVERSION=	2.11.1
 CATEGORIES=	security
 PKGNAMESUFFIX=	2
 
@@ -95,8 +95,6 @@ CONFIGURE_ARGS=	--disable-dependency-tracking \
 		--without-nfsv4-idmapd-plugin \
 		--with-secrets-db-path=/var/lib/sss/secrets \
 		--with-kcm \
-		--with-oidc-child \
-		--with-ldb-lib-dir=${LOCALBASE}/lib/shared-modules/ldb \
 		--with-smb-idmap-interface-version=6 \
 		--without-libnl \
 		--with-python_prefix=${PREFIX}
@@ -104,10 +102,10 @@ CONFIGURE_ENV=	KRB5_CONFIG="${KRB5CONFIG}"
 
 CPPFLAGS+=	-DRENEWAL_PROG_PATH='\"${LOCALBASE}/sbin/adcli\"'
 CFLAGS+=	-fstack-protector-all
-LIBS+=		-linotify -lintl
+LIBS+=		-lintl
 
 PLIST_SUB=	PYTHON_VER=${PYTHON_VER}
-MAKE_ENV=	MAKELEVEL=0 LINGUAS="bg de eu es fr hu id it ja nb nl pl pt ru sv tg tr uk zh_CN zh_TW"
+MAKE_ENV=	MAKELEVEL=0
 SUB_FILES=	pkg-message
 
 BINARY_ALIAS=	python3=python${PYTHON_VER}
@@ -135,7 +133,7 @@ USE_RC_SUBR=	${PORTNAME}
 
 USE_GITHUB=yes
 GH_ACCOUNT=sssd
-GH_TAGNAME=ac9fd622bbcc1034b771eda4607e5bd8917812f6
+GH_TAGNAME=c6d1d69952b3f639ce58a05c73eb4858dfbba892
 
 post-patch:
 	@${REINPLACE_CMD} -e 's|/usr/bin/|${PREFIX}/bin/|g' \
