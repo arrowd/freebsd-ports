@@ -63,7 +63,7 @@ PLIST_SUB+=	ARCH="generic"
 
 .include <bsd.port.pre.mk>
 
-.if ${COMPILER_TYPE} == clang && ${COMPILER_VERSION} >= 190
+.if ${COMPILER_TYPE} == clang
 EXTRA_PATCHES+=	${PATCHDIR}/extra-patch-config_knl_make__defs.mk
 .endif
 
