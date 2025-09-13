@@ -19,4 +19,11 @@ GH_ACCOUNT=	loriab
 
 PLIST_FILES=	bin/dftd3
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if ${FORTRAN_DEFAULT} == flang
+# https://github.com/llvm/llvm-project/issues/158438
+BROKEN=	dftd3.f:268:14: error: No explicit type declared for 'iargc'
+.endif
+
+.include <bsd.port.post.mk>
