@@ -50,10 +50,14 @@ C_API_IMPLIES=		MPIX # the ISO_C_BINDINGS require MPI unconditionally
 
 .include <bsd.port.pre.mk>
 
-.  if ${GCC_DEFAULT} >= 10
+.if ${GCC_DEFAULT} >= 10
 CMAKE_ARGS+=	-DCMAKE_Fortran_FLAGS="${FFLAGS} -fallow-argument-mismatch" # -fallow-argument-mismatch is a workaround of https://github.com/cp2k/dbcsr/issues/387 for gcc10+
-.  else
+.else
 CMAKE_ARGS+=	-DCMAKE_Fortran_FLAGS="${FFLAGS}"
-.  endif
+.endif
+
+.if ${FORTRAN_DEFAULT} == flang
+BROKEN=	src/base/dbcsr_kinds.F:33:39: error: bad character ('&') in Fortran token
+.endif
 
 .include <bsd.port.post.mk>
