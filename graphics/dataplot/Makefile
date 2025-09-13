@@ -29,6 +29,12 @@ PORTDATA=	*
 
 OPTIONS_DEFINE=	DOCS
 
+.include <bsd.port.pre.mk>
+
+.if ${FORTRAN_DEFAULT} == flang
+BROKEN=	dp36.F:33942:20: error: DATA statement initializations affect 'inlong(1523_8)(1_8:7860_8)' more than once
+.endif
+
 post-patch:
 	@${REINPLACE_CMD} \
 		-e 's;%%FC%%;${FC};' \
@@ -41,4 +47,4 @@ post-patch:
 post-build:
 	@${STRIP_CMD} ${WRKSRC}/dataplot
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>
