@@ -21,9 +21,13 @@ OPTIONS_DEFINE=	DOCS EXAMPLES
 
 .include <bsd.port.pre.mk>
 
-.if ${GCC_DEFAULT} >= 10
+.if ${FORTRAN_DEFAULT} == gfortran && ${GCC_DEFAULT} >= 10
 # workaround for Rank mismatch in argument 'lines' at (1) (rank-1 and scalar)
 FFLAGS+=	-fallow-argument-mismatch
+.endif
+
+.if ${FORTRAN_DEFAULT} == flang
+BROKEN=	contrib/pewe/fortran/cylindrical_walloutabc2.f90:73:29: error: No explicit type declared for 'besjn'
 .endif
 
 do-test:
