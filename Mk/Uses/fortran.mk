@@ -2,7 +2,7 @@
 #
 # Feature:	fortran
 # Usage:	USES=fortran
-# Valid ARGS:	gfortran
+# Valid ARGS:	gfortran, quadmath
 #
 # MAINTAINER:	fortran@FreeBSD.org
 
@@ -11,6 +11,11 @@ _INCLUDE_USES_FORTRAN_MK=	yes
 
 .  if empty(fortran_ARGS)
 fortran_ARGS=	${FORTRAN_DEFAULT}
+.  endif
+
+# quadmath is provided by libquadmath, which is a part of gccXX
+.  if ${fortran_ARGS} == quadmath
+fortran_ARGS:=	${fortran_ARGS:S/quadmath/gfortran/}
 .  endif
 
 .  if ${fortran_ARGS} == gfortran
