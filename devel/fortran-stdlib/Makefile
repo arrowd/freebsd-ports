@@ -21,4 +21,11 @@ GH_PROJECT=	stdlib
 CMAKE_ON=	BUILD_SHARED_LIBS
 CMAKE_OFF=	BUILD_TESTING
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if ${FORTRAN_DEFAULT} == flang
+# https://github.com/fortran-lang/stdlib/issues/81#issuecomment-3289429121
+BROKEN=        multiple errors
+.endif
+
+.include <bsd.port.post.mk>
