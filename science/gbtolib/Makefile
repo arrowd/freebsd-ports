@@ -20,7 +20,7 @@ BROKEN=		requires OpenMP support that is missing on this architecture
 
 LIB_DEPENDS=	libopenblas.so:math/openblas
 
-USES=		cmake fortran zip
+USES=		cmake fortran:quadmath zip
 
 CMAKE_ON=	BUILD_SHARED_LIBS
 CMAKE_OFF=	BUILD_DOC BUILD_TESTING
