@@ -80,4 +80,11 @@ do-install-ICC-on:
 	${INSTALL_PROGRAM} ${WRKSRC}/himenobmtxps_ss.icc    ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_PROGRAM} ${WRKSRC}/himenobmtxpa.icc       ${STAGEDIR}${PREFIX}/bin
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if ${FORTRAN_DEFAULT} == flang
+# https://github.com/llvm/llvm-project/issues/161559
+BROKEN=        Flang does not support dtime()
+.endif
+
+.include <bsd.port.post.mk>
