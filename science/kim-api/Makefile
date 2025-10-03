@@ -20,4 +20,10 @@ post-install:
 	${REINPLACE_CMD} -i '' -e 's|#!/bin/bash|#!/bin/sh|' ${STAGEDIR}${PREFIX}/bin/kim-api-collections-management
 	${RM} -r ${STAGEDIR}${PREFIX}/share/doc
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if ${FORTRAN_DEFAULT} == flang
+EXTRA_PATCHES+=	${FILESDIR}/extrapatch-flang
+.endif
+
+.include <bsd.port.post.mk>
