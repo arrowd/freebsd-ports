@@ -24,7 +24,13 @@ CMAKE_OFF=	HAVE_TESTS
 FFLAGS+=	-std=legacy
 LDFLAGS+=	-leccodes
 
+.include <bsd.port.pre.mk>
+
+.if ${FORTRAN_DEFAULT} == flang
+BROKEN=		interpolation/wavexx2.F:462:34: error: Actual argument for 'x=' has bad type or kind 'REAL(4)'
+.endif
+
 post-stage: # installs the file from eccodes: https://jira.ecmwf.int/browse/SUP-2693
 	@${RM} ${STAGEDIR}${PREFIX}/bin/bufr_filter
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>
