@@ -25,8 +25,15 @@ USE_LDCONFIG=	yes
 CFLAGS+=	-fPIC
 FFLAGS+=	-fPIC -std=legacy
 
+.include <bsd.port.pre.mk>
+
+.if ${FORTRAN_DEFAULT} == flang
+# https://github.com/llvm/llvm-project/issues/158438
+BROKEN=        Flang does not have iargc and getarg
+.endif
+
 post-configure:
 	${REINPLACE_CMD} -e 's| -Wl,--as-needed||; s| -Wl,--no-as-needed||' ${WRKSRC}/Makefile
 	${REINPLACE_CMD} -e 's|^archive_cmds=|wl="-Wl,"; archive_cmds=|' ${WRKSRC}/libtool # wl is missing otherwise for some reason
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>
