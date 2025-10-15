@@ -26,4 +26,11 @@ post-install:
 	${RLN} ${STAGEDIR}${PREFIX}/mcstas/${PORTVERSION}/bin/${e} ${STAGEDIR}${PREFIX}/bin/${e}
 .endfor
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if ${FORTRAN_DEFAULT} == flang
+https://github.com/llvm/llvm-project/issues/161559
+BROKEN=	Uses unimplemented GNU extensions
+.endif
+
+.include <bsd.port.post.mk>
