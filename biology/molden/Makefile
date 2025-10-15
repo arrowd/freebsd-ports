@@ -70,10 +70,14 @@ do-install-DOCS-on:
 
 .include <bsd.port.pre.mk>
 
-.if ${GCC_DEFAULT} >= 10
+.if ${FORTRAN_DEFAULT} == gfortran && ${GCC_DEFAULT} >= 10
 # workaround for Type mismatch between actual argument at (1) and actual argument at (2) (INTEGER(4)/REAL(4)).
 # in theory, this should set FCFLAGS, but the port does not conform
 FFLAGS+=	-fallow-argument-mismatch
+.endif
+.if ${FORTRAN_DEFAULT} == flang
+# https://github.com/llvm/llvm-project/issues/163550
+BROKEN=	unknown argument '-fno-builtin'
 .endif
 
 .include <bsd.port.post.mk>
