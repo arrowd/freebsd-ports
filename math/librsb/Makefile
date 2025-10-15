@@ -15,7 +15,7 @@ LICENSE_FILE=	${WRKSRC}/COPYING
 BUILD_DEPENDS=	gsed:textproc/gsed \
 		bash:shells/bash
 
-USES=		fortran gmake libtool shebangfix
+USES=		autoreconf fortran gmake libtool shebangfix
 INSTALL_TARGET=	install-strip
 TEST_TARGET=	qtests
 GNU_CONFIGURE=	yes
