@@ -52,4 +52,10 @@ do-test:
 	(cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} code=${CODE} ${MAKE_CMD} demo)
 .endfor
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if ${FORTRAN_DEFAULT} == flang
+BROKEN=	Uses too much unsupported command line flags
+.endif
+
+.include <bsd.port.post.mk>
