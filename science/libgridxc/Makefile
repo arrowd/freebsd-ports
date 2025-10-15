@@ -37,4 +37,11 @@ LIBXC_CMAKE_BOOL=	WITH_LIBXC
 LIBXC_VARS=		FCFLAGS+="-I${LOCALBASE}/include" LDFLAGS+="-L${LOCALBASE}/lib -lxcf90"
 LIBXC_LIB_DEPENDS=	libxc.so:science/libxc
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if ${FORTRAN_DEFAULT} == flang
+.  undef MPICH_VARS
+.  undef OPENMPI_VARS
+.endif
+
+.include <bsd.port.post.mk>
