@@ -35,7 +35,14 @@ BINARY_ALIAS=	python=${PYTHON_CMD}
 MAKE_ARGS+=	PLATFORM=1
 .endif
 
+.include <bsd.port.pre.mk>
+
+.if ${FORTRAN_DEFAULT} == flang
+# https://github.com/llvm/llvm-project/issues/163550
+BROKEN=		flang-21: error: unknown argument '-fdata-sections'
+.endif
+
 post-install:
 	@${RM} ${STAGEDIR}${PREFIX}/include/libxsmm/libxsmm_timer.c.orig
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>
