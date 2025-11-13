@@ -45,6 +45,13 @@ BINARY_ALIAS=	ifort=gfortran${GCC_DEFAULT} \
 PLIST_FILES=	bin/Multiwfn \
 		bin/Multiwfn_noGUI
 
+.include <bsd.port.pre.mk>
+
+.if ${FORTRAN_DEFAULT} == flang
+# https://github.com/llvm/llvm-project/issues/167912
+BROKEN=        unknown argument '-ffree-line-length-none'
+.endif
+
 post-patch: # replace the dislin.a library with the FreeBSD version
 	@${CP} \
 		${WRKDIR}/dislin-${DISLIN_VERSION}/fbsd_64/lib/dislin_d-${DISLIN_VERSION}.a \
@@ -54,4 +61,4 @@ do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/Multiwfn ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_PROGRAM} ${WRKSRC}/Multiwfn_noGUI ${STAGEDIR}${PREFIX}/bin
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>
