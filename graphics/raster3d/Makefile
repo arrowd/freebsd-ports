@@ -38,6 +38,11 @@ IMAGEMAGICK_USES=	magick:6,run
 FFLAGS+=	-fallow-invalid-boz
 .endif
 
+.if ${FORTRAN_DEFAULT} == flang
+# https://github.com/llvm/llvm-project/issues/158438
+BROKEN=		No explicit type declared for 'iargc'
+.endif
+
 pre-build: # generation of Makefile.incl has to be separate from 'make all', otherwise the generated Makefile.incl isn't read by 'make all'
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${MAKE_ARGS} linux
 
