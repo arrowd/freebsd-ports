@@ -11,7 +11,7 @@ WWW=		https://crd-legacy.lbl.gov/~dhbailey/mpdist
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/DISCLAIMER.txt
 
-USES=		fortran
+USES=		fortran:quadmath
 
 BINARY_ALIAS=	gfortran=${FC}
 FFLAGS+=	-O3
