@@ -22,8 +22,6 @@ GH_PROJECT=	Silo
 CMAKE_TESTING_ON=		SILO_ENABLE_TESTS # 3 tests fail, see https://github.com/LLNL/Silo/issues/289
 CMAKE_TESTING_TARGET=		check
 
-FFLAGS+=			-fallow-argument-mismatch # needed only for tests
-
 CONFLICTS_INSTALL=		deforaos-browser # bin/browser
 
 OPTIONS_DEFINE=			BROWSER FORTRAN HDF5 PYTHON SILOCK
@@ -48,4 +46,10 @@ PYTHON_USES=			python
 SILOCK_DESC=			Enable building of silock
 SILOCK_CMAKE_BOOL=		SILO_ENABLE_SILOCK
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if ${FORTRAN_DEFAULT} == gfortran
+FFLAGS+=			-fallow-argument-mismatch # needed only for tests
+.endif
+
+.include <bsd.port.post.mk>
