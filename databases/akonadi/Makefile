@@ -37,7 +37,6 @@ OPTIONS_GROUP_DB=	MYSQL PGSQL
 OPTIONS_DEFAULT=	MYSQL
 
 MYSQL_DESC=		Install MySQL Qt plugin and server
-MYSQL_USES=		mysql:server
 MYSQL_USE=		QT=sqldriver-mysql:run
 
 PGSQL_DESC=		Install PostgreSQL Qt plugin

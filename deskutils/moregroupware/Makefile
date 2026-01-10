@@ -29,7 +29,7 @@ OPTIONS_SUB=		yes
 ADDONS_DESC=	install additional workgroup features (addons)
 
 ADDONS_DISTFILES=	${PORTNAME}-addons-${PORTVERSION}${EXTRACT_SUFX}
-MYSQL_USES=		mysql:server
+MYSQL_USES=		mysql
 NLS_USES=		gettext
 PGSQL_USES=		pgsql
 

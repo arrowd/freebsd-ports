@@ -103,18 +103,19 @@ IPMI_LIB_DEPENDS=	libOpenIPMI.so:sysutils/openipmi
 LDAP_CONFIGURE_WITH=	ldap
 LDAP_USES=		ldap
 
+# TODO: unify mysql/maridb option, as they all use the same client port now
 MYSQL_CONFIGURE_ON=	--with-mysql
-MYSQL_USES+=		compiler:c11 mysql:80
+MYSQL_USES+=		compiler:c11 mysql
 
 MYSQLDV_CONFIGURE_ON=	--with-mysql
 MYSQLDV_USES+=		compiler:c11 mysql
 
 MDB5_CONFIGURE_ON=	--with-mysql=${LOCALBASE}/bin/mysql_config
-MDB5_USES+=		compiler:c11 mysql:105m
+MDB5_USES+=		compiler:c11 mysql
 MDB5_DESC=		Mariadb 10.5 database support
 
 MDB6_CONFIGURE_ON=	--with-mysql=${LOCALBASE}/bin/mysql_config
-MDB6_USES+=		compiler:c11 mysql:106m
+MDB6_USES+=		compiler:c11 mysql
 MDB6_DESC=		Mariadb 10.6 database support
 
 PGSQL_CONFIGURE_WITH=	postgresql

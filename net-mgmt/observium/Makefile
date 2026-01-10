@@ -77,9 +77,10 @@ USES+=	php:web
 .endif
 
 .if ${PORT_OPTIONS:MMYSQLD}
-USES+=	mysql:server
+# TODO: remove the server option -- there is no need/way to depend on a specific server.
+USES+=	mysql
 .else
-USES+=	mysql:client
+USES+=	mysql
 .endif
 
 pre-install:

@@ -17,7 +17,7 @@ ONLY_FOR_ARCHS=	amd64 armv7 i386 powerpc powerpc64 powerpc64le
 
 LIB_DEPENDS=	libodbc.so:databases/unixODBC
 
-USES=		display:build mysql:client ncurses pgsql sqlite tar:tgz xorg
+USES=		display:build mysql ncurses pgsql sqlite tar:tgz xorg
 
 OPTIONS_DEFINE=	DOCS EXAMPLES
 

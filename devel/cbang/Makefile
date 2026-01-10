@@ -23,7 +23,7 @@ LIB_DEPENDS=	libv8.so:lang/v8		\
 USE_GITHUB=	yes
 GH_ACCOUNT=	CauldronDevelopmentLLC
 
-USES=		compiler:c++17-lang localbase mysql:client python:test scons	\
+USES=		compiler:c++17-lang localbase mysql python:test scons	\
 		sqlite ssl
 USE_CXXSTD=	gnu++17
 USE_LDCONFIG=	yes

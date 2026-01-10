@@ -116,11 +116,8 @@ MYSQL_USE=		QT=sqldriver-mysql:run
 MYSQL_CMAKE_BOOL=	ENABLE_MYSQLSUPPORT
 
 MYSQL_INTERNAL_DESC=		Use a dedicated MySQL instance (requires MariaDB)
-MYSQL_INTERNAL_USES=		mysql:server
+MYSQL_INTERNAL_USES=		mysql
 MYSQL_INTERNAL_CMAKE_BOOL=	ENABLE_INTERNALMYSQL
-# Only works with MariaDB. Try to keep this in sync with supported MySQL
-# versions and add any version not ending with 'm' to the IGNORE list.
-MYSQL_INTERNAL_VARS=		IGNORE_WITH_MYSQL="80 81"
 MYSQL_INTERNAL_IMPLIES=		MYSQL
 
 SQLITE3_USE=		QT=sqldriver-sqlite:run

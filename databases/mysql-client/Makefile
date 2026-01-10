@@ -1,12 +1,13 @@
 PORTNAME=	mysql
 PORTREVISION=	0
-PKGNAMESUFFIX=	80-client
+PKGNAMESUFFIX=	-client
 
 COMMENT=	Multithreaded SQL database (client)
 
 LICENSE+=	LGPL21
 
-MASTERDIR=	${.CURDIR}/../mysql80-server
+_MYSQL_LATEST=	94
+MASTERDIR=	${.CURDIR}/../${PORTNAME}${_MYSQL_LATEST}-server
 
 PKGMESSAGE=	${.CURDIR}/pkg-message
 PATCHDIR=	${MASTERDIR}/files
@@ -38,13 +39,13 @@ SASLCLIENT_USES=		ldap
 OPTIONS_DEFAULT+=	SASLCLIENT
 OPTIONS_SUB=	yes
 
-# issue 166367: adding symlinks for back-compatibility with ${lib}_r
 post-install:
-#	@${RM} ${STAGEDIR}${PREFIX}/lib/mysql/private/libprotobuf-lite.so.3.19.4
-#	@${RM} ${STAGEDIR}${PREFIX}/lib/mysql/private/libprotobuf.so.3.19.4
+	@${MKDIR} ${STAGEDIR}${ETCDIR}
+	${INSTALL_DATA} ${WRKDIR}/my.cnf.sample ${STAGEDIR}${ETCDIR}/my.cnf.sample
+
 	@${RM} -r ${STAGEDIR}${PREFIX}/lib/mysql/private
 	@${LN} -s libmysqlclient.a ${STAGEDIR}${PREFIX}/lib/mysql/libmysqlclient_r.a
 	@${LN} -s libmysqlclient.so ${STAGEDIR}${PREFIX}/lib/mysql/libmysqlclient_r.so
-	@${LN} -s libmysqlclient.so.21 ${STAGEDIR}${PREFIX}/lib/mysql/libmysqlclient_r.so.21
+	@${LN} -s libmysqlclient.so.24 ${STAGEDIR}${PREFIX}/lib/mysql/libmysqlclient_r.so.24
 
 .include "${MASTERDIR}/Makefile"

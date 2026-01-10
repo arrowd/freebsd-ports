@@ -79,7 +79,7 @@ post-patch:
 		${WRKSRC}/controller/seafile-controller.c
 
 	@${MKDIR} ${_PKGCONFIGDIR}
-.if ${MYSQL_FLAVOUR} == mariadb
+.if ${MYSQL_CLIENT_DEFAULT} == mariadb
 # If mariadb is the selected flavor, link the pc file as
 # mysqlclient so PKG_CHECK_MODULES can find it. Mariadb
 # doesn't supply this file in the same way other flavours do.

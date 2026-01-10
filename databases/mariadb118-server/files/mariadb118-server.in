@@ -1,0 +1,153 @@
+#!/bin/sh
+
+# PROVIDE: mysql
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+#
+# Add the following line to /etc/rc.conf to enable mysql:
+# %%SUFXD_NAME%%_(instance_)?enable (bool):	Set to "NO" by default.
+#			Set it to "YES" to enable MySQL.
+%%LEGACY_LIMITS%%# %%SUFXD_NAME%%_(instance_)?limits (bool):	Set to "NO" by default.
+%%LEGACY_LIMITS%%#			Set it to yes to run `limits -e -U mysql`
+%%LEGACY_LIMITS%%#			just before mysql starts.
+# %%SUFXD_NAME%%_(instance_)?dbdir (str):	Default to "%%MARIADB_DBDIR%%"
+#			Base database directory.
+# %%SUFXD_NAME%%_(instance_)?args (str):	Custom additional arguments to be passed
+#			to mysqld_safe (default empty).
+# %%SUFXD_NAME%%_(instance_)?pidfile (str): Custom PID file path and name.
+#			Default to "${%%SUFXD_NAME%%_dbdir}/${hostname}.pid".
+# %%SUFXD_NAME%%_(instance_)?user (str): User to run mysqld as
+#			Default to "%%MARIADB_USER%%" created by the port
+# %%SUFXD_NAME%%_(instance_)?optfile (str): Server-specific option file.
+#			Default to "${%%SUFXD_NAME%%_dbdir}/my.cnf".
+# %%SUFXD_NAME%%_(instance)?rundir (str):	Default to "%%MARIADB_RUNDIR%%"
+# %%SUFXD_NAME%%_instances (str): Set to "" by default.
+#			If defined, list of instances to enable
+
+. /etc/rc.subr
+
+name="%%SUFXD_NAME%%"
+rcvar=%%SUFXD_NAME%%_enable
+
+load_rc_config $name
+
+: ${%%SUFXD_NAME%%_enable="NO"}
+%%LEGACY_LIMITS%%: ${%%SUFXD_NAME%%_limits="NO"}
+: ${%%SUFXD_NAME%%_user="%%MARIADB_USER%%"}
+%%LEGACY_LIMITS%%mysql_limits_args="-e -U ${%%SUFXD_NAME%%_user}"
+: ${%%SUFXD_NAME%%_dbdir="%%MARIADB_DBDIR%%"}
+: ${%%SUFXD_NAME%%_optfile="%%ETCDIR%%/my.cnf"}
+: ${%%SUFXD_NAME%%_rundir="%%MARIADB_RUNDIR%%"}
+
+command="/usr/sbin/daemon"
+procname="%%PREFIX%%/libexec/mariadbd"
+start_precmd="mysql_prestart"
+start_postcmd="mysql_poststart"
+
+if [ -n "$2" ]; then
+	instance="$2"
+	load_rc_config ${name}_${instance}
+	case "$%%SUFXD_NAME%%_instances" in
+	"$2 "*|*" $2 "*|*" $2"|"$2")
+		eval %%SUFXD_NAME%%_args="\${%%SUFXD_NAME%%_${instance}_args:-\"${%%SUFXD_NAME%%_args}\"}"
+		eval %%SUFXD_NAME%%_dbdir="\${%%SUFXD_NAME%%_${instance}_dbdir:-\"%%MARIADB_DBDIR%%_${instance}\"}"
+		%%LEGACY_LIMITS%%eval %%SUFXD_NAME%%_limits="\${%%SUFXD_NAME%%_${instance}_limits:-\"${%%SUFXD_NAME%%_limits}\"}"
+		eval %%SUFXD_NAME%%_user="\${%%SUFXD_NAME%%_${instance}_user:-\"${%%SUFXD_NAME%%_user}\"}"
+		%%LEGACY_LIMITS%%eval mysql_limits_args="\${%%SUFXD_NAME%%_${instance}_limits_args:-\"-e -U $%%SUFXD_NAME%%_user\"}"
+		eval %%SUFXD_NAME%%_socket="\${%%SUFXD_NAME%%_${instance}_socket:-\"%%MARIADB_RUNDIR%%_${instance}/%%MARIADB_SOCK%%\"}"
+		eval %%SUFXD_NAME%%_optfile="\${%%SUFXD_NAME%%_${instance}_optfile:-\"%%PREFIX%%/etc/mariadb_${instance}/my.cnf\"}"
+		eval %%SUFXD_NAME%%_pidfile="\${%%SUFXD_NAME%%_${instance}_pidfile:-\"%%MARIADB_RUNDIR%%_${instance}/mysqld.pid\"}"
+	;;
+	*)
+		err 1 "$2 not found in %%SUFXD_NAME%%_instances" ;;
+	esac
+else
+	if [ -n "${%%SUFXD_NAME%%_instances}" -a -n "$1" ]; then
+		for instance in ${%%SUFXD_NAME%%_instances}; do
+			eval _enable="\${%%SUFXD_NAME%%_${instance}_enable}"
+			case "${_enable:-${%%SUFXD_NAME%%_enable}}" in
+			[Nn][Oo]|[Ff][Aa][Ll][Ss][Ee]|[Oo][Ff][Ff]|0)
+				continue
+			;;
+			[Yy][Ee][Ss]|[Tt][Rr][Uu][Ee]|[Oo][Nn]|1)
+			;;
+			*)
+				if [ -z "$_enable" ]; then
+					_var=%%SUFXD_NAME%%_enable
+				else
+					_var=%%SUFXD_NAME%%_${instance}_enable
+				fi
+				warn "Bad value" \
+					"'${_enable:-${%%SUFXD_NAME%%_enable}}'" \
+					"for ${_var}. " \
+					"Instance ${instance} skipped."
+				continue
+			;;
+			esac
+			echo "===> mysql instance: ${instance}"
+			if %%LOCALBASE%%/etc/rc.d/%%SUFXD_NAME%%-server $1 ${instance}; then
+				success="${instance} ${success}"
+			else
+				failed="${instance} (${retcode}) ${failed}"
+			fi
+		done
+		exit 0
+	else
+		%%SUFXD_NAME%%_pidfile=${%%SUFXD_NAME%%_pidfile:-"%%MARIADB_RUNDIR%%/mysqld.pid"}
+	fi
+fi
+
+if [ ! -z "${%%SUFXD_NAME%%_optfile}" ]; then
+	mysql_extra="--defaults-extra-file=${%%SUFXD_NAME%%_optfile}"
+fi
+
+pidfile=$%%SUFXD_NAME%%_pidfile
+mysql_install_db="%%PREFIX%%/bin/mariadb-install-db"
+mysql_install_db_args="--basedir=%%PREFIX%% --datadir=${%%SUFXD_NAME%%_dbdir} --force"
+command_args="-c -f %%PREFIX%%/bin/mariadbd-safe ${mysql_extra} --user=${%%SUFXD_NAME%%_user} --datadir=${%%SUFXD_NAME%%_dbdir} --pid-file=${pidfile} ${%%SUFXD_NAME%%_socket:+--socket=${%%SUFXD_NAME%%_socket}} ${%%SUFXD_NAME%%_args}"
+
+mysql_create_auth_tables()
+{
+	eval $mysql_install_db $mysql_install_db_args
+        [ $? -eq 0 ] && chown -R ${%%SUFXD_NAME%%_user}:$(id -gn $%%SUFXD_NAME%%_user) ${%%SUFXD_NAME%%_dbdir}
+}
+
+mysql_prestart()
+{
+	local dir
+	for dir in /etc /usr/local/etc /etc/mysql /var/db/mysql; do
+		if [ -f "${dir}/my.cnf" ]; then
+			echo "Please merge existing ${dir}/my.cnf file with %%ETCDIR%%/conf.d/server.cnf"
+			return 1
+		fi
+	done
+	if [ ! -d "${%%SUFXD_NAME%%_dbdir}/mysql/." ]; then
+		mysql_create_auth_tables || return 1
+	fi
+	mysql_group="`/usr/bin/id -gn ${%%SUFXD_NAME%%_user}`"
+	[ "${%%SUFXD_NAME%%_socket}" = "" ] && %%SUFXD_NAME%%_rundir="%%MARIADB_RUNDIR%%" || %%SUFXD_NAME%%_rundir="`/usr/bin/dirname ${%%SUFXD_NAME%%_socket}`"
+	if [ ! -d "${%%SUFXD_NAME%%_rundir}" ]; then
+		install -d -o ${%%SUFXD_NAME%%_user} -g ${mysql_group} "${%%SUFXD_NAME%%_rundir}"
+	fi
+%%LEGACY_LIMITS%%	if checkyesno %%SUFXD_NAME%%_limits; then
+%%LEGACY_LIMITS%%		eval `/usr/bin/limits ${mysql_limits_args}` 2>/dev/null
+%%LEGACY_LIMITS%%	else
+%%LEGACY_LIMITS%%		return 0
+%%LEGACY_LIMITS%%	fi
+%%MODERN_LIMITS%%	return 0
+	if [ ! -d "${%%SUFXD_NAME%%_rundir}" ]; then
+		install -d -u${%%SUFXD_NAME%%_user} -g$(id -gn $%%SUFXD_NAME%%_user) -m755 ${%%SUFXD_NAME%%_rundir}
+	fi
+}
+
+mysql_poststart()
+{
+	local timeout=15
+	while [ ! -f "${pidfile}" -a ${timeout} -gt 0 ]; do
+		timeout=$(( timeout - 1 ))
+		sleep 1
+	done
+	return 0
+}
+
+run_rc_command "$1"

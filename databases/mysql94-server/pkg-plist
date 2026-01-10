@@ -24,7 +24,7 @@ bin/mysqltest
 bin/mysqltest_safe_process
 bin/mysqlxtest
 etc/logrotate.d/mysqlrouter
-%%ETCDIR%%/my.cnf.sample
+@sample %%ETCDIR%%/my.cnf.sample
 lib/mysql/libmysqlharness.so
 lib/mysql/libmysqlharness.so.1
 lib/mysql/libmysqlharness_stdx.so
@@ -284,5 +284,4 @@ libexec/mysqld
 @dir %%ETCDIR%%/keyring
 @dir lib/mysql/plugin/debug
 @dir %%MY_SECDIR%%
-@dir %%MY_TMPDIR%%
-
+@dir(mysql,mysql,0750) %%MY_TMPDIR%%

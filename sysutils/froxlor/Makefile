@@ -94,7 +94,8 @@ NGINX_RUN_DEPENDS=	nginx:www/nginx
 
 APACHE_USES=	apache php:mod
 
-MYSQLS_USES=	mysql:server
+# TODO: remove option, there is no way/need to depend on a specific mysql server
+MYSQLS_USES=	mysql
 
 PCNTL_USE=	PHP=pcntl
 

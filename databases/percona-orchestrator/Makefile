@@ -16,7 +16,7 @@ RUN_DEPENDS=	bash>0:shells/bash \
 		gsed>0:textproc/gsed \
 		jq>0:textproc/jq
 
-USES=		go mysql:server shebangfix
+USES=		go mysql shebangfix
 
 USERS=		percona
 GROUPS=		percona

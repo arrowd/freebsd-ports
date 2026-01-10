@@ -15,7 +15,7 @@ RUN_DEPENDS=	icinga-php-library${PHP_PKGNAMESUFFIX}>0:net-mgmt/icinga-php-librar
 		icingaweb2${PHP_PKGNAMESUFFIX}>=2.11.4:net-mgmt/icingaweb2@${PHP_FLAVOR} \
 		icingaweb2-module-reactbundle${PHP_PKGNAMESUFFIX}>0:net-mgmt/icingaweb2-module-reactbundle@${PHP_FLAVOR}
 
-USES=		mysql:server php:web,flavors ssl
+USES=		mysql php:web,flavors ssl
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Icinga

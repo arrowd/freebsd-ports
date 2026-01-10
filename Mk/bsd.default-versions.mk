@@ -19,7 +19,7 @@ LOCALBASE?=	/usr/local
 
 .  for lang in APACHE BDB COROSYNC EBUR128 EMACS FIREBIRD FORTRAN FPC GCC \
 	GHOSTSCRIPT GL GO GUILE IMAGEMAGICK JAVA LAZARUS LIBRSVG2 LINUX LLVM \
-	LUA LUAJIT MONO MYSQL NINJA NODEJS OPENLDAP PERL5 PGSQL PHP \
+	LUA LUAJIT MONO MYSQL_CLIENT NINJA NODEJS OPENLDAP PERL5 PGSQL PHP \
 	PYCRYPTOGRAPHY PYTHON PYTHON2 RUBY RUST SAMBA SSL TCLTK VARNISH
 .    if defined(${lang}_DEFAULT)
 ERROR+=	"The variable ${lang}_DEFAULT is set and it should only be defined through DEFAULT_VERSIONS+=${lang:tl}=${${lang}_DEFAULT} in /etc/make.conf"
@@ -105,8 +105,8 @@ LUAJIT_DEFAULT?=	luajit
 .  endif
 # Possible values: 5.10, 5.20, 6.8
 MONO_DEFAULT?=		5.20
-# Possible values: 8.0, 8.4, 9.1, 9.4, 10.6m, 10.11m, 11.4m, 11.8m
-MYSQL_DEFAULT?=		8.0
+# Possible values: mysql mariadb
+MYSQL_CLIENT_DEFAULT?=		mysql
 # Possible values: ninja, samurai
 NINJA_DEFAULT?=		ninja
 # Possible value: 20, 22, 24, 25, current, lts (Note: current = 25 and lts = 24)

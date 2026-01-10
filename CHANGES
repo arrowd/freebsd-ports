@@ -10,6 +10,28 @@ in the release notes and/or placed into UPDATING.
 
 All ports committers are allowed to commit to this file.
 
+20240228:
+AUTHOR: tcberner@FreeBSD.org
+
+  Simplify and improve the mysql/mariadb ports and packages.
+
+  Changes:
+    * only one client port for each provider:
+      - databases/mysql-client
+      - databases/mariadb-client
+    * servers install to ${LOCALBASE}/${provider}${version}
+    * new default version MYSQL_CLIENT_DEFAULT=mysql|mariadb
+    * mysql.mk only adds run or build depends on ${MYSQL_CLIENT_DEFAULT}
+
+   The greatest benefit of this is, that one can have multiple
+   mysql/mariadb servers installed at once; which makes migrations
+   to newer server versions finally easier.
+
+   The respective client ports should be kept at the version of the latest
+   provided server package. So if there is a databases/mysql82-server port
+   in the future, databases/mysql-client should be updated to use that one.
+
+   Note: the clients are backwards compatible.
 20251111:
 AUTHOR: kiwi@FreeBSD.org
 

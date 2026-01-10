@@ -273,4 +273,4 @@ libexec/mysqld
 @dir %%ETCDIR%%/keyring
 @dir lib/mysql/plugin/debug
 @dir %%MY_SECDIR%%
-@dir %%MY_TMPDIR%%
+@dir(mysql,mysql,0750) %%MY_TMPDIR%%

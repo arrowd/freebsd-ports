@@ -28,7 +28,7 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	CauldronDevelopmentLLC
 
 USES=		compiler:c++14-lang desktop-file-utils gettext-runtime gl gnome	\
-		localbase:ldflags mysql:client pkgconfig python qt:5 scons	\
+		localbase:ldflags mysql pkgconfig python qt:5 scons	\
 		shared-mime-info shebangfix sqlite ssl
 SHEBANG_FILES=	examples/python/camotics_python_example.py	\
 		tests/testHarness

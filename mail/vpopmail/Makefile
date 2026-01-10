@@ -118,7 +118,6 @@ MYSQL_CONFIGURE_ON=		--enable-auth-module=mysql \
 				--enable-incdir=${LOCALBASE}/include/mysql \
 				--enable-libdir=${LOCALBASE}/lib/mysql
 MYSQL_CFLAGS=			-fcommon
-MYSQL_VARS=			IGNORE_WITH_MYSQL="105m 106m 1011m 81"
 MYSQL_LIMITS_CONFIGURE_ON=	--enable-mysql-limits
 MYSQL_REPLICATION_CONFIGURE_ON=	--enable-mysql-replication
 ONCHANGE_SCRIPT_CONFIGURE_ON=	--enable-onchange-script

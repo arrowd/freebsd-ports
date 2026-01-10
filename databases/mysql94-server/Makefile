@@ -18,10 +18,6 @@ NOT_FOR_ARCHS= armv6 armv7 i386 powerpc
 USES=		bison:build cmake:noninja cpe groff:run libedit localbase \
 		ncurses perl5 pkgconfig shebangfix ssl compiler:c++20-lang
 
-WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}${DISTVERSIONSUFFIX}
-
-SLAVEDIRS=	databases/mysql91-client
-
 CPE_VENDOR=	oracle
 
 USE_CXXSTD=	c++20
@@ -91,9 +87,13 @@ SHEBANG_FILES=	scripts/*.pl* scripts/*.sh
 IGNORE=		you have `USE_MYSQL' variable defined either in environment or in make(1) arguments, please undefine and try again
 .endif
 
+SUFXD_NAME=	mysql94
+
+SUB_FILES=	my.cnf.sample
 SUB_LIST=	MY_DBDIR=${MY_DBDIR} \
 		MY_SECDIR=${MY_SECDIR} \
-		MY_TMPDIR=${MY_TMPDIR}
+		MY_TMPDIR=${MY_TMPDIR} \
+		SUFXD_NAME=${SUFXD_NAME}
 
 PLIST_SUB=	MY_DBDIR=${MY_DBDIR} \
 		MY_SECDIR=${MY_SECDIR} \
@@ -101,21 +101,21 @@ PLIST_SUB=	MY_DBDIR=${MY_DBDIR} \
 
 # MySQL-Server part
 .if !defined(CLIENT_ONLY)
-USES+=		mysql:94
+# Install to a prefix to be able to co-install multiple versions of the
+# server. Client installs directly to PREFIX
+PREFIX=			${LOCALBASE}/${SUFXD_NAME}
 
 CONFLICTS_INSTALL=	mysql*-server \
 			mysqlwsrep*-server \
 			mariadb*-server \
 			percona*-server
 
-USE_RC_SUBR=	mysql-server
+USE_RC_SUBR=	${SUFXD_NAME}-server
 
-SUB_FILES=	my.cnf.sample pkg-message
+SUB_FILES+=	pkg-message
 
 USERS=		mysql
 GROUPS=		mysql
-
-USE_LDCONFIG+=	${PREFIX}/lib/mysql/plugin
 
 MMAN1=		ibd2sdi.1 innochecksum.1 my_print_defaults.1 myisam_ftdump.1 myisamchk.1 \
 		myisamlog.1 myisampack.1 mysql_secure_installation.1 mysql_ssl_rsa_setup.1 \
@@ -171,10 +171,20 @@ post-extract:
 	@${RM} -rv ${WRKSRC}/sql/sql_hints.yy.cc ${WRKSRC}/sql/sql_hints.yy.h
 
 .if !defined(CLIENT_ONLY)
+
+install-rc-script:
+	@${ECHO_MSG} "===> Staging rc.d startup script(s)"
+	@${MKDIR} ${STAGEDIR}${LOCALBASE}/etc/rc.d
+	@for i in ${USE_RC_SUBR}; do \
+		_prefix=${LOCALBASE}; \
+		${INSTALL_SCRIPT} ${WRKDIR}/$${i} ${STAGEDIR}$${_prefix}/etc/rc.d/$${i%.sh}; \
+		${ECHO_CMD} "@(root,wheel,0755) $${_prefix}/etc/rc.d/$${i%.sh}" >> ${TMPPLIST}; \
+	done
+
 post-install:
-	${MKDIR} ${STAGEDIR}${ETCDIR}
+	@${MKDIR} ${STAGEDIR}${ETCDIR}/keyring
 	${INSTALL_DATA} ${WRKDIR}/my.cnf.sample ${STAGEDIR}${ETCDIR}/my.cnf.sample
-	${MKDIR} ${STAGEDIR}${ETCDIR}/keyring
+
 	${MKDIR} ${STAGEDIR}${MY_SECDIR}
 	${MKDIR} ${STAGEDIR}${MY_TMPDIR}
 .endif

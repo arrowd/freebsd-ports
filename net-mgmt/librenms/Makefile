@@ -103,7 +103,9 @@ WMIC_DESC=	Enable support for WMI polling
 FPING_RUN_DEPENDS=	fping:net/fping
 IPMITOOL_RUN_DEPENDS=	ipmitool:sysutils/ipmitool
 LIBVIRT_RUN_DEPENDS=	virsh:devel/libvirt
-MYSQLD_USES=		mysql:server
+MYSQLD_USES=		mysql
+# TODO: remove this option, don't try to depend on servers
+MYSQLD_USES_OFF=	mysql
 NAGPLUGINS_RUN_DEPENDS=	${LOCALBASE}/libexec/nagios/check_nagios:net-mgmt/nagios-plugins
 NMAP_RUN_DEPENDS=	nmap:security/nmap
 WMIC_RUN_DEPENDS=	wmic:net-mgmt/wmi-client

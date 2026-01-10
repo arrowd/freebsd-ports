@@ -116,7 +116,7 @@ MYSQLDV_CONFIGURE_ON=	--with-mysql
 MYSQLDV_USES+=		compiler:c11 mysql
 
 MDB5_CONFIGURE_ON=	--with-mysql=${LOCALBASE}/bin/mysql_config
-MDB5_USES+=		compiler:c11 mysql:105m
+MDB5_USES+=		compiler:c11 mysql:???
 MDB5_DESC=		Mariadb 10.5 database support
 
 MDB6_CONFIGURE_ON=	--with-mysql=${LOCALBASE}/bin/mysql_config
