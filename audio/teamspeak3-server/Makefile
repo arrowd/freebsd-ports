@@ -1,5 +1,6 @@
 PORTNAME=	teamspeak3-server
 PORTVERSION=	3.13.7
+PORTREVISION=	1
 PORTEPOCH=	1
 CATEGORIES=	audio net
 MASTER_SITES=	https://files.teamspeak-services.com/releases/server/${PORTVERSION}/
@@ -47,11 +48,7 @@ PORTDOCS=	accounting.txt \
 		update_mysql_to_mariadb.txt \
 		webquery.md
 
-OPTIONS_DEFINE=	DOCS MYSQL
-
-MYSQL_USES=	mysql:server
-MYSQL_VARS=	SUB_LIST+=MYSQL=mysql
-MYSQL_VARS_OFF=	SUB_LIST+=MYSQL=
+OPTIONS_DEFINE=	DOCS
 
 .include <bsd.port.options.mk>
 
