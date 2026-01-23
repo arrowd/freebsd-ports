@@ -11,7 +11,7 @@ WWW=		https://labs.consol.de/de/nagios/check_mysql_health/
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-RUN_DEPENDS=	${DBD_MYSQL}
+RUN_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
 
 USES=		autoreconf mysql perl5 gmake
 

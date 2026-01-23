@@ -11,7 +11,7 @@ LICENSE=	GPLv2
 
 CONFLICTS_INSTALL=	mariadb*-client
 
-RUN_DEPENDS=	${DBD_MYSQL} \
+RUN_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql \
 		p5-DBI>=1.13:databases/p5-DBI \
 		p5-Term-ReadKey>=2.10:devel/p5-Term-ReadKey
 

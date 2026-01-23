@@ -17,7 +17,7 @@ RUN_DEPENDS=	p5-DBI>0:databases/p5-DBI \
 		p5-Net-Telnet>0:net/p5-Net-Telnet \
 		p5-Net-CIDR>0:net-mgmt/p5-Net-CIDR \
 		p5-RPSL-Parser>0:devel/p5-RPSL-Parser \
-		${DBD_MYSQL}
+		p5-DBD-mysql>=0:databases/p5-DBD-mysql
 
 USES=		mysql shebangfix tar:tgz
 

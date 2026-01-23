@@ -107,7 +107,7 @@ BINDINGS_BUILD_DEPENDS=	${PY_SETUPTOOLS} \
 			${PYTHON_PKGNAMEPREFIX}requests>=0:www/py-requests@${PY_FLAVOR} \
 			${PYTHON_PKGNAMEPREFIX}simplejson>=0:devel/py-simplejson@${PY_FLAVOR} \
 			p5-DBI>=0:databases/p5-DBI \
-			${DBD_MYSQL} \
+			p5-DBD-mysql>=0:databases/p5-DBD-mysql \
 			p5-Net-UPnP>=0:multimedia/p5-Net-UPnP \
 			p5-IO-Socket-INET6>=2.51:net/p5-IO-Socket-INET6 \
 			p5-XML-Simple>=0:textproc/p5-XML-Simple \
@@ -120,7 +120,7 @@ BINDINGS_RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}mysqlclient>=1.2.2:databases/py-mys
 			${PYTHON_PKGNAMEPREFIX}requests-cache>0:www/py-requests-cache@${PY_FLAVOR} \
 			${PYTHON_PKGNAMEPREFIX}simplejson>=3:devel/py-simplejson@${PY_FLAVOR} \
 			p5-DBI>=0:databases/p5-DBI \
-			${DBD_MYSQL} \
+			p5-DBD-mysql>=0:databases/p5-DBD-mysql \
 			p5-Net-UPnP>=0:multimedia/p5-Net-UPnP \
 			p5-IO-Socket-INET6>=2.51:net/p5-IO-Socket-INET6 \
 			p5-XML-Simple>=0:textproc/p5-XML-Simple \

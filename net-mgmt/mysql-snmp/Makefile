@@ -13,7 +13,7 @@ LICENSE=	GPLv2+
 LICENSE_FILE=	${WRKSRC}/COPYING
 
 RUN_DEPENDS=	net-snmp>=0:net-mgmt/net-snmp \
-		${DBD_MYSQL} \
+		p5-DBD-mysql>=0:databases/p5-DBD-mysql \
 		p5-DBI>=0:databases/p5-DBI \
 		p5-Math-BigInt-GMP>=0:math/p5-Math-BigInt-GMP \
 		p5-Net-SNMP>=5.4.3:net-mgmt/p5-Net-SNMP \

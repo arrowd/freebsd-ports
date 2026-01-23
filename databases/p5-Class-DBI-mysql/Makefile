@@ -11,7 +11,7 @@ WWW=		https://metacpan.org/release/Class-DBI-mysql
 
 BUILD_DEPENDS=	${RUN_DEPENDS}
 RUN_DEPENDS=	p5-Class-DBI>=0:databases/p5-Class-DBI \
-		${DBD_MYSQL}
+		p5-DBD-mysql>=0:databases/p5-DBD-mysql
 
 USES=		mysql perl5
 USE_PERL5=	configure

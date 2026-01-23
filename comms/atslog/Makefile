@@ -35,8 +35,8 @@ WWW_DESC=	Install web interface
 WWWGD_DESC=	Graphic reports
 
 MYSQL_USES=		mysql
-MYSQL_BUILD_DEPENDS=	${DBD_MYSQL}
-MYSQL_RUN_DEPENDS=	${DBD_MYSQL}
+MYSQL_BUILD_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
+MYSQL_RUN_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
 
 PGSQL_USES=		pgsql
 PGSQL_BUILD_DEPENDS=	p5-DBD-Pg>=0:databases/p5-DBD-Pg

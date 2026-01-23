@@ -52,7 +52,7 @@ OPTIONS_DEFAULT=SQLITE
 
 SQLITE_RUN_DEPENDS=	p5-DBD-SQLite>=0:databases/p5-DBD-SQLite
 PGSQL_RUN_DEPENDS=	p5-DBD-Pg>=0:databases/p5-DBD-Pg
-MYSQL_RUN_DEPENDS=	${DBD_MYSQL}
+MYSQL_RUN_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
 MYSQL_USES=		mysql
 
 .include <bsd.port.mk>

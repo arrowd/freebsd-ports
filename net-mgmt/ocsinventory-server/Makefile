@@ -11,7 +11,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 RUN_DEPENDS=	p5-XML-Simple>=2.12:textproc/p5-XML-Simple \
 		p5-DBI>=1.40:databases/p5-DBI \
-		${DBD_MYSQL} \
+		p5-DBD-mysql>=0:databases/p5-DBD-mysql \
 		p5-Apache-DBI>=0.93:www/p5-Apache-DBI \
 		p5-Net-IP>=1.21:net-mgmt/p5-Net-IP \
 		p5-SOAP-Lite>=0.66:net/p5-SOAP-Lite \

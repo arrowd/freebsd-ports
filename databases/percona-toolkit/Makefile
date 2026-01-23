@@ -12,7 +12,7 @@ LICENSE=	ARTPERL10 GPLv2
 LICENSE_COMB=	dual
 
 RUN_DEPENDS=	bash:shells/bash \
-		${DBD_MYSQL} \
+		p5-DBD-mysql>=0:databases/p5-DBD-mysql \
 		p5-DBI>=1.46:databases/p5-DBI \
 		p5-Term-ReadKey>=2.10:devel/p5-Term-ReadKey \
 		pidof:sysutils/pidof

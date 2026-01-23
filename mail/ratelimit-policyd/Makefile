@@ -15,7 +15,7 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	MirLach
 #GH_TAGNAME=	65154a2
 
-RUN_DEPENDS+=	${DBD_MYSQL}
+RUN_DEPENDS+=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
 
 SHEBANG_FILES=	ratelimit-policyd.pl
 

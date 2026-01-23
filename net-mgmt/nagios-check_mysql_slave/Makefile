@@ -14,7 +14,7 @@ LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 RUN_DEPENDS=	p5-DBI>=1.60.7:databases/p5-DBI \
-		${DBD_MYSQL}
+		p5-DBD-mysql>=0:databases/p5-DBD-mysql
 
 PORTSCOUT=	ignore:1
 

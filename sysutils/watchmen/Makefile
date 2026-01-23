@@ -29,7 +29,7 @@ MYSQL_DESC=	Enable test mysql queries
 PGSQL_DESC=	Enable test postgresql queries
 EMAIL_DESC=	Report problems by email
 
-MYSQL_RUN_DEPENDS=	${DBD_MYSQL}
+MYSQL_RUN_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
 PGSQL_RUN_DEPENDS=	p5-DBD-Pg>=2.19.2:databases/p5-DBD-Pg
 EMAIL_RUN_DEPENDS=	p5-MIME-Lite>=0:mail/p5-MIME-Lite
 

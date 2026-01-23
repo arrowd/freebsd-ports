@@ -111,7 +111,7 @@ APACHE_RUN_DEPENDS=	${LOCALBASE}/${APACHEMODDIR}/mod_fastcgi.so:www/mod_fastcgi
 APACHE_USES=		apache:run
 FASTCGI_RUN_DEPENDS=	p5-CGI-Fast>=1.08:www/p5-CGI-Fast \
 			p5-FCGI>=0.67:www/p5-FCGI
-MYSQL_RUN_DEPENDS=	${DBD_MYSQL}
+MYSQL_RUN_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
 MYSQL_SUB_LIST=		REQ_MYSQL=mysql
 MYSQL_SUB_LIST_OFF=	REQ_MYSQL=""
 MYSQL_USES=		mysql

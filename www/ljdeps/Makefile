@@ -20,7 +20,7 @@ RUN_DEPENDS=	p5-Net-Telnet>=0:net/p5-Net-Telnet \
 		p5-GD-Graph>=0:graphics/p5-GD-Graph \
 		p5-GD-TextUtil>=0:graphics/p5-GD-TextUtil \
 		p5-Data-ShowTable>=0:devel/p5-Data-ShowTable \
-		${DBD_MYSQL} \
+		p5-DBD-mysql>=0:databases/p5-DBD-mysql \
 		p5-Proc-ProcessTable>=0:devel/p5-Proc-ProcessTable \
 		p5-SOAP-Lite>=0:net/p5-SOAP-Lite \
 		p5-Unicode-MapUTF8>=0:converters/p5-Unicode-MapUTF8

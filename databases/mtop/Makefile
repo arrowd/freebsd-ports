@@ -12,7 +12,7 @@ LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/COPYING
 
 BUILD_DEPENDS=	p5-Curses>=0:devel/p5-Curses \
-		${DBD_MYSQL}
+		p5-DBD-mysql>=0:databases/p5-DBD-mysql
 RUN_DEPENDS:=	${BUILD_DEPENDS}
 
 NO_ARCH=	yes

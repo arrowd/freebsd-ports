@@ -112,7 +112,7 @@ RUN_DEPENDS+=	p5-DBD-SQLite>=0:databases/p5-DBD-SQLite
 .endif
 
 .if ${PORT_OPTIONS:MMYSQL}
-RUN_DEPENDS+=	${DBD_MYSQL}
+RUN_DEPENDS+=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
 USES+=		mysql
 .endif
 
