@@ -56,11 +56,10 @@ SQLITE_IMPLIES=		SMSD
 SMSD_PLIST_SUB=		SMSD=''
 SMSD_PLIST_SUB_OFF=	SMSD='@comment ' MSM='@comment ' PGM='@comment ' SQLT='@comment '
 SMSD_CONFIGURE_OFF=	--disable-smsd
-MYSQL_USES=		mysql ssl
+MYSQL_USES=		mysql:mariadb ssl
 MYSQL_PLIST_SUB=	MSM=''
 MYSQL_PLIST_SUB_OFF=	MSM='@comment '
 MYSQL_CONFIGURE_OFF=	--disable-mysql
-MYSQL_VARS=		IGNORE_WITH_MYSQL="80 81"
 PGSQL_USES=		pgsql
 PGSQL_PLIST_SUB=	PGM=''
 PGSQL_PLIST_SUB_OFF=	PGM='@comment '
