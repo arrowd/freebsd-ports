@@ -49,9 +49,8 @@ MYSQL_DESC=	Use MYSQL backend
 SOFTHSM_DESC=	SoftHSM cryptographic store for PKCS \#11 interface
 SQLITE_DESC=	Use SQLite backend
 
-MYSQL_USES=		mysql
+MYSQL_USES=		mysql:mariadb
 MYSQL_CONFIGURE_ON=	--with-enforcer-database=mysql
-MYSQL_VARS=		IGNORE_WITH_MYSQL="80 81"
 SOFTHSM_RUN_DEPENDS=	softhsm2>=2.5.0:security/softhsm2
 SOFTHSM_CONFIGURE_ON=	--with-pkcs11-softhsm=${LOCALBASE}/lib/softhsm/libsofthsm2.so
 SQLITE_BUILD_DEPENDS=	sqlite3>=3.3.9:databases/sqlite3
