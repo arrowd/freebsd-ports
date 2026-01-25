@@ -91,21 +91,17 @@ PORTEXAMPLES=	snmpd.conf.example
 
 DBDIR=		/var/db/${PORTNAME}
 
-OPTIONS_DEFINE=		DOCS EXAMPLES FPING IPMITOOL LIBVIRT MYSQLD NAGPLUGINS \
+OPTIONS_DEFINE=		DOCS EXAMPLES FPING IPMITOOL LIBVIRT NAGPLUGINS \
 			NMAP WMIC X11
 OPTIONS_DEFAULT=	FPING IPMITOOL LIBVIRT NAGPLUGINS NMAP PYPOLLER WMIC
 
 FPING_DESC=	Enable fping support ping monitoring
 IPMITOOL_DESC=	Enable support for monitoring hardware IPMI
-MYSQLD_DESC=	Use local MySQL server
 WMIC_DESC=	Enable support for WMI polling
 
 FPING_RUN_DEPENDS=	fping:net/fping
 IPMITOOL_RUN_DEPENDS=	ipmitool:sysutils/ipmitool
 LIBVIRT_RUN_DEPENDS=	virsh:devel/libvirt
-MYSQLD_USES=		mysql
-# TODO: remove this option, don't try to depend on servers
-MYSQLD_USES_OFF=	mysql
 NAGPLUGINS_RUN_DEPENDS=	${LOCALBASE}/libexec/nagios/check_nagios:net-mgmt/nagios-plugins
 NMAP_RUN_DEPENDS=	nmap:security/nmap
 WMIC_RUN_DEPENDS=	wmic:net-mgmt/wmi-client
