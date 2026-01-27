@@ -85,7 +85,7 @@ SUB_FILES=	pkg-message
 OPTIONS_DEFAULT+=	CURL FPING IPMI IPV6 MYSQL OPENSSL SNMP SSH UNIXODBC
 OPTIONS_DEFINE=		CURL FPING IPMI IPV6 LDAP NMAP SNMP SSH UNIXODBC
 OPTIONS_SINGLE+=	DB SSL
-OPTIONS_SINGLE_DB=	MDB5 MDB6 MYSQL MYSQLDV ORACLE PGSQL
+OPTIONS_SINGLE_DB=	MYSQL ORACLE PGSQL
 .if ${ZABBIX_BUILD} == "proxy"
 OPTIONS_SINGLE_DB+=	SQLITE
 .endif
@@ -100,7 +100,6 @@ SNMP_DESC=	Support for SNMP checks
 SSH_DESC=	Support for SSH-based checks
 UNIXODBC_DESC=	Support for database checks via ODBC
 MYSQL_DESC=	MySQL 8.0 database support
-MYSQLDV_DESC=	MYSQL DEFAULT_VERSIONS= (poudriere)
 
 FPING_RUN_DEPENDS=	fping:net/fping
 
@@ -110,20 +109,8 @@ IPMI_LIB_DEPENDS=	libOpenIPMI.so:sysutils/openipmi
 LDAP_CONFIGURE_WITH=	ldap
 LDAP_USES=		ldap
 
-# TODO: This does not really make sense with the new mysql-client/mariadb-client scheme.
 MYSQL_CONFIGURE_ON=	--with-mysql
-MYSQL_USES+=		compiler:c11 mysql:build,run
-
-MYSQLDV_CONFIGURE_ON=	--with-mysql
-MYSQLDV_USES+=		compiler:c11 mysql:build,run
-
-MDB5_CONFIGURE_ON=	--with-mysql=${LOCALBASE}/bin/mysql_config
-MDB5_USES+=		compiler:c11 mysql:build,run
-MDB5_DESC=		Mariadb 10.5 database support
-
-MDB6_CONFIGURE_ON=	--with-mysql=${LOCALBASE}/bin/mysql_config
-MDB6_USES+=		compiler:c11 mysql:build,run
-MDB6_DESC=		Mariadb 10.6 database support
+MYSQL_USES+=		compiler:c11 mysql
 
 ORACLE_CONFIGURE_WITH=	oracle
 
