@@ -41,9 +41,8 @@ BDB_USES=		bdb:5
 BDB_CONFIGURE_WITH=	bdb
 
 MYSQL_LIB_DEPENDS=	libunwind.so:devel/libunwind
-MYSQL_USES=		mysql ssl
+MYSQL_USES=		mysql:mysql ssl
 MYSQL_CONFIGURE_WITH=	mysql
-MYSQL_VARS=	IGNORE_WITH_MYSQL="105m 106m 1011m"
 
 PGSQL_USES=		pgsql
 PGSQL_CONFIGURE_WITH=	postgresql
