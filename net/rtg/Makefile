@@ -33,12 +33,8 @@ LDFLAGS+=	-fstack-protector
 USERS=		rtg
 GROUPS=		rtg
 
-OPTIONS_DEFINE=	WEB MYSQL
-MYSQL_DESC=	Pull MySQL server in as a dependancy for local setups
+OPTIONS_DEFINE=	WEB
 WEB_DESC=	Include PHP-based web client interface pre-requisites
-
-# TODO: remove this part
-MYSQL_USES=	mysql
 
 WEB_USES=		php
 WEB_USE=		PHP=mysqli
