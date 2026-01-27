@@ -30,9 +30,8 @@ MYSQL_DESC=	Enable SuperMediator to directly write into MySQL
 SKIPSET_DESC=	Enable SiLK IPSET files for filtering
 SPREAD_DESC=	Enable Spread libary as a pub/sub distribution capability
 
-MYSQL_USES=	mysql
+MYSQL_USES=	mysql:mariadb
 MYSQL_CONFIGURE_WITH=	mysql
-MYSQL_VARS=	IGNORE_WITH_MYSQL="80 81"
 SKIPSET_LIB_DEPENDS=	libsilk.so:security/silktools
 SKIPSET_CONFIGURE_WITH=	skipset
 SPREAD_LIB_DEPENDS=	libspread.so:net/spread4
