@@ -64,8 +64,7 @@ CONFIGURE_ARGS+=	--without-ldap
 .endif
 
 .if ${LIBGDA5_SLAVE}==mysql
-USES+=			mysql
-IGNORE_WITH_MYSQL=	80
+USES+=			mysql:mariadb
 CONFIGURE_ARGS+=	--with-mysql=${LOCALBASE}
 .else
 CONFIGURE_ARGS+=	--without-mysql

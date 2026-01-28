@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # PROVIDE: dspam
-# REQUIRE: DAEMON %%MYSQL%% %%PGSQL%% %%CLAMD%%
+# REQUIRE: DAEMON mysql %%PGSQL%% %%CLAMD%%
 # BEFORE: mail
 # KEYWORD: shutdown
 

@@ -11,7 +11,7 @@ WWW=		https://magerun.net/
 
 LICENSE=	MIT
 
-USES=		mysql:client php:cli
+USES=		mysql php:cli
 USE_PHP=	phar bz2 simplexml pdo_mysql zlib ctype dom posix
 
 NO_ARCH=	yes

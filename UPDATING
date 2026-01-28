@@ -5,6 +5,76 @@ they are unavoidable.
 You should get into the habit of checking this file for changes each time
 you update your ports collection, before attempting any port upgrades.
 
+YYYYMMDD:
+  AFFECTS: users of databases/mroonga
+  AUTHOR: arrowd@FreeBSD.org
+  The port has been flavorized to allow selecting the version of a MySQL server
+  to compile against. The only version supported at the moment is mysql80.
+  This resulted in a change of package's name from "mroonga" to "mroonga-mysql80".
+
+YYYYMMDD:
+  AFFECTS: users of audio/teamspeak3-server, comms/cqrlog,
+           databases/percona-orchestrator, deskutils/moregroupware,
+           finance/frontaccounting, graphics/digikam, net-mgmt/icingaweb2-module-x509,
+           net-mgmt/librenms, net-mgmt/observium, net/rtg, security/webfwlog,
+           sysutils/froxlor, www/hotcrp
+  AUTHOR: arrowd@FreeBSD.org
+  Mentioned ports are no longer depend on a specific SQL server. You now have
+  to install an appropriate server manually. Consult software's documentation
+  to figure out what SQL server it is intended to run against. See also the
+  entry below that talks about changes in SQL server ports.
+
+  Users of the official binary packages are advised to mark installed
+  SQL server packages as non-automatic to prevent them from being removed by
+  "pkg autoremove":
+
+  # pkg info -g 'mysql*server'
+  # pkg info -g 'mariadb*server'
+  # pkg set -A 0 <packages printed by previous 2 commands>
+
+YYYYMMDD:
+  AFFECTS: users of net-mgmt/zabbix*-server
+  AUTHOR: arrowd@FreeBSD.org
+  MDB5, MDB6 and MYSQLDV options got removed. If you want to run Zabbix against
+  the MariaDB server, just install an appropriate version manually. See also
+  the entry below that talks about changes in SQL server ports.
+
+YYYYMMDD:
+  AFFECTS: users of databases/mysql*-server, databases/mariadb*-server
+  AUTHOR: arrowd@FreeBSD.org
+  The MySQL and MariaDB servers now install into a prefix. This makes
+  them co-installable. It is no longer possible to depend on a "default" MySQL
+  or MariaDB server.
+
+  Server's rc scripts and their variables are now suffixed with server version.
+  Users need to update their /etc/rc.conf, replacing mysql_foo vars like this:
+
+  mysql_enable="YES"  ->  mysqlXY_enable="YES"
+  mysql_args="..."    ->  mysqlXY_args="..."
+  ...
+
+  MariaDB multi-instance rc.conf renaming would look like:
+
+  mariadb_instances="prod test"  ->  mariadbXY_instances="prod test"
+  mariadb_prod_args="..."        ->  mariadbXY_prod_args="..."
+
+  The default path to server's my.cnf got changed from /usr/local/etc/mysql/my.cnf
+  to /usr/local/{mariadbXY,mysqlXY}/etc/mysql/my.cnf. If you did not change
+  this file, you can skip this migrating the config. To figure whether you made
+  changes to my.cnf run
+
+  # diff -u /usr/local/etc/mysql/my.cnf.sample /usr/local/etc/mysql/my.cnf
+
+  If you made changes to my.cnf and want to preserve them, run following commands
+  before upgrading, but after shutting down the server:
+
+  # mkdir -p /usr/local/{mariadbXY,mysqlXY}/etc/mysql
+  # mv /usr/local/etc/mysql/my.cnf /usr/local/{mariadbXY,mysqlXY}/etc/mysql/my.cnf
+
+  Note that while different SQL servers are now co-installable, they can't be
+  run in parallel without changing the mysqlXY_dbdir variable in rc.conf -
+  the default is the same "/var/db/mysql" across all servers!
+
 20260125:
   AFFECTS: users of dns/ddclient
   AUTHOR: mjl@luckie.org.nz

@@ -22,14 +22,10 @@ SUB_FILES=		pkg-deinstall pkg-message
 
 WRKSRC=			${WRKDIR}/${DIST_SUBDIR}
 
-OPTIONS_DEFINE=		APACHE LIGHTTPD NGINX NLS DOCS
-OPTIONS_DEFAULT=	APACHE MYSQL_SERVER
-OPTIONS_RADIO=		RG1
-OPTIONS_RADIO_RG1=	MARIADB_CLIENT MYSQL_CLIENT MYSQL_SERVER
+OPTIONS_DEFINE=		APACHE LIGHTTPD MYSQL NGINX NLS DOCS
+OPTIONS_DEFAULT=	APACHE MYSQL
 
-MARIADB_CLIENT_DESC=	MariaDB client connector support
-MYSQL_CLIENT_DESC=	MySQL client connector support
-MYSQL_SERVER_DESC=	MySQL server support
+MYSQL_DESC=	MySQL client connector support
 NGINX_DESC=		NGINX web server
 RG1_DESC=		Database Connectivity
 
@@ -37,9 +33,7 @@ APACHE_USES=		apache:run php:web
 DOCS_VARS_OFF=	PORTDOCSARGS='-not -path "./doc*"'
 LIGHTTPD_RUN_DEPENDS=	lighttpd:www/lighttpd
 LIGHTTPD_USES=		php:web
-MARIADB_CLIENT_USES=	mysql:106m
-MYSQL_CLIENT_USES=	mysql:client
-MYSQL_SERVER_USES=	mysql:server
+MYSQL_USES=		mysql
 NGINX_RUN_DEPENDS=	nginx:www/nginx
 NGINX_USES=		php:web
 NLS_USES=		gettext
@@ -48,10 +42,6 @@ NLS_USES=		gettext
 
 .if !${PORT_OPTIONS:MAPACHE} && !${PORT_OPTIONS:MLIGHTTPD} && !{PORT_OPTIONS:MNGINX}
 USES+=			php:cgi php:cli
-.endif
-
-.if ${PORT_OPTIONS:MMYSQL_SERVER} || ${PORT_OPTIONS:MMARIADB_CLIENT}
-USE_PHP+=		mysqli
 .endif
 
 do-install:

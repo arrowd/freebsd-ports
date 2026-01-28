@@ -12,7 +12,7 @@ WWW=		https://sourceforge.net/projects/klg/
 
 LICENSE=	BSD3CLAUSE
 
-USES=		tar:txz php:web,flavors mysql:client
+USES=		tar:txz php:web,flavors mysql
 USE_PHP=	mysqli sockets xml
 
 NO_ARCH=	yes

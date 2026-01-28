@@ -12,6 +12,7 @@ bin/mysqlimport
 bin/mysqlshow
 bin/mysqlslap
 bin/perror
+@sample %%ETCDIR%%/my.cnf.sample
 include/mysql/errmsg.h
 include/mysql/field_types.h
 include/mysql/my_command.h
@@ -33,6 +34,8 @@ lib/mysql/libmysqlclient_r.so
 lib/mysql/libmysqlclient_r.so.24
 %%SASLCLIENT%%lib/mysql/plugin/authentication_ldap_sasl_client.so
 %%SASLCLIENT%%lib/mysql/plugin/authentication_oci_client.so
+%%SASLCLIENT%%lib/mysql/plugin/authentication_openid_connect_client.so
 %%SASLCLIENT%%lib/mysql/plugin/authentication_webauthn_client.so
+%%SASLCLIENT%%lib/mysql/plugin/mysql_native_password.so
 libdata/pkgconfig/mysqlclient.pc
 share/aclocal/mysql.m4

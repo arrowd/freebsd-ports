@@ -23,7 +23,7 @@ NO_ARCH=	yes
 NO_BUILD=	yes
 NO_WRKSUBDIR=	yes
 
-OPTIONS_DEFINE=	DKIM LIBNSS LOGROTATE MYSQLS NLS PCNTL
+OPTIONS_DEFINE=	DKIM LIBNSS LOGROTATE NLS PCNTL
 
 OPTIONS_RADIO=		DNS FTP IMAPPOP3 SMTP WEB
 OPTIONS_RADIO_WEB=	APACHE LIGHTTPD NGINX
@@ -57,10 +57,9 @@ LIBNSS_DESC=	Libnss-mysql for authentication
 WEBALIZER_DESC=	Webalizer (small, fast, static result pages)
 AWSTATS_DESC=	Awstats (more fancy, dynamic and static result pages)
 LOGROTATE_DESC=	Logrotate for log rotation
-MYSQLS_DESC=	Depend on MySQL server
 NLS_DESC=	Enable NLS support (required for webFTP frontend)
 
-OPTIONS_DEFAULT=	APACHE DOVECOT2 MYSQLS PCNTL POSTFIX PROFTPD WEBALIZER
+OPTIONS_DEFAULT=	APACHE DOVECOT2 PCNTL POSTFIX PROFTPD WEBALIZER
 
 POSTFIX_RUN_DEPENDS=	postfix:mail/postfix
 
@@ -93,8 +92,6 @@ LIGHTTPD_RUN_DEPENDS=	lighttpd:www/lighttpd
 NGINX_RUN_DEPENDS=	nginx:www/nginx
 
 APACHE_USES=	apache php:mod
-
-MYSQLS_USES=	mysql:server
 
 PCNTL_USE=	PHP=pcntl
 

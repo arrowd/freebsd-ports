@@ -58,8 +58,7 @@ RUN_DEPENDS+=	pg_dump:databases/postgresql${PGSQL_VER_NODOT}-client
 RUN_DEPENDS+=	pg_dumpall:databases/postgresql${PGSQL_VER_NODOT}-client
 .endif
 .if ${PORT_OPTIONS:MMYSQL}
-USES+=	mysql
-RUN_DEPENDS+=	mysqldump:${_MYSQL_CLIENT}
+USES+=	mysql:build,run
 .endif
 .endif
 

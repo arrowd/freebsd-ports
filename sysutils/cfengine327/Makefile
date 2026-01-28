@@ -61,7 +61,6 @@ PGSQL_CONFIGURE_OFF=	--without-postgresql
 MYSQL_USES=		mysql
 MYSQL_CONFIGURE_WITH=	--with-mysql=${LOCALBASE}
 MYSQL_CONFIGURE_OFF=	--without-mysql
-MYSQL_LIB_DEPENDS=	libmysqlclient.so:${_MYSQL_CLIENT}
 MYSQL_LDFLAGS=		-L${LOCALBASE}/lib/mysql
 
 LIBVIRT_CONFIGURE_WITH=	--with-libvirt=${LOCALBASE}

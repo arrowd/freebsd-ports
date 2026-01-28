@@ -38,7 +38,7 @@ DATABASE_DESC=	Database support
 WEBVAULT_DESC=	Vaultwarden web (bw_web_builds)
 S3_DESC=        S3 storage backend support (experimental)
 
-MYSQL_USES=	mysql:client
+MYSQL_USES=	mysql
 MYSQL_VARS=	cargo_features+=mysql
 PGSQL_USES=	pgsql
 PGSQL_VARS=	cargo_features+=postgresql

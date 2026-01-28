@@ -6,55 +6,88 @@ bin/aria_read_log
 %%S3%%bin/aria_s3_copy
 %%INNOBASE%%bin/innochecksum
 %%INNOBASE%%bin/mariabackup
+bin/mariadb
+bin/mariadb-access
+bin/mariadb-admin
 bin/mariadb-backup
+bin/mariadb-binlog
+bin/mariadb-check
 bin/mariadb-client-test
 bin/mariadb-client-test-embedded
+bin/mariadb-config
+bin/mariadb-conv
+bin/mariadb-convert-table-format
+bin/mariadb-dump
 bin/mariadb-dumpslow
 bin/mariadb-embedded
+bin/mariadb-find-rows
 bin/mariadb-fix-extensions
+bin/mariadb-hotcopy
+bin/mariadb-import
 bin/mariadb-install-db
-%%ROCKSDB%%bin/mariadb-ldb
+bin/mariadb-plugin
 bin/mariadb-secure-installation
+bin/mariadb-setpermission
+bin/mariadb-show
+bin/mariadb-slap
+bin/mariadb-test
 bin/mariadb-test-embedded
 bin/mariadb-tzinfo-to-sql
 bin/mariadb-upgrade
+bin/mariadb-waitpid
+bin/mariadb_config
 bin/mariadbd-multi
 bin/mariadbd-safe
 bin/mariadbd-safe-helper
 %%INNOBASE%%bin/mbstream
+bin/msql2mysql
+bin/my_print_defaults
 bin/myisam_ftdump
 bin/myisamchk
 bin/myisamlog
 bin/myisampack
-@comment bin/mytop
-%%ROCKSDB%%bin/myrocks_hotbackup
+bin/mysql
 bin/mysql_client_test
 bin/mysql_client_test_embedded
+bin/mysql_config
+bin/mysql_convert_table_format
 bin/mysql_embedded
+bin/mysql_find_rows
 bin/mysql_fix_extensions
 bin/mysql_install_db
-%%ROCKSDB%%bin/mysql_ldb
 bin/mysql_plugin
 bin/mysql_secure_installation
+bin/mysql_setpermission
 bin/mysql_tzinfo_to_sql
 bin/mysql_upgrade
 bin/mysql_waitpid
+bin/mysqlaccess
+bin/mysqladmin
+bin/mysqlbinlog
+bin/mysqlcheck
 bin/mysqld_multi
 bin/mysqld_safe
 bin/mysqld_safe_helper
+bin/mysqldump
 bin/mysqldumpslow
+bin/mysqlhotcopy
+bin/mysqlimport
+bin/mysqlshow
+bin/mysqlslap
+bin/mysqltest
 bin/mysqltest_embedded
+@comment bin/mytop
 bin/perror
+bin/replace
 bin/resolve_stack_dump
 bin/resolveip
-%%ROCKSDB%%bin/sst_dump
 bin/test-connect-t
+%%WSREP%%bin/wsrep_sst_backup
 %%WSREP%%bin/wsrep_sst_common
 %%WSREP%%bin/wsrep_sst_mariabackup
 %%WSREP%%bin/wsrep_sst_mysqldump
 %%WSREP%%bin/wsrep_sst_rsync
 %%WSREP%%bin/wsrep_sst_rsync_wan
-%%WSREP%%bin/wsrep_sst_backup
 @comment %%ETCDIR%%/conf.d/client.cnf
 %%ETCDIR%%/conf.d/enable_encryption.preset
 %%HASHICORP_VAULT%%%%ETCDIR%%/conf.d/hashicorp_key_management.cnf
@@ -68,9 +101,29 @@ bin/test-connect-t
 @sample %%ETCDIR%%/conf.d/server.cnf.sample
 %%SPIDER%%@sample %%ETCDIR%%/conf.d/spider.cnf.sample
 %%WSREP%%%%ETCDIR%%/conf.d/wsrep.cnf.sample
-@comment %%ETCDIR%%/my.cnf
-@comment %%ETCDIR%%/server.cnf
+@sample %%ETCDIR%%/my.cnf.sample
 @sample %%ETCDIR%%/user_map.conf.sample
+include/mysql/errmsg.h
+include/mysql/ma_list.h
+include/mysql/ma_pvio.h
+include/mysql/ma_tls.h
+include/mysql/mariadb/ma_io.h
+include/mysql/mariadb_com.h
+include/mysql/mariadb_ctype.h
+include/mysql/mariadb_dyncol.h
+include/mysql/mariadb_rpl.h
+include/mysql/mariadb_stmt.h
+include/mysql/mariadb_version.h
+include/mysql/my_alloca.h
+include/mysql/my_config.h
+include/mysql/my_global.h
+include/mysql/my_sys.h
+include/mysql/mysql.h
+include/mysql/mysql/client_plugin.h
+include/mysql/mysql/plugin_auth.h
+include/mysql/mysql_com.h
+include/mysql/mysql_version.h
+include/mysql/mysqld_error.h
 include/mysql/server/big_endian.h
 include/mysql/server/byte_order_generic.h
 include/mysql/server/byte_order_generic_x86.h
@@ -150,6 +203,7 @@ include/mysql/server/mysql/service_print_check_msg.h
 include/mysql/server/mysql/service_progress_report.h
 include/mysql/server/mysql/service_sha1.h
 include/mysql/server/mysql/service_sha2.h
+include/mysql/server/mysql/service_sql.h
 include/mysql/server/mysql/service_thd_alloc.h
 include/mysql/server/mysql/service_thd_autoinc.h
 include/mysql/server/mysql/service_thd_error_context.h
@@ -158,7 +212,6 @@ include/mysql/server/mysql/service_thd_rnd.h
 include/mysql/server/mysql/service_thd_specifics.h
 include/mysql/server/mysql/service_thd_timezone.h
 include/mysql/server/mysql/service_thd_wait.h
-include/mysql/server/mysql/service_sql.h
 %%WSREP%%include/mysql/server/mysql/service_wsrep.h
 include/mysql/server/mysql/services.h
 include/mysql/server/mysql_com.h
@@ -175,21 +228,34 @@ include/mysql/server/sslopt-case.h
 include/mysql/server/sslopt-longopts.h
 include/mysql/server/sslopt-vars.h
 include/mysql/server/typelib.h
+lib/mysql/libmariadb.a
+lib/mysql/libmariadb.so
+lib/mysql/libmariadb.so.3
+lib/mysql/libmariadbclient.a
 lib/mysql/libmariadbd.a
 lib/mysql/libmariadbd.so
 lib/mysql/libmariadbd.so.19
+lib/mysql/libmysqlclient.a
+lib/mysql/libmysqlclient.so
+lib/mysql/libmysqlclient_r.a
+lib/mysql/libmysqlclient_r.so
 lib/mysql/libmysqld.a
 lib/mysql/libmysqld.so
+lib/mysql/libmysqlservices.a
 lib/mysql/pam_user_map.so
 lib/mysql/plugin/adt_null.so
 lib/mysql/plugin/auth_0x0100.so
 lib/mysql/plugin/auth_ed25519.so
-@comment lib/mysql/plugin/auth_gssapi_client.so
 %%NO_GSSAPI_NONE%%lib/mysql/plugin/auth_gssapi.so
+@comment lib/mysql/plugin/auth_gssapi_client.so
 lib/mysql/plugin/auth_pam.so
 lib/mysql/plugin/auth_pam_tool_dir/auth_pam_tool
 lib/mysql/plugin/auth_pam_v1.so
+lib/mysql/plugin/caching_sha2_password.so
+lib/mysql/plugin/client_ed25519.so
+lib/mysql/plugin/daemon_example.ini
 lib/mysql/plugin/debug_key_management.so
+lib/mysql/plugin/dialog.so
 lib/mysql/plugin/disks.so
 lib/mysql/plugin/file_key_management.so
 lib/mysql/plugin/func_test.so
@@ -209,6 +275,7 @@ lib/mysql/plugin/handlersocket.so
 %%HASHICORP_VAULT%%lib/mysql/plugin/hashicorp_key_management.so
 lib/mysql/plugin/locales.so
 lib/mysql/plugin/metadata_lock_info.so
+lib/mysql/plugin/mysql_clear_password.so
 lib/mysql/plugin/password_reuse_check.so
 lib/mysql/plugin/provider_bzip2.so
 lib/mysql/plugin/provider_lz4.so
@@ -221,6 +288,7 @@ lib/mysql/plugin/qa_auth_server.so
 lib/mysql/plugin/query_cache_info.so
 lib/mysql/plugin/query_response_time.so
 lib/mysql/plugin/server_audit.so
+lib/mysql/plugin/sha256_password.so
 lib/mysql/plugin/simple_password_check.so
 lib/mysql/plugin/sql_errlog.so
 lib/mysql/plugin/test_sql_service.so
@@ -230,228 +298,9 @@ lib/mysql/plugin/type_mysql_timestamp.so
 lib/mysql/plugin/type_test.so
 %%WSREP%%lib/mysql/plugin/wsrep_info.so
 lib/mysql/plugin/zstd.so
+libdata/pkgconfig/libmariadb.pc
 libexec/mariadbd
 libexec/mysqld
-@comment share/man/man1/aria_chk.1.gz
-@comment share/man/man1/aria_dump_log.1.gz
-@comment share/man/man1/aria_ftdump.1.gz
-@comment share/man/man1/aria_pack.1.gz
-@comment share/man/man1/aria_read_log.1.gz
-@comment %%S3%%share/man/man1/aria_s3_copy.1.gz
-@comment share/man/man1/galera_new_cluster.1.gz
-@comment share/man/man1/galera_recovery.1.gz
-@comment share/man/man1/innochecksum.1.gz
-@comment share/man/man1/mariabackup.1.gz
-@comment share/man/man1/mariadb-access.1.gz
-@comment share/man/man1/mariadb-admin.1.gz
-@comment share/man/man1/mariadb-backup.1.gz
-@comment share/man/man1/mariadb-binlog.1.gz
-@comment share/man/man1/mariadb-check.1.gz
-@comment share/man/man1/mariadb-client-test-embedded.1.gz
-@comment share/man/man1/mariadb-client-test.1.gz
-@comment share/man/man1/mariadb-conv.1.gz
-@comment share/man/man1/mariadb-convert-table-format.1.gz
-@comment share/man/man1/mariadb-dump.1.gz
-@comment share/man/man1/mariadb-dumpslow.1.gz
-@comment share/man/man1/mariadb-embedded.1.gz
-@comment share/man/man1/mariadb-find-rows.1.gz
-@comment share/man/man1/mariadb-fix-extensions.1.gz
-@comment share/man/man1/mariadb-hotcopy.1.gz
-@comment share/man/man1/mariadb-import.1.gz
-@comment share/man/man1/mariadb-install-db.1.gz
-@comment %%ROCKSDB%%share/man/man1/mariadb-ldb.1.gz
-@comment share/man/man1/mariadb-plugin.1.gz
-@comment share/man/man1/mariadb-secure-installation.1.gz
-@comment share/man/man1/mariadb-service-convert.1.gz
-@comment share/man/man1/mariadb-setpermission.1.gz
-@comment share/man/man1/mariadb-show.1.gz
-@comment share/man/man1/mariadb-slap.1.gz
-@comment share/man/man1/mariadb-test-embedded.1.gz
-@comment share/man/man1/mariadb-test.1.gz
-@comment share/man/man1/mariadb-tzinfo-to-sql.1.gz
-@comment share/man/man1/mariadb-upgrade.1.gz
-@comment share/man/man1/mariadb-waitpid.1.gz
-@comment share/man/man1/mariadbd-multi.1.gz
-@comment share/man/man1/mariadbd-safe-helper.1.gz
-@comment share/man/man1/mariadbd-safe.1.gz
-@comment share/man/man1/mariadb.1.gz
-@comment share/man/man1/mariadb_config.1.gz
-@comment share/man/man1/mbstream.1.gz
-@comment share/man/man1/msql2mysql.1.gz
-@comment share/man/man1/my_print_defaults.1.gz
-@comment share/man/man1/my_safe_process.1.gz
-@comment share/man/man1/myisam_ftdump.1.gz
-@comment share/man/man1/myisamchk.1.gz
-@comment share/man/man1/myisamlog.1.gz
-@comment share/man/man1/myisampack.1.gz
-@comment %%ROCKSDB%%share/man/man1/myrocks_hotbackup.1.gz
-@comment share/man/man1/mysql-stress-test.pl.1.gz
-@comment share/man/man1/mysql-test-run.pl.1.gz
-@comment share/man/man1/mysql.1.gz
-@comment share/man/man1/mysql_client_test.1.gz
-@comment share/man/man1/mysql_client_test_embedded.1.gz
-@comment share/man/man1/mysql_config.1.gz
-@comment share/man/man1/mysql_convert_table_format.1.gz
-@comment share/man/man1/mysql_embedded.1.gz
-@comment share/man/man1/mysql_find_rows.1.gz
-@comment share/man/man1/mysql_plugin.1.gz
-@comment share/man/man1/mysql_setpermission.1.gz
-@comment share/man/man1/mysqlaccess.1.gz
-@comment share/man/man1/mysqladmin.1.gz
-@comment share/man/man1/mysqlbinlog.1.gz
-@comment share/man/man1/mysqlcheck.1.gz
-@comment share/man/man1/mysqldump.1.gz
-@comment share/man/man1/mysqlhotcopy.1.gz
-@comment share/man/man1/mysqlimport.1.gz
-@comment share/man/man1/mysqlshow.1.gz
-@comment share/man/man1/mysqlslap.1.gz
-@comment share/man/man1/mysqltest.1.gz
-@comment share/man/man1/mysqltest_embedded.1.gz
-@comment share/man/man1/mytop.1.gz
-@comment share/man/man1/mysql.server.1.gz
-@comment share/man/man1/mysql_fix_extensions.1.gz
-@comment share/man/man1/mysql_install_db.1.gz
-@comment %%ROCKSDB%%share/man/man1/mysql_ldb.1.gz
-@comment share/man/man1/mysql_secure_installation.1.gz
-@comment share/man/man1/mysql_tzinfo_to_sql.1.gz
-@comment share/man/man1/mysql_upgrade.1.gz
-@comment share/man/man1/mysql_waitpid.1.gz
-@comment share/man/man1/mysqld_multi.1.gz
-@comment share/man/man1/mysqld_safe.1.gz
-@comment share/man/man1/mysqld_safe_helper.1.gz
-@comment share/man/man1/mysqldumpslow.1.gz
-@comment share/man/man1/perror.1.gz
-@comment share/man/man1/replace.1.gz
-@comment share/man/man1/resolve_stack_dump.1.gz
-@comment share/man/man1/resolveip.1.gz
-@comment %%WSREP%%share/man/man1/wsrep_sst_common.1.gz
-@comment %%WSREP%%share/man/man1/wsrep_sst_mariabackup.1.gz
-@comment %%WSREP%%share/man/man1/wsrep_sst_mysqldump.1.gz
-@comment %%WSREP%%share/man/man1/wsrep_sst_rsync.1.gz
-@comment %%WSREP%%share/man/man1/wsrep_sst_rsync_wan.1.gz
-%%WSREP%%share/man/man1/wsrep_sst_backup.1.gz
-@comment share/man/man3/mariadb_cancel.3.gz
-@comment share/man/man3/mariadb_connection.3.gz
-@comment share/man/man3/mariadb_dyncol_check.3.gz
-@comment share/man/man3/mariadb_dyncol_column_cmp_named.3.gz
-@comment share/man/man3/mariadb_dyncol_column_count.3.gz
-@comment share/man/man3/mariadb_dyncol_create_many_named.3.gz
-@comment share/man/man3/mariadb_dyncol_create_many_num.3.gz
-@comment share/man/man3/mariadb_dyncol_exists_named.3.gz
-@comment share/man/man3/mariadb_dyncol_exists_num.3.gz
-@comment share/man/man3/mariadb_dyncol_free.3.gz
-@comment share/man/man3/mariadb_dyncol_list_named.3.gz
-@comment share/man/man3/mariadb_dyncol_list_num.3.gz
-@comment share/man/man3/mariadb_dyncol_unpack.3.gz
-@comment share/man/man3/mariadb_dyncol_update_many_named.3.gz
-@comment share/man/man3/mariadb_dyncol_update_many_num.3.gz
-@comment share/man/man3/mariadb_get_infov.3.gz
-@comment share/man/man3/mariadb_reconnect.3.gz
-@comment share/man/man3/mariadb_rpl_close.3.gz
-@comment share/man/man3/mariadb_rpl_fetch.3.gz
-@comment share/man/man3/mariadb_rpl_get_optionsv.3.gz
-@comment share/man/man3/mariadb_rpl_open.3.gz
-@comment share/man/man3/mariadb_rpl_optionsv.3.gz
-@comment share/man/man3/mariadb_stmt_execute_direct.3.gz
-@comment share/man/man3/mariadb_stmt_fetch_fields.3.gz
-@comment share/man/man3/mysql_affected_rows.3.gz
-@comment share/man/man3/mysql_autocommit.3.gz
-@comment share/man/man3/mysql_change_user.3.gz
-@comment share/man/man3/mysql_close.3.gz
-@comment share/man/man3/mysql_commit.3.gz
-@comment share/man/man3/mysql_data_seek.3.gz
-@comment share/man/man3/mysql_errno.3.gz
-@comment share/man/man3/mysql_error.3.gz
-@comment share/man/man3/mysql_fetch_field.3.gz
-@comment share/man/man3/mysql_fetch_field_direct.3.gz
-@comment share/man/man3/mysql_fetch_fields.3.gz
-@comment share/man/man3/mysql_fetch_lengths.3.gz
-@comment share/man/man3/mysql_fetch_row.3.gz
-@comment share/man/man3/mysql_field_count.3.gz
-@comment share/man/man3/mysql_field_seek.3.gz
-@comment share/man/man3/mysql_field_tell.3.gz
-@comment share/man/man3/mysql_free_result.3.gz
-@comment share/man/man3/mysql_get_character_set_info.3.gz
-@comment share/man/man3/mysql_get_client_info.3.gz
-@comment share/man/man3/mysql_get_client_version.3.gz
-@comment share/man/man3/mysql_get_host_info.3.gz
-@comment share/man/man3/mysql_get_proto_info.3.gz
-@comment share/man/man3/mysql_get_server_info.3.gz
-@comment share/man/man3/mysql_get_server_version.3.gz
-@comment share/man/man3/mysql_get_socket.3.gz
-@comment share/man/man3/mysql_get_ssl_cipher.3.gz
-@comment share/man/man3/mysql_hex_string.3.gz
-@comment share/man/man3/mysql_info.3.gz
-@comment share/man/man3/mysql_init.3.gz
-@comment share/man/man3/mysql_kill.3.gz
-@comment share/man/man3/mysql_more_results.3.gz
-@comment share/man/man3/mysql_next_result.3.gz
-@comment share/man/man3/mysql_num_fields.3.gz
-@comment share/man/man3/mysql_num_rows.3.gz
-@comment share/man/man3/mysql_options.3.gz
-@comment share/man/man3/mysql_options4.3.gz
-@comment share/man/man3/mysql_optionsv.3.gz
-@comment share/man/man3/mysql_ping.3.gz
-@comment share/man/man3/mysql_query.3.gz
-@comment share/man/man3/mysql_read_query_result.3.gz
-@comment share/man/man3/mysql_real_connect.3.gz
-@comment share/man/man3/mysql_real_escape_string.3.gz
-@comment share/man/man3/mysql_real_query.3.gz
-@comment share/man/man3/mysql_refresh.3.gz
-@comment share/man/man3/mysql_reset_connection.3.gz
-@comment share/man/man3/mysql_rollback.3.gz
-@comment share/man/man3/mysql_row_seek.3.gz
-@comment share/man/man3/mysql_row_tell.3.gz
-@comment share/man/man3/mysql_select_db.3.gz
-@comment share/man/man3/mysql_send_query.3.gz
-@comment share/man/man3/mysql_server_end.3.gz
-@comment share/man/man3/mysql_server_init.3.gz
-@comment share/man/man3/mysql_session_track_get_first.3.gz
-@comment share/man/man3/mysql_session_track_get_next.3.gz
-@comment share/man/man3/mysql_set_character_set.3.gz
-@comment share/man/man3/mysql_set_server_option.3.gz
-@comment share/man/man3/mysql_shutdown.3.gz
-@comment share/man/man3/mysql_sqlstate.3.gz
-@comment share/man/man3/mysql_ssl_set.3.gz
-@comment share/man/man3/mysql_stat.3.gz
-@comment share/man/man3/mysql_stmt_affected_rows.3.gz
-@comment share/man/man3/mysql_stmt_attr_get.3.gz
-@comment share/man/man3/mysql_stmt_attr_set.3.gz
-@comment share/man/man3/mysql_stmt_bind_param.3.gz
-@comment share/man/man3/mysql_stmt_bind_result.3.gz
-@comment share/man/man3/mysql_stmt_close.3.gz
-@comment share/man/man3/mysql_stmt_data_seek.3.gz
-@comment share/man/man3/mysql_stmt_errno.3.gz
-@comment share/man/man3/mysql_stmt_error.3.gz
-@comment share/man/man3/mysql_stmt_execute.3.gz
-@comment share/man/man3/mysql_stmt_fetch.3.gz
-@comment share/man/man3/mysql_stmt_fetch_column.3.gz
-@comment share/man/man3/mysql_stmt_field_count.3.gz
-@comment share/man/man3/mysql_stmt_free_result.3.gz
-@comment share/man/man3/mysql_stmt_init.3.gz
-@comment share/man/man3/mysql_stmt_insert_id.3.gz
-@comment share/man/man3/mysql_stmt_more_results.3.gz
-@comment share/man/man3/mysql_stmt_next_result.3.gz
-@comment share/man/man3/mysql_stmt_num_rows.3.gz
-@comment share/man/man3/mysql_stmt_param_count.3.gz
-@comment share/man/man3/mysql_stmt_param_metadata.3.gz
-@comment share/man/man3/mysql_stmt_prepare.3.gz
-@comment share/man/man3/mysql_stmt_reset.3.gz
-@comment share/man/man3/mysql_stmt_result_metadata.3.gz
-@comment share/man/man3/mysql_stmt_row_seek.3.gz
-@comment share/man/man3/mysql_stmt_row_tell.3.gz
-@comment share/man/man3/mysql_stmt_send_long_data.3.gz
-@comment share/man/man3/mysql_stmt_sqlstate.3.gz
-@comment share/man/man3/mysql_stmt_store_result.3.gz
-@comment share/man/man3/mysql_stmt_warning_count.3.gz
-@comment share/man/man3/mysql_store_result.3.gz
-@comment share/man/man3/mysql_thread_end.3.gz
-@comment share/man/man3/mysql_thread_id.3.gz
-@comment share/man/man3/mysql_thread_init.3.gz
-@comment share/man/man3/mysql_use_result.3.gz
-@comment share/man/man3/mysql_warning_count.3.gz
-@comment share/man/man8/mariadbd.8.gz
-@comment share/man/man8/mysqld.8.gz
 share/aclocal/mysql.m4
 %%PORTDOCS%%%%DOCSDIR%%/CREDITS
 %%PORTDOCS%%%%DOCSDIR%%/INSTALL-BINARY
@@ -459,9 +308,229 @@ share/aclocal/mysql.m4
 %%PORTDOCS%%%%DOCSDIR%%/README.md
 %%PORTDOCS%%%%DOCSDIR%%/THIRDPARTY
 %%MROONGA%%%%PORTDOCS%%%%DOCSDIR%%/groonga/README.md
+%%HASHICORP_VAULT%%%%PORTDOCS%%%%DOCSDIR%%/hashicorp_key_management.txt
 %%MROONGA%%share/groonga-normalizer-mysql/README.md
 %%MROONGA%%share/groonga-normalizer-mysql/lgpl-2.0.txt
-%%HASHICORP_VAULT%%%%PORTDOCS%%%%DOCSDIR%%/hashicorp_key_management.txt
+share/man/man1/aria_chk.1.gz
+share/man/man1/aria_dump_log.1.gz
+share/man/man1/aria_ftdump.1.gz
+share/man/man1/aria_pack.1.gz
+share/man/man1/aria_read_log.1.gz
+share/man/man1/aria_s3_copy.1.gz
+%%WSREP%%share/man/man1/galera_new_cluster.1.gz
+%%WSREP%%share/man/man1/galera_recovery.1.gz
+share/man/man1/innochecksum.1.gz
+share/man/man1/mariabackup.1.gz
+share/man/man1/mariadb-access.1.gz
+share/man/man1/mariadb-admin.1.gz
+share/man/man1/mariadb-backup.1.gz
+share/man/man1/mariadb-binlog.1.gz
+share/man/man1/mariadb-check.1.gz
+share/man/man1/mariadb-client-test-embedded.1.gz
+share/man/man1/mariadb-client-test.1.gz
+share/man/man1/mariadb-conv.1.gz
+share/man/man1/mariadb-convert-table-format.1.gz
+share/man/man1/mariadb-dump.1.gz
+share/man/man1/mariadb-dumpslow.1.gz
+share/man/man1/mariadb-embedded.1.gz
+share/man/man1/mariadb-find-rows.1.gz
+share/man/man1/mariadb-fix-extensions.1.gz
+share/man/man1/mariadb-hotcopy.1.gz
+share/man/man1/mariadb-import.1.gz
+share/man/man1/mariadb-install-db.1.gz
+share/man/man1/mariadb-ldb.1.gz
+share/man/man1/mariadb-plugin.1.gz
+share/man/man1/mariadb-secure-installation.1.gz
+share/man/man1/mariadb-service-convert.1.gz
+share/man/man1/mariadb-setpermission.1.gz
+share/man/man1/mariadb-show.1.gz
+share/man/man1/mariadb-slap.1.gz
+share/man/man1/mariadb-test-embedded.1.gz
+share/man/man1/mariadb-test.1.gz
+share/man/man1/mariadb-tzinfo-to-sql.1.gz
+share/man/man1/mariadb-upgrade.1.gz
+share/man/man1/mariadb-waitpid.1.gz
+share/man/man1/mariadb.1.gz
+share/man/man1/mariadb_config.1.gz
+share/man/man1/mariadbd-multi.1.gz
+share/man/man1/mariadbd-safe-helper.1.gz
+share/man/man1/mariadbd-safe.1.gz
+share/man/man1/mbstream.1.gz
+share/man/man1/msql2mysql.1.gz
+share/man/man1/my_print_defaults.1.gz
+share/man/man1/my_safe_process.1.gz
+share/man/man1/myisam_ftdump.1.gz
+share/man/man1/myisamchk.1.gz
+share/man/man1/myisamlog.1.gz
+share/man/man1/myisampack.1.gz
+share/man/man1/myrocks_hotbackup.1.gz
+share/man/man1/mysql-stress-test.pl.1.gz
+share/man/man1/mysql-test-run.pl.1.gz
+share/man/man1/mysql.1.gz
+share/man/man1/mysql.server.1.gz
+share/man/man1/mysql_client_test.1.gz
+share/man/man1/mysql_client_test_embedded.1.gz
+share/man/man1/mysql_config.1.gz
+share/man/man1/mysql_convert_table_format.1.gz
+share/man/man1/mysql_embedded.1.gz
+share/man/man1/mysql_find_rows.1.gz
+share/man/man1/mysql_fix_extensions.1.gz
+share/man/man1/mysql_install_db.1.gz
+share/man/man1/mysql_ldb.1.gz
+share/man/man1/mysql_plugin.1.gz
+share/man/man1/mysql_secure_installation.1.gz
+share/man/man1/mysql_setpermission.1.gz
+share/man/man1/mysql_tzinfo_to_sql.1.gz
+share/man/man1/mysql_upgrade.1.gz
+share/man/man1/mysql_waitpid.1.gz
+share/man/man1/mysqlaccess.1.gz
+share/man/man1/mysqladmin.1.gz
+share/man/man1/mysqlbinlog.1.gz
+share/man/man1/mysqlcheck.1.gz
+share/man/man1/mysqld_multi.1.gz
+share/man/man1/mysqld_safe.1.gz
+share/man/man1/mysqld_safe_helper.1.gz
+share/man/man1/mysqldump.1.gz
+share/man/man1/mysqldumpslow.1.gz
+share/man/man1/mysqlhotcopy.1.gz
+share/man/man1/mysqlimport.1.gz
+share/man/man1/mysqlshow.1.gz
+share/man/man1/mysqlslap.1.gz
+share/man/man1/mysqltest.1.gz
+share/man/man1/mysqltest_embedded.1.gz
+share/man/man1/mytop.1.gz
+share/man/man1/perror.1.gz
+share/man/man1/replace.1.gz
+share/man/man1/resolve_stack_dump.1.gz
+share/man/man1/resolveip.1.gz
+%%WSREP%%share/man/man1/wsrep_sst_backup.1.gz
+%%WSREP%%share/man/man1/wsrep_sst_common.1.gz
+%%WSREP%%share/man/man1/wsrep_sst_mariabackup.1.gz
+%%WSREP%%share/man/man1/wsrep_sst_mysqldump.1.gz
+%%WSREP%%share/man/man1/wsrep_sst_rsync.1.gz
+%%WSREP%%share/man/man1/wsrep_sst_rsync_wan.1.gz
+share/man/man3/mariadb_cancel.3.gz
+share/man/man3/mariadb_connection.3.gz
+share/man/man3/mariadb_dyncol_check.3.gz
+share/man/man3/mariadb_dyncol_column_cmp_named.3.gz
+share/man/man3/mariadb_dyncol_column_count.3.gz
+share/man/man3/mariadb_dyncol_create_many_named.3.gz
+share/man/man3/mariadb_dyncol_create_many_num.3.gz
+share/man/man3/mariadb_dyncol_exists_named.3.gz
+share/man/man3/mariadb_dyncol_exists_num.3.gz
+share/man/man3/mariadb_dyncol_free.3.gz
+share/man/man3/mariadb_dyncol_list_named.3.gz
+share/man/man3/mariadb_dyncol_list_num.3.gz
+share/man/man3/mariadb_dyncol_unpack.3.gz
+share/man/man3/mariadb_dyncol_update_many_named.3.gz
+share/man/man3/mariadb_dyncol_update_many_num.3.gz
+share/man/man3/mariadb_get_infov.3.gz
+share/man/man3/mariadb_reconnect.3.gz
+share/man/man3/mariadb_rpl_close.3.gz
+share/man/man3/mariadb_rpl_fetch.3.gz
+share/man/man3/mariadb_rpl_get_optionsv.3.gz
+share/man/man3/mariadb_rpl_open.3.gz
+share/man/man3/mariadb_rpl_optionsv.3.gz
+share/man/man3/mariadb_stmt_execute_direct.3.gz
+share/man/man3/mariadb_stmt_fetch_fields.3.gz
+share/man/man3/mysql_affected_rows.3.gz
+share/man/man3/mysql_autocommit.3.gz
+share/man/man3/mysql_change_user.3.gz
+share/man/man3/mysql_close.3.gz
+share/man/man3/mysql_commit.3.gz
+share/man/man3/mysql_data_seek.3.gz
+share/man/man3/mysql_errno.3.gz
+share/man/man3/mysql_error.3.gz
+share/man/man3/mysql_fetch_field.3.gz
+share/man/man3/mysql_fetch_field_direct.3.gz
+share/man/man3/mysql_fetch_fields.3.gz
+share/man/man3/mysql_fetch_lengths.3.gz
+share/man/man3/mysql_fetch_row.3.gz
+share/man/man3/mysql_field_count.3.gz
+share/man/man3/mysql_field_seek.3.gz
+share/man/man3/mysql_field_tell.3.gz
+share/man/man3/mysql_free_result.3.gz
+share/man/man3/mysql_get_character_set_info.3.gz
+share/man/man3/mysql_get_client_info.3.gz
+share/man/man3/mysql_get_client_version.3.gz
+share/man/man3/mysql_get_host_info.3.gz
+share/man/man3/mysql_get_proto_info.3.gz
+share/man/man3/mysql_get_server_info.3.gz
+share/man/man3/mysql_get_server_version.3.gz
+share/man/man3/mysql_get_socket.3.gz
+share/man/man3/mysql_get_ssl_cipher.3.gz
+share/man/man3/mysql_hex_string.3.gz
+share/man/man3/mysql_info.3.gz
+share/man/man3/mysql_init.3.gz
+share/man/man3/mysql_kill.3.gz
+share/man/man3/mysql_more_results.3.gz
+share/man/man3/mysql_next_result.3.gz
+share/man/man3/mysql_num_fields.3.gz
+share/man/man3/mysql_num_rows.3.gz
+share/man/man3/mysql_options.3.gz
+share/man/man3/mysql_options4.3.gz
+share/man/man3/mysql_optionsv.3.gz
+share/man/man3/mysql_ping.3.gz
+share/man/man3/mysql_query.3.gz
+share/man/man3/mysql_read_query_result.3.gz
+share/man/man3/mysql_real_connect.3.gz
+share/man/man3/mysql_real_escape_string.3.gz
+share/man/man3/mysql_real_query.3.gz
+share/man/man3/mysql_refresh.3.gz
+share/man/man3/mysql_reset_connection.3.gz
+share/man/man3/mysql_rollback.3.gz
+share/man/man3/mysql_row_seek.3.gz
+share/man/man3/mysql_row_tell.3.gz
+share/man/man3/mysql_select_db.3.gz
+share/man/man3/mysql_send_query.3.gz
+share/man/man3/mysql_server_end.3.gz
+share/man/man3/mysql_server_init.3.gz
+share/man/man3/mysql_session_track_get_first.3.gz
+share/man/man3/mysql_session_track_get_next.3.gz
+share/man/man3/mysql_set_character_set.3.gz
+share/man/man3/mysql_set_server_option.3.gz
+share/man/man3/mysql_shutdown.3.gz
+share/man/man3/mysql_sqlstate.3.gz
+share/man/man3/mysql_ssl_set.3.gz
+share/man/man3/mysql_stat.3.gz
+share/man/man3/mysql_stmt_affected_rows.3.gz
+share/man/man3/mysql_stmt_attr_get.3.gz
+share/man/man3/mysql_stmt_attr_set.3.gz
+share/man/man3/mysql_stmt_bind_param.3.gz
+share/man/man3/mysql_stmt_bind_result.3.gz
+share/man/man3/mysql_stmt_close.3.gz
+share/man/man3/mysql_stmt_data_seek.3.gz
+share/man/man3/mysql_stmt_errno.3.gz
+share/man/man3/mysql_stmt_error.3.gz
+share/man/man3/mysql_stmt_execute.3.gz
+share/man/man3/mysql_stmt_fetch.3.gz
+share/man/man3/mysql_stmt_fetch_column.3.gz
+share/man/man3/mysql_stmt_field_count.3.gz
+share/man/man3/mysql_stmt_free_result.3.gz
+share/man/man3/mysql_stmt_init.3.gz
+share/man/man3/mysql_stmt_insert_id.3.gz
+share/man/man3/mysql_stmt_more_results.3.gz
+share/man/man3/mysql_stmt_next_result.3.gz
+share/man/man3/mysql_stmt_num_rows.3.gz
+share/man/man3/mysql_stmt_param_count.3.gz
+share/man/man3/mysql_stmt_param_metadata.3.gz
+share/man/man3/mysql_stmt_prepare.3.gz
+share/man/man3/mysql_stmt_reset.3.gz
+share/man/man3/mysql_stmt_result_metadata.3.gz
+share/man/man3/mysql_stmt_row_seek.3.gz
+share/man/man3/mysql_stmt_row_tell.3.gz
+share/man/man3/mysql_stmt_send_long_data.3.gz
+share/man/man3/mysql_stmt_sqlstate.3.gz
+share/man/man3/mysql_stmt_store_result.3.gz
+share/man/man3/mysql_stmt_warning_count.3.gz
+share/man/man3/mysql_store_result.3.gz
+share/man/man3/mysql_thread_end.3.gz
+share/man/man3/mysql_thread_id.3.gz
+share/man/man3/mysql_thread_init.3.gz
+share/man/man3/mysql_use_result.3.gz
+share/man/man3/mysql_warning_count.3.gz
+share/man/man8/mariadbd.8.gz
+share/man/man8/mysqld.8.gz
 %%DATADIR%%/binary-configure
 %%DATADIR%%/bulgarian/errmsg.sys
 %%DATADIR%%/charsets/Index.xml
@@ -499,8 +568,8 @@ share/aclocal/mysql.m4
 %%DATADIR%%/estonian/errmsg.sys
 %%DATADIR%%/fill_help_tables.sql
 %%DATADIR%%/french/errmsg.sys
-%%DATADIR%%/german/errmsg.sys
 %%DATADIR%%/georgian/errmsg.sys
+%%DATADIR%%/german/errmsg.sys
 %%DATADIR%%/greek/errmsg.sys
 %%DATADIR%%/hindi/errmsg.sys
 %%DATADIR%%/hungarian/errmsg.sys
@@ -534,7 +603,5 @@ share/aclocal/mysql.m4
 %%DATADIR%%/spanish/errmsg.sys
 %%DATADIR%%/swedish/errmsg.sys
 %%DATADIR%%/ukrainian/errmsg.sys
-@comment %%DATADIR%%/wsrep.cnf
 %%WSREP%%%%DATADIR%%/wsrep_notify
 @dir(%%MARIADB_USER%%,%%MARIADB_GROUP%%,) %%MARIADB_LOGDIR%%
-

@@ -41,11 +41,10 @@ MBOXINDICES_CONFIGURE_ENABLE=	mbox-bsd-save-indices
 
 GDBMAUTH_CPPFLAGS=		-I${LOCALBASE}/include
 GDBMAUTH_LIB_DEPENDS=		libgdbm.so:databases/gdbm
-MYSQL_USES=		mysql
+MYSQL_USES=		mysql:mariadb
 MYSQL_CONFIGURE_ON=	--enable-auth-mysql \
 			--with-mysql-lib-dir=${LOCALBASE}/lib/mysql \
 			--with-mysql-include-dir=${LOCALBASE}/include/mysql
-MYSQL_VARS=		IGNORE_WITH_MYSQL="80 81"
 PGSQL_USES=		pgsql
 PGSQL_CONFIGURE_ON=	--enable-auth-pgsql \
 			--with-pgsql-lib-dir=${LOCALBASE}/lib \

@@ -26,7 +26,7 @@ LIB_DEPENDS=	libboost_filesystem.so:devel/boost-libs \
 		libprotobuf.so:devel/protobuf
 RUN_DEPENDS=	Orthanc:science/orthanc
 
-USES=		cmake localbase mysql:client python:build ssl
+USES=		cmake localbase mysql python:build ssl
 USE_LDCONFIG=	${DATADIR}/plugins
 
 WRKSRC=		${WRKDIR}/OrthancMySQL-${PORTVERSION}

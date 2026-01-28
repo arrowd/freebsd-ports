@@ -13,7 +13,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 RUN_DEPENDS=	pdftohtml:graphics/poppler-utils
 
-USES=		php mysql:server
+USES=		php mysql
 USE_PHP=	ctype gd mysqli session zlib
 
 NO_BUILD=	yes

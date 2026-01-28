@@ -12,8 +12,7 @@ WWW=		http://ygrek.org.ua/p/ocaml-mysql/
 
 LICENSE=	LGPL21
 
-USES=		gmake ocaml:camlp4,findplist,ldconfig mysql
-IGNORE_WITH_MYSQL=	80 81
+USES=		gmake ocaml:camlp4,findplist,ldconfig mysql:mariadb
 
 GNU_CONFIGURE=		yes
 

@@ -25,7 +25,7 @@ LIB_DEPENDS=	libhttp_parser.so:www/http-parser \
 		libunwind.so:devel/libunwind \
 		libyaml.so:textproc/libyaml
 
-USES=		compiler:c11 cpe gmake libtool localbase lua mysql:client perl5 \
+USES=		compiler:c11 cpe gmake libtool localbase lua mysql perl5 \
 		pkgconfig python:build readline shebangfix ssl tar:bz2
 CPE_VENDOR=	schedmd
 USE_LDCONFIG=	yes

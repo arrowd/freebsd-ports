@@ -39,6 +39,7 @@ OPTIONS_DEFAULT=	MYSQL MYSQLIPV6
 
 MYSQL_CONFIGURE_WITH=	mysql
 MYSQL_USE=		php=mysqli
+MYSQL_USES=		mysql
 
 MYSQLIPV6_DESC=			Build plugin for Mysql IPv6 support (implies MYSQL)
 MYSQLIPV6_IMPLIES=		MYSQL
@@ -74,12 +75,6 @@ BDB_LDFLAGS=			-L${BDB_LIB_DIR}
 BDB_USES=			bdb
 
 .include <bsd.port.options.mk>
-
-.if ${PORT_OPTIONS:MMYSQLIPV6}
-USES+=	mysql:server,client
-.elif ${PORT_OPTIONS:MMYSQL}
-USES+=	mysql:client
-.endif
 
 do-install:
 	@${MKDIR} ${STAGEDIR}${WWWDIR}/include/

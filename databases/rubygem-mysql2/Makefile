@@ -12,6 +12,6 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 RUN_DEPENDS=	rubygem-bigdecimal>=0:math/rubygem-bigdecimal
 
-USES=		gem mysql ssl
+USES=		gem mysql:build ssl
 
 .include <bsd.port.mk>

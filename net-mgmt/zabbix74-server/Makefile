@@ -78,7 +78,7 @@ SUB_FILES=	pkg-message
 OPTIONS_DEFAULT+=	CURL FPING IPMI IPV6 MYSQL OPENSSL SNMP SSH UNIXODBC
 OPTIONS_DEFINE=		CURL FPING IPMI IPV6 LDAP NMAP PCRE2 SNMP SSH UNIXODBC
 OPTIONS_SINGLE+=	DB SSL
-OPTIONS_SINGLE_DB=	MDB5 MDB6 MYSQL MYSQLDV PGSQL
+OPTIONS_SINGLE_DB=	MYSQL PGSQL
 .if ${ZABBIX_BUILD} == "proxy"
 OPTIONS_SINGLE_DB+=	SQLITE
 .endif
@@ -103,19 +103,9 @@ IPMI_LIB_DEPENDS=	libOpenIPMI.so:sysutils/openipmi
 LDAP_CONFIGURE_WITH=	ldap
 LDAP_USES=		ldap
 
+# TODO: unify mysql/maridb option, as they all use the same client port now
 MYSQL_CONFIGURE_ON=	--with-mysql
-MYSQL_USES+=		compiler:c11 mysql:80
-
-MYSQLDV_CONFIGURE_ON=	--with-mysql
-MYSQLDV_USES+=		compiler:c11 mysql
-
-MDB5_CONFIGURE_ON=	--with-mysql=${LOCALBASE}/bin/mysql_config
-MDB5_USES+=		compiler:c11 mysql:105m
-MDB5_DESC=		Mariadb 10.5 database support
-
-MDB6_CONFIGURE_ON=	--with-mysql=${LOCALBASE}/bin/mysql_config
-MDB6_USES+=		compiler:c11 mysql:106m
-MDB6_DESC=		Mariadb 10.6 database support
+MYSQL_USES+=		compiler:c11 mysql
 
 PGSQL_CONFIGURE_WITH=	postgresql
 PGSQL_USES+=		pgsql

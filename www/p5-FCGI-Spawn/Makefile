@@ -34,7 +34,6 @@ PGSQL_DESC=	PgSQL dependency to run on RC start
 .include <bsd.port.options.mk>
 
 .if ${PORT_OPTIONS:MMYSQL}
-# RUN_DEPENDS+=	mysql-server>=0:databases/mysql${MYSQL_VER}-server
 SUB_LIST+=	MYSQL=mysql
 .	else
 SUB_LIST+=	MYSQL=

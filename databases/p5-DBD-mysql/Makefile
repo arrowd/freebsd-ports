@@ -19,7 +19,7 @@ LIB_DEPENDS=	libunwind.so:devel/libunwind
 RUN_DEPENDS=	p5-DBI>=1.08:databases/p5-DBI
 TEST_DEPENDS=	p5-Test-Deep>=0:devel/p5-Test-Deep
 
-USES=		compiler:c11 mysql perl5 ssl
+USES=		compiler:c11 mysql:mysql perl5 ssl
 USE_PERL5=	configure
 
 CONFIGURE_ARGS=		${_CONFIGURE_ARGS_${CHOSEN_COMPILER_TYPE}}
@@ -30,10 +30,4 @@ CONFLICTS_INSTALL=	p5-DBD-mysql4
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/${SITE_ARCH_REL}/auto/DBD/mysql/mysql.so
 
-.include <bsd.port.pre.mk>
-
-.if ${MYSQL_FLAVOUR} != mysql
-IGNORE=	use databases/p5-DBD-mysql4 or databases/p5-DBD-MariaDB instead
-.endif
-
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

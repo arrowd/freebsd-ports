@@ -16,7 +16,7 @@ LIB_DEPENDS=	libhamlib.so:comms/hamlib
 ONLY_FOR_ARCHS=	amd64 i386
 
 USES=		fpc gnome lazarus:flavors shebangfix ssl:run dos2unix \
-		mysql:server xorg
+		mysql xorg
 
 USE_GNOME+=	cairo
 USE_XORG=	x11

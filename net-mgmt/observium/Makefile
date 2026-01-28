@@ -33,12 +33,11 @@ NO_ARCH=	yes
 NO_BUILD=	yes
 WRKSRC=		${WRKDIR}/${PORTNAME}
 
-OPTIONS_DEFINE=	APACHEMOD DOCS EXAMPLES FPING IPMITOOL LIBVIRT MYSQLD NAGPLUGINS PYPOLLER SUBVERSION WMIC
+OPTIONS_DEFINE=	APACHEMOD DOCS EXAMPLES FPING IPMITOOL LIBVIRT NAGPLUGINS PYPOLLER SUBVERSION WMIC
 OPTIONS_DEFAULT=	APACHEMOD FPING IPMITOOL LIBVIRT NAGPLUGINS PYPOLLER SUBVERSION WMIC
 APACHEMOD_DESC=	Use PHP with Apache 2.4+ module
 FPING_DESC=	Enable fping support ping monitoring
 IPMITOOL_DESC=	Enable support for monitoring hardware IPMI
-MYSQLD_DESC=	Use local MySQL server
 PYPOLLER_DESC=	Enable Python Poller Wrapper
 WMIC_DESC=	Enable support for WMI polling
 
@@ -74,12 +73,6 @@ USES+=	php:mod
 # Package builder doesn't create php8 with module
 USES+=	php:web
 .endif
-.endif
-
-.if ${PORT_OPTIONS:MMYSQLD}
-USES+=	mysql:server
-.else
-USES+=	mysql:client
 .endif
 
 pre-install:

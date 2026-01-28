@@ -11,7 +11,6 @@ WWW=		https://github.com/luislavena/mysql-gem
 LICENSE=	GPLv2 RUBY
 LICENSE_COMB=	dual
 
-USES=		gem mysql
-IGNORE_WITH_MYSQL=	80 81
+USES=		gem mysql:mariadb
 
 .include <bsd.port.mk>

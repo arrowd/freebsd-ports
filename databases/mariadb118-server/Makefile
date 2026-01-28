@@ -35,13 +35,13 @@ LDFLAGS+=	-L${LOCALBASE}/lib
 
 USES=		bison:build cmake:insource compiler:c++11-lib cpe iconv:translit libedit ncurses shebangfix ssl
 
-SUB_FILES=	pkg-message
+SUB_FILES=	my.cnf.sample pkg-message
 PKGMESSAGE=	${WRKDIR}/pkg-message
 
-USE_LDCONFIG=	${PREFIX}/lib/mysql
 SHEBANG_FILES?=	scripts/*.sh support-files/*.sh
 SITESDIR=	mariadb/mariadb-${PORTVERSION}/source
 DOCSDIR=	${PREFIX}/share/doc/mysql
+DATADIR=	${PREFIX}/share/mysql
 
 MARIADB_USER?=		mysql
 MARIADB_GROUP?=		mysql
@@ -56,6 +56,8 @@ GROUPS=			${MARIADB_GROUP}
 OPTIONS_SINGLE=		GSSAPI
 OPTIONS_SINGLE_GSSAPI=	GSSAPI_BASE GSSAPI_HEIMDAL GSSAPI_MIT GSSAPI_NONE
 OPTIONS_DEFAULT=	GSSAPI_BASE
+
+SUFXD_NAME=		mariadb118
 
 .if ${PKGNAMESUFFIX:M*-server}
 # MySQL-Server options
@@ -129,9 +131,6 @@ CMAKE_ON+=	WITH_LIBWRAP WITHOUT_DOCS
 DISABLED_PLUGINS+=	AUTH_TEST_PLUGIN DAEMON_EXAMPLE DIALOG_EXAMPLES \
 		EXAMPLE EXAMPLE_KEY_MANAGEMENT FTEXAMPLE
 
-DATADIR=	${PREFIX}/share/mysql
-ETCDIR=		${PREFIX}/etc/mysql
-
 CONFLICTS_INSTALL=	mariadb10[0-57-9]-${PKGNAMESUFFIX:C/^[0-9]*-//}-* \
 			mysql[0-9]*-${PKGNAMESUFFIX:C/^[0-9]*-//}-* \
 			mysqlwsrep* \
@@ -155,22 +154,24 @@ WRKSRC=		${WRKDIR}/mariadb-${PORTVERSION}/libmariadb
 CMAKE_ON+=	CONC_WITH_MYSQLCOMPAT WITHOUT_SERVER
 CMAKE_OFF+=	WITH_WSREP
 USES+=		readline
-USE_LDCONFIG=	${PREFIX}/lib/mysql
-SUB_FILES+=	my.cnf.sample client.cnf.sample
+SUB_FILES+=	client.cnf.sample
 
 .else # ! ${PKGNAMESUFFIX:M*-client}
 # MySQL-Server part
-USES+=		mysql:118m
 
-USE_LDCONFIG+=	${PREFIX}/lib/mysql/plugin
-USE_RC_SUBR=	mysql-server
+# Install to a prefix to be able to co-install multiple versions of the
+# server. The client installs to ${LOCALBASE}.
+PREFIX=		${LOCALBASE}/${SUFXD_NAME}
+
+USE_RC_SUBR=	${SUFXD_NAME}-server
 
 CMAKE_ON+=	CMAKE_SKIP_BUILD_RPATH WITH_EMBEDDED_SERVER
 CMAKE_OFF+=	WITH_CLIENT
 SUB_FILES+=	server.cnf.sample
 SUB_LIST+=	MARIADB_DBDIR="${MARIADB_DBDIR}" \
 		MARIADB_LOGDIR="${MARIADB_LOGDIR}" \
-		MARIADB_USER="${MARIADB_USER}"
+		MARIADB_USER="${MARIADB_USER}" \
+		SUFXD_NAME="${SUFXD_NAME}"
 PLIST_SUB+=	MARIADB_LOGDIR="${MARIADB_LOGDIR}" \
 		MARIADB_USER="${MARIADB_USER}" \
 		MARIADB_GROUP="${MARIADB_GROUP}"
@@ -243,11 +244,18 @@ post-patch:
 		${WRKSRC}/cmake/os/DragonFly.cmake
 .endif
 
-pre-install:
-	${MKDIR} ${STAGEDIR}${ETCDIR}/conf.d
+install-rc-script:
+	@${ECHO_MSG} "===> Staging rc.d startup script(s)"
+	@${MKDIR} ${STAGEDIR}${LOCALBASE}/etc/rc.d
+	@for i in ${USE_RC_SUBR}; do \
+		_prefix=${LOCALBASE}; \
+		${INSTALL_SCRIPT} ${WRKDIR}/$${i} ${STAGEDIR}$${_prefix}/etc/rc.d/$${i%.sh}; \
+		${ECHO_CMD} "@(root,wheel,0755) $${_prefix}/etc/rc.d/$${i%.sh}" >> ${TMPPLIST}; \
+	done
 
 .if ${PKGNAMESUFFIX:M*-client}
 post-install:
+	@${MKDIR} ${STAGEDIR}${ETCDIR}/conf.d
 	${INSTALL_DATA} ${WRKDIR}/my.cnf.sample ${STAGEDIR}${ETCDIR}/my.cnf.sample
 	${INSTALL_DATA} ${WRKDIR}/client.cnf.sample \
 		${STAGEDIR}${ETCDIR}/conf.d/client.cnf.sample
@@ -261,10 +269,11 @@ post-install-GSSAPI_NONE-off:
 
 .else # ! ${PKGNAMESUFFIX:M*-client}
 post-install:
+	${INSTALL_DATA} ${WRKDIR}/my.cnf.sample ${STAGEDIR}${ETCDIR}/my.cnf.sample
 	${INSTALL_DATA} ${WRKDIR}/server.cnf.sample \
 		${STAGEDIR}${ETCDIR}/conf.d/server.cnf.sample
 	${MV} ${STAGEDIR}${PREFIX}/share/user_map.conf \
-		${STAGEDIR}${PREFIX}/etc/mysql/user_map.conf.sample
+		${STAGEDIR}${ETCDIR}/user_map.conf.sample
 	${MV} ${STAGEDIR}${PREFIX}/share/pam_user_map.so \
 		${STAGEDIR}${PREFIX}/lib/mysql/
 	${RM} -r ${STAGEDIR}${PREFIX}/share/mysql/policy \
@@ -278,8 +287,6 @@ post-install:
 	${MV} ${STAGEDIR}${ETCDIR}/conf.d/mysql-clients.cnf \
 		${STAGEDIR}${ETCDIR}/conf.d/mysql-clients.cnf.sample
 	${MKDIR} ${STAGEDIR}${MARIADB_LOGDIR}
-	${SED} '/%%/d;/^@comment /d;s/^/@comment /' ${PORTSDIR}/${CATEGORIES:[1]}/${PORTNAME}${PKGNAMESUFFIX:S/-server/-client/}/pkg-plist \
-		>> ${TMPPLIST}
 
 post-install-HASHICORP_VAULT-on:
 	${MV} ${STAGEDIR}${ETCDIR}/conf.d/hashicorp_key_management.cnf \

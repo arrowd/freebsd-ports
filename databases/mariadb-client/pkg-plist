@@ -66,7 +66,6 @@ include/mysql/mysql/plugin_auth.h
 include/mysql/mysql_com.h
 include/mysql/mysql_version.h
 include/mysql/mysqld_error.h
-%%NO_GSSAPI_NONE%%lib/mysql/plugin/auth_gssapi_client.so
 lib/mysql/libmariadb.a
 lib/mysql/libmariadb.so
 lib/mysql/libmariadb.so.3
@@ -76,11 +75,13 @@ lib/mysql/libmysqlclient.so
 lib/mysql/libmysqlclient_r.a
 lib/mysql/libmysqlclient_r.so
 lib/mysql/libmysqlservices.a
+%%NO_GSSAPI_NONE%%lib/mysql/plugin/auth_gssapi_client.so
 lib/mysql/plugin/caching_sha2_password.so
 lib/mysql/plugin/client_ed25519.so
 lib/mysql/plugin/daemon_example.ini
 lib/mysql/plugin/dialog.so
 lib/mysql/plugin/mysql_clear_password.so
+lib/mysql/plugin/parsec.so
 lib/mysql/plugin/sha256_password.so
 lib/mysql/plugin/zstd.so
 libdata/pkgconfig/libmariadb.pc

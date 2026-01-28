@@ -14,6 +14,5 @@ RUN_DEPENDS=	rubygem-dbi>=0:databases/rubygem-dbi \
 		rubygem-mysql>=0:databases/rubygem-mysql
 
 USES=		gem
-IGNORE_WITH_MYSQL=	80 81
 
 .include <bsd.port.mk>

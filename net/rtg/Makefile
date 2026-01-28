@@ -15,7 +15,7 @@ LIB_DEPENDS=	libnetsnmp.so:net-mgmt/net-snmp \
 RUN_DEPENDS=	p5-DBI>=0:databases/p5-DBI \
 		${DBD_MYSQL}
 
-USES=		mysql:client perl5 shebangfix ssl
+USES=		mysql perl5 shebangfix ssl
 USE_RC_SUBR=	rtgpoll
 
 SHEBANG_FILES=	etc/95.pl etc/report.pl etc/rtgtargmkr.pl.in
@@ -33,11 +33,8 @@ LDFLAGS+=	-fstack-protector
 USERS=		rtg
 GROUPS=		rtg
 
-OPTIONS_DEFINE=	WEB MYSQL
-MYSQL_DESC=	Pull MySQL server in as a dependancy for local setups
+OPTIONS_DEFINE=	WEB
 WEB_DESC=	Include PHP-based web client interface pre-requisites
-
-MYSQL_USES=	mysql:server
 
 WEB_USES=		php
 WEB_USE=		PHP=mysqli

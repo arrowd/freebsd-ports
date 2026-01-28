@@ -33,7 +33,7 @@ tdbc_CONFIGURE_ARGS=	--with-tcloo=${TCL_LIBDIR}
 
 # MySQL
 MYSQL_VARS=		MODULES+=tdbcmysql
-MYSQL_USES=		mysql:client
+MYSQL_USES=		mysql
 MYSQL_DISTFILES=	${PORTNAME}mysql${PORTVERSION}${EXTRACT_SUFX}
 
 # ODBC
