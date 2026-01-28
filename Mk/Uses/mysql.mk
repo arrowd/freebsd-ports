@@ -10,6 +10,10 @@
 #		mysql:    use mysql-client disregarding ${MYSQL_CLIENT_DEFAULT}
 #		mariadb:  use mariadb-client disregarding ${MYSQL_CLIENT_DEFAULT}
 #
+# Additionally this USES defines the following knobs for ports to use:
+#		DBD_MYSQL can be used a value for *_DEPENDS, points to
+#			either p5-DBD-mysql or p5-DBD-MariaDB
+#
 # MAINTAINER:	ports@FreeBSD.org
 
 .if !defined(_INCLUDE_USES_MYSQL_MK)
@@ -49,8 +53,10 @@ _mysql_default=		mariadb
 _MYSQL_CLIENT_PORT=	databases/${_mysql_default}-client
 .  if ${_mysql_default} == mysql
 _MYSQL_CLIENT_LIB=	libmysqlclient.so
+DBD_MYSQL=		p5-DBD-mysql>=0:databases/p5-DBD-mysql
 .  elif ${_mysql_default} == mariadb
 _MYSQL_CLIENT_LIB=	libmariadb.so
+DBD_MYSQL=		p5-DBD-MariaDB>=0:databases/p5-DBD-MariaDB
 .  endif
 
 _MYSQL_CLIENT_BUILD_DEPENDS=	${_mysql_default}-client>=0:${_MYSQL_CLIENT_PORT}
