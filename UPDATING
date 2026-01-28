@@ -6,6 +6,13 @@ You should get into the habit of checking this file for changes each time
 you update your ports collection, before attempting any port upgrades.
 
 YYYYMMDD:
+  AFFECTS: users of databases/mroonga
+  AUTHOR: arrowd@FreeBSD.org
+  The port has been flavorized to allow selecting the version of a MySQL server
+  to compile against. The only version supported at the moment is mysql80.
+  This resulted in a change of package's name from "mroonga" to "mroonga-mysql80".
+
+YYYYMMDD:
   AFFECTS: users of audio/teamspeak3-server, comms/cqrlog,
            databases/percona-orchestrator, deskutils/moregroupware,
            finance/frontaccounting, graphics/digikam, net-mgmt/icingaweb2-module-x509,
