@@ -39,7 +39,7 @@ PGSQL_DESC=		Add a dependency on DBD::Pg
 SQLITE_DESC=		Add a dependency on DBD:SQLite
 WEBUI_DESC=		Add a dependency on the corresponding PHP pdo driver
 
-MYSQL_RUN_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
+MYSQL_RUN_DEPENDS=	${DBD_MYSQL}
 MYSQL_USES=		mysql
 PGSQL_RUN_DEPENDS=	p5-DBD-Pg>=0:databases/p5-DBD-Pg
 SQLITE_RUN_DEPENDS=	p5-DBD-SQLite>=0:databases/p5-DBD-SQLite

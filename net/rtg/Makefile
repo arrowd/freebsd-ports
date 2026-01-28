@@ -13,7 +13,7 @@ LICENSE=	GPLv2
 LIB_DEPENDS=	libnetsnmp.so:net-mgmt/net-snmp \
 		libgd.so:graphics/gd
 RUN_DEPENDS=	p5-DBI>=0:databases/p5-DBI \
-		p5-DBD-mysql>=0:databases/p5-DBD-mysql
+		${DBD_MYSQL}
 
 USES=		mysql perl5 shebangfix ssl
 USE_RC_SUBR=	rtgpoll

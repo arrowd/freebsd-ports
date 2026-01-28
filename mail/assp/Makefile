@@ -96,7 +96,7 @@ RUN_DEPENDS+=	p5-Net-DNS>=0.68:dns/p5-Net-DNS
 
 .if ${PORT_OPTIONS:MMYSQL}
 RUN_DEPENDS+=	p5-Tie-DBI>=1.05:databases/p5-Tie-DBI
-RUN_DEPENDS+=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
+RUN_DEPENDS+=	${DBD_MYSQL}
 USES+=		mysql
 .endif
 

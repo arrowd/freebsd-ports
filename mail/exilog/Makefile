@@ -30,7 +30,7 @@ OPTIONS_DEFAULT=		AGENT DOCS MYSQL
 OPTIONS_SUB=			YES
 AGENT_DESC=			Include exilog agent
 
-MYSQL_RUN_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
+MYSQL_RUN_DEPENDS=	${DBD_MYSQL}
 MYSQL_USES=		mysql
 
 PGSQL_RUN_DEPENDS=	p5-DBD-Pg>=0:databases/p5-DBD-Pg

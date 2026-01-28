@@ -31,8 +31,8 @@ NO_ARCH=	yes
 USES=		perl5
 USE_PERL5=	configure
 
-MYSQL_BUILD_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
-MYSQL_RUN_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
+MYSQL_BUILD_DEPENDS=	${DBD_MYSQL}
+MYSQL_RUN_DEPENDS=	${DBD_MYSQL}
 MYSQL_USES=		mysql
 POSTGRES_BUILD_DEPENDS=	p5-DBD-Pg>=2:databases/p5-DBD-Pg
 POSTGRES_RUN_DEPENDS=	p5-DBD-Pg>=2:databases/p5-DBD-Pg

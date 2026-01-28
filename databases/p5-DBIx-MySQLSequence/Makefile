@@ -9,10 +9,10 @@ MAINTAINER=	perl@FreeBSD.org
 COMMENT=	Proper and correct (emulated) sequence support for MySQL
 WWW=		https://metacpan.org/release/DBIx-MySQLSequence
 
-BUILD_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql \
+BUILD_DEPENDS=	${DBD_MYSQL} \
 		p5-DBI>0:databases/p5-DBI \
 		p5-Params-Util>=0.26:devel/p5-Params-Util
-RUN_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql \
+RUN_DEPENDS=	${DBD_MYSQL} \
 		p5-DBI>0:databases/p5-DBI \
 		p5-Params-Util>=0.26:devel/p5-Params-Util
 

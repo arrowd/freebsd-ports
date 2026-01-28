@@ -10,7 +10,7 @@ WWW=		https://hackmysql.com/mysqlreport
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-RUN_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql \
+RUN_DEPENDS=	${DBD_MYSQL} \
 		p5-DBI>=0:databases/p5-DBI \
 		p5-Term-ReadKey>=0:devel/p5-Term-ReadKey
 

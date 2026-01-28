@@ -80,7 +80,7 @@ p5-FCGI>=0:www/p5-FCGI
 .if ${PORT_OPTIONS:MMYSQL}
 USES+=	mysql
 RUN_DEPENDS+=\
-p5-DBD-mysql>=0:databases/p5-DBD-mysql
+${DBD_MYSQL}
 .endif
 
 .if ${PORT_OPTIONS:MDB} && ${PORT_OPTIONS:MMYSQL}

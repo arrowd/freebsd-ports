@@ -13,7 +13,7 @@ WWW=		https://metacpan.org/release/MogileFS-Server
 BUILD_DEPENDS=	${RUN_DEPENDS}
 RUN_DEPENDS=	p5-Danga-Socket>=1.56:devel/p5-Danga-Socket \
 		p5-DBD-SQLite>=1.13:databases/p5-DBD-SQLite \
-		p5-DBD-mysql>=0:databases/p5-DBD-mysql \
+		${DBD_MYSQL} \
 		p5-DBI>=0:databases/p5-DBI \
 		p5-IO-AIO>=0:devel/p5-IO-AIO \
 		p5-MogileFS-Client>=0:sysutils/p5-MogileFS-Client \

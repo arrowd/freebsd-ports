@@ -11,7 +11,7 @@ COMMENT=	Parallel operation on MySQL processlist
 WWW=		https://metacpan.org/release/RSOLIV/mysql-genocide-0.03
 
 BUILD_DEPENDS=	${RUN_DEPENDS}
-RUN_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
+RUN_DEPENDS=	${DBD_MYSQL}
 
 USES=		mysql perl5
 USE_PERL5=	configure

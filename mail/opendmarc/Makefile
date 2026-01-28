@@ -17,7 +17,7 @@ LICENSE_PERMS_SENDMAIL=		dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 
 RUN_DEPENDS=	p5-Switch>=0:lang/p5-Switch \
 		p5-DBI>=0:databases/p5-DBI \
-		p5-DBD-mysql>=0:databases/p5-DBD-mysql \
+		${DBD_MYSQL} \
 		p5-HTTP-Message>=0:www/p5-HTTP-Message \
 		public_suffix_list>=0:dns/public_suffix_list
 

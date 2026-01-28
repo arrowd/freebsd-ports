@@ -30,7 +30,7 @@ MARIADB_DESC=	MariaDB database support
 
 MARIADB_BUILD_DEPENDS=	p5-DBD-MariaDB>=0:databases/p5-DBD-MariaDB
 MARIADB_RUN_DEPENDS=	p5-DBD-MariaDB>=0:databases/p5-DBD-MariaDB
-MYSQL_BUILD_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
-MYSQL_RUN_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
+MYSQL_BUILD_DEPENDS=	${DBD_MYSQL}
+MYSQL_RUN_DEPENDS=	${DBD_MYSQL}
 
 .include <bsd.port.mk>

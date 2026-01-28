@@ -37,7 +37,7 @@ IGNORE=		will not be automatically fetched due to licensing\
 .endif
 
 .if ${PORT_OPTIONS:MMYSQL}
-RUN_DEPENDS+=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
+RUN_DEPENDS+=	${DBD_MYSQL}
 .endif
 
 pre-configure:

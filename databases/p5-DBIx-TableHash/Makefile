@@ -11,7 +11,7 @@ COMMENT=	Tie a hash to a MySQL table plus SQL utilities
 WWW=		https://christhorman.com/projects/perl/DBIx-TableHash/
 
 BUILD_DEPENDS=	${RUN_DEPENDS}
-RUN_DEPENDS=	p5-DBD-mysql>=0:databases/p5-DBD-mysql
+RUN_DEPENDS=	${DBD_MYSQL}
 
 USES=		mysql perl5
 USE_PERL5=	configure
