@@ -197,7 +197,7 @@ _ALL_OPTIONS_HELPERS=	${_OPTIONS_DEPENDS:S/$/_DEPENDS/} \
 			${_OPTIONS_FLAGS:S/$/_OFF/} ${_OPTIONS_FLAGS} \
 			CABAL_FLAGS CMAKE_BOOL CMAKE_BOOL_OFF CMAKE_OFF CMAKE_ON \
 			CONFIGURE_ENABLE CONFIGURE_OFF CONFIGURE_ON \
-			CONFIGURE_WITH IMPLIES MESON_ARGS MESON_DISABLED \
+			CONFIGURE_WITH IMPLIES LIB_PROVIDES MESON_ARGS MESON_DISABLED \
 			MESON_ENABLED MESON_FALSE MESON_OFF MESON_ON MESON_TRUE \
 			PREVENTS PREVENTS_MSG QMAKE_OFF QMAKE_ON \
 			ZIG_BOOL ZIG_BOOL_OFF \
@@ -535,6 +535,9 @@ CMAKE_ARGS+=		${${opt}_CMAKE_BOOL:C/.*/-D&:BOOL=true/}
 .      if defined(${opt}_CMAKE_BOOL_OFF)
 CMAKE_ARGS+=		${${opt}_CMAKE_BOOL_OFF:C/.*/-D&:BOOL=false/}
 .      endif
+.      if defined(${opt}_LIB_PROVIDES)
+LIB_PROVIDES+=		%%${opt}%%${${opt}_LIB_PROVIDES}
+.      endif
 .      if defined(${opt}_MESON_TRUE)
 MESON_ARGS+=		${${opt}_MESON_TRUE:C/.*/-D&=true/}
 .      endif
@@ -613,6 +616,9 @@ CMAKE_ARGS+=		${${opt}_CMAKE_BOOL:C/.*/-D&:BOOL=false/}
 .      endif
 .      if defined(${opt}_CMAKE_BOOL_OFF)
 CMAKE_ARGS+=		${${opt}_CMAKE_BOOL_OFF:C/.*/-D&:BOOL=true/}
+.      endif
+.      if defined(${opt}_LIB_PROVIDES)
+LIB_PROVIDES+=		%%${opt}%%${${opt}_LIB_PROVIDES}
 .      endif
 .      if defined(${opt}_MESON_TRUE)
 MESON_ARGS+=		${${opt}_MESON_TRUE:C/.*/-D&=false/}

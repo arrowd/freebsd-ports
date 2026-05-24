@@ -1676,6 +1676,15 @@ CO_ENV+=		STAGEDIR=${STAGEDIR} \
 				PORT_OPTIONS="${PORT_OPTIONS}" \
 				PORTSDIR="${PORTSDIR}"
 
+LP_ENV=			PREFIX=${PREFIX} \
+				LOCALBASE=${LOCALBASE} \
+				TMPPLIST=${TMPPLIST} \
+				SCRIPTSDIR=${SCRIPTSDIR} \
+				PLIST="${PLIST}" \
+				PLIST_FILES="${_REALLY_ALL_PLIST_FILES:O:u}" \
+				USE_LDCONFIG="${USE_LDCONFIG}" \
+				AGAINST_TMPPLIST="${AGAINST_TMPPLIST}"
+
 .    if defined(CROSS_SYSROOT)
 PKG_ENV+=		ABI_FILE=${CROSS_SYSROOT}/bin/sh
 MAKE_ENV+=		NM=${NM} \
@@ -4572,6 +4581,37 @@ ${.CURDIR}/README.html:
 							   ${SED} -e 's| .*||' -e 's|[^/]*|..|g')"'/..|' \
 		${TEMPLATES}/README.port >> ${.TARGET}
 
+_REALLY_ALL_PLIST_FILES=	${PLIST_FILES}
+.    for opt in ${_REALLY_ALL_POSSIBLE_OPTIONS}
+# At this point PLIST_FILES contains not only initial values set by the port,
+# but also values coming from the OPT_PLIST_FILES helpers. We want to prefix
+# such values with %%OPT%%
+.      for f in ${${opt}_PLIST_FILES}
+.        if ${_REALLY_ALL_PLIST_FILES:M${f}}
+_REALLY_ALL_PLIST_FILES:=	${_REALLY_ALL_PLIST_FILES:S/${f}/%%${opt}%%${f}/}
+.        else
+_REALLY_ALL_PLIST_FILES+=	%%${opt}%%${f}
+.        endif
+.      endfor
+.    endfor
+lib-provides-list:
+.    if defined(LIB_PROVIDES)
+.      for lib in ${LIB_PROVIDES}
+	@${ECHO_CMD} ${lib}
+.      endfor
+.    elif defined(BUNDLE_LIBS)
+	@${DO_NADA}
+.    else
+.      if defined(SUBSTITUTE_OPTIONS)
+	@${SETENV} ${LP_ENV} ${SH} ${SCRIPTSDIR}/lib-provides-list.sh \
+		| ${SED} ${PLIST_SUB_SANITIZED:S/$/!g/:S/^/ -e s!%%/:S/=/%%!/} \
+		| ${SED} '/@comment /d' \
+		| ${SORT} | uniq
+.      else
+	@${SETENV} ${LP_ENV} ${SH} ${SCRIPTSDIR}/lib-provides-list.sh
+.      endif
+.    endif
+
 # The following two targets require an up-to-date INDEX in ${PORTSDIR}
 
 _PRETTY_PRINT_DEPENDS_LIST=\
@@ -4804,6 +4844,10 @@ check-orphans: check-plist
 stage-qa:
 	@${ECHO_MSG} "====> Running Q/A tests (stage-qa)"
 	@${SETENV} ${QA_ENV} ${SH} ${SCRIPTSDIR}/qa.sh
+	@${MAKE} -C ${.CURDIR} lib-provides-list SUBSTITUTE_OPTIONS=yes OPTIONS_SUB=yes > ${WRKDIR}/.lib-provides
+	@${MAKE} -C ${.CURDIR} lib-provides-list AGAINST_TMPPLIST=yes > ${WRKDIR}/.lib-provides-against-tmpplist
+	@cd ${WRKDIR} && ${DIFF} -u .lib-provides .lib-provides-against-tmpplist
+# TODO: It'd be great to also check against pkg info -b at some later stage when the package is built
 .      if !defined(DEVELOPER)
 	@${ECHO_MSG} "/!\\ To run stage-qa automatically add DEVELOPER=yes to your environment /!\\"
 .      endif
