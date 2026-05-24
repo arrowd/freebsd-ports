@@ -1,0 +1,4 @@
+%%USB%%lib/libusb.so
+%%ZFS%%lib/libzfs.so
+lib/libsys.so
+

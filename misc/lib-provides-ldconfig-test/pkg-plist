@@ -1,0 +1,4 @@
+lib/b/libbsm.so
+lib/s/libsys.so
+%%USB%%lib/u/libusb.so
+%%ZFS%%lib/z/libzfs.so
