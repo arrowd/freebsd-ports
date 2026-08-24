@@ -10,6 +10,8 @@ WWW=		https://airspy.com/
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/airspy-tools/LICENSE.md
 
+BROKEN=		Fails to build with CMake 4
+
 USES=		cmake pkgconfig
 USE_GITHUB=	yes
 GH_PROJECT=	airspyone_host
