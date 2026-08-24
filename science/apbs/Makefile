@@ -10,6 +10,8 @@ WWW=		https://www.poissonboltzmann.org/
 
 LICENSE=	MIT
 
+BROKEN=		Fails to build with CMake 4
+
 USES=		cmake shebangfix
 SHEBANG_FILES=	tools/github/getReleases.sh
 USE_GITHUB=	yes
