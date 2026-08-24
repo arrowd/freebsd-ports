@@ -11,6 +11,8 @@ WWW=		https://github.com/ytsutano/axmldec
 LICENSE=	ISCL
 LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
+BROKEN=		Fails to build with CMake 4
+
 LIB_DEPENDS=	libboost_thread.so:devel/boost-libs
 
 USES=		cmake compiler:c++14-lang cpe minizip:ng pkgconfig
