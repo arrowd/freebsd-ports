@@ -12,6 +12,8 @@ WWW=		https://github.com/wbhart/antic
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/gpl-2.0.txt
 
+BROKEN=		Fails to build with CMake 4
+
 LIB_DEPENDS=	libflint.so:math/flint2 \
 		libgmp.so:math/gmp \
 		libmpfr.so:math/mpfr
