@@ -12,6 +12,7 @@ LICENSE_NAME=	AMPAS
 LICENSE_FILE=	${WRKSRC}/LICENSE
 LICENSE_PERMS=	dist-mirror dist-sell pkg-mirror pkg-sell auto-accept
 
+BROKEN=		Fails to build with CMake 4
 DEPRECATED=	Ancient software, archived upstream, does not build with CMake 4
 EXPIRATION_DATE=2026-11-30
 
