@@ -10,6 +10,8 @@ WWW=		https://arblib.org/
 LICENSE=	LGPL21
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BROKEN=		Fails to build with CMake 4
+
 LIB_DEPENDS=	libflint.so:math/flint2 \
 		libgmp.so:math/gmp \
 		libmpfr.so:math/mpfr
