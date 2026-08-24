@@ -11,6 +11,8 @@ WWW=		https://github.com/badaix/aixlog
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BROKEN=		Fails to build with CMake 4
+
 USES=		cmake
 USE_GITHUB=	yes
 GH_ACCOUNT=	badaix
