@@ -9,6 +9,8 @@ WWW=		https://github.com/flacon/alacenc
 
 LICENSE=	MIT
 
+BROKEN=		Fails to build with CMake 4
+
 USES=		cmake
 USE_GITHUB=	yes
 GH_ACCOUNT=	flacon
