@@ -10,6 +10,8 @@ WWW=		https://github.com/Qucs/ADMS
 LICENSE=	GPLv3+
 LICENSE_FILE=	${WRKSRC}/COPYING
 
+BROKEN=		Fails to build with CMake 4
+
 BUILD_DEPENDS=	p5-XML-LibXML>=0:textproc/p5-XML-LibXML
 
 USES=		bison cmake perl5
