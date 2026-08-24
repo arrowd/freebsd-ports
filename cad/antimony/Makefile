@@ -10,6 +10,8 @@ WWW=		https://www.mattkeeter.com/projects/antimony/3/ \
 
 LICENSE=	MIT
 
+BROKEN=		Fails to build with CMake 4
+
 BUILD_DEPENDS=	lemon:devel/lemon
 LIB_DEPENDS=	${PY_BOOST} \
 		libpng16.so:graphics/png
