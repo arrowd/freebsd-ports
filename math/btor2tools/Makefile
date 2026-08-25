@@ -9,6 +9,8 @@ WWW=		https://github.com/Boolector/btor2tools
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
+BROKEN=		Fails to build with CMake 4
+
 USES=		cmake cpe
 USE_LDCONFIG=	yes
 
