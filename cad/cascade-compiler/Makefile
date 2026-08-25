@@ -10,6 +10,8 @@ WWW=		https://github.com/vmware/cascade
 LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
+BROKEN=		Fails to build with CMake 4
+
 BUILD_DEPENDS=	flex>0:textproc/flex
 RUN_DEPENDS=	verilator:cad/verilator
 TEST_DEPENDS=	benchmark>0:devel/benchmark \
