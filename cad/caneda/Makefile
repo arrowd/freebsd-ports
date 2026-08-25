@@ -11,6 +11,8 @@ WWW=		http://caneda.org/
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/COPYING
 
+BROKEN=		Fails to build with CMake 4
+
 LIB_DEPENDS=	libqwt.so:x11-toolkits/qwt6@qt5
 
 USES=		cmake compiler:c++11-lang desktop-file-utils qt:5 \
