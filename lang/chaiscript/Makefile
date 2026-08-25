@@ -11,6 +11,8 @@ WWW=		https://chaiscript.com/
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BROKEN=		Fails to build with CMake 4
+
 USES=		cmake localbase:ldflags readline
 USE_GITHUB=	yes
 USE_LDCONFIG=	${PREFIX}/lib/chaiscript
