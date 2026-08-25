@@ -11,6 +11,8 @@ WWW=		https://github.com/SebWouters/CheMPS2
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BROKEN=		Fails to build with CMake 4
+
 LIB_DEPENDS=	libhdf5.so:science/hdf5 \
 		libsz.so:science/libaec
 
