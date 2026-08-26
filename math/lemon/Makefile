@@ -12,6 +12,8 @@ WWW=		https://lemon.cs.elte.hu/trac/lemon/
 LICENSE=	BSL
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BROKEN=		Fails to build with CMake 4
+
 LIB_DEPENDS=	libCbc.so:math/cbc \
 		libCgl.so:math/cgl \
 		libClp.so:math/clp \
