@@ -9,6 +9,7 @@ WWW=		https://daltonprogram.org/
 
 LICENSE=	LGPL21
 
+BROKEN=		Fails to build with CMake 4
 BROKEN_armv7=	fortran runs out of memory
 
 LIB_DEPENDS=	liblapack.so:math/lapack \
