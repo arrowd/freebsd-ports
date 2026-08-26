@@ -12,6 +12,8 @@ WWW=		https://github.com/CSCsw/ColPack
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BROKEN=		Fails to build with CMake 4
+
 USES=		cmake
 USE_LDCONFIG=	yes
 
