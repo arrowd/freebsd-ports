@@ -10,6 +10,8 @@ WWW=		https://www.commontk.org/index.php/Main_Page
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BROKEN=		Fails to build with CMake 4
+
 USES=		cmake compiler:c++11-lib qt:5
 USE_QT=		concurrent core designer gui multimedia opengl sql widgets xml xmlpatterns \
 		buildtools:build uitools:build qmake:build testlib:build # see CMake/ctkMacroSetupQt.cmake
