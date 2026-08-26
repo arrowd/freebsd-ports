@@ -12,6 +12,8 @@ WWW=		https://github.com/coin-or/qpOASES
 LICENSE=	LGPL21
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BROKEN=		Fails to build with CMake 4
+
 LIB_DEPENDS=	libopenblas.so:math/openblas
 
 USES=		cmake fortran tar:tgz
