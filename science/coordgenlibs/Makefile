@@ -10,6 +10,8 @@ WWW=		https://github.com/schrodinger/coordgenlibs
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BROKEN=		Fails to build with CMake 4
+
 BUILD_DEPENDS=	${LOCALBASE}/include/boost/dynamic_bitset.hpp:devel/boost-libs
 LIB_DEPENDS=	libmaeparser.so:science/maeparser
 
