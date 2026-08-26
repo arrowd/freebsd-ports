@@ -10,6 +10,8 @@ WWW=		http://www.reiher.ethz.ch/software/dkh-x2c.html
 
 LICENSE=	GPLv3
 
+BROKEN=		Fails to build with CMake 4
+
 USES=		cmake fortran
 USE_GITHUB=	yes
 GH_ACCOUNT=	psi4
