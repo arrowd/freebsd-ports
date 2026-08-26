@@ -12,6 +12,8 @@ WWW=		https://dmc-docs.web.cern.ch/dmc-docs/davix.html \
 LICENSE=	LGPL21
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BROKEN=		Fails to build with CMake 4
+
 LIB_DEPENDS=	libcurl.so:ftp/curl \
 		libuuid.so:misc/libuuid
 TEST_DEPENDS=	googletest>0:devel/googletest
