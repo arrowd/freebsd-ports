@@ -13,6 +13,7 @@ WWW=		http://diracprogram.org/doku.php
 LICENSE=	LGPL21
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BROKEN=		Fails to build with CMake 4
 BROKEN_i386=		compilation fails: Error: Type mismatch in argument 'lu' at (1); passed INTEGER(8) to INTEGER(4) (and similar)
 
 BUILD_DEPENDS=	gmake:devel/gmake
