@@ -12,6 +12,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 NOT_FOR_ARCHS=		aarch64 riscv64
 NOT_FOR_ARCHS_REASON=	test/packages/EABase/include/Common/EABase/config/eaplatform.h:436:4: error: Unknown processor
 
+BROKEN=		Fails to build with CMake 4
+
 USES=		cmake compiler:c++17-lang
 USE_LDCONFIG=	yes
 
