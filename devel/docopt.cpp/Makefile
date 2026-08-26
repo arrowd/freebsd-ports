@@ -11,6 +11,8 @@ WWW=		https://github.com/docopt/docopt.cpp
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE-MIT
 
+BROKEN=		Fails to build with CMake 4
+
 USES=		cmake:testing compiler:c++11-lang python:test
 USE_LDCONFIG=	yes
 
