@@ -10,6 +10,8 @@ WWW=		https://github.com/amrayn/easyloggingpp
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BROKEN=		Fails to build with CMake 4
+
 USES=		cmake compiler:c++11-lang
 USE_LDCONFIG=	yes
 CMAKE_ON=	build_shared_lib  # patched in, requested such option in https://github.com/muflihun/easyloggingpp/issues/603
