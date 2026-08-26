@@ -16,6 +16,8 @@ LICENSE_FILE_GPLv2=				${WRKSRC}/LICENSE
 LICENSE_FILE_AngryFly-Royalty-Free-License=	${WRKSRC}/packs/License.txt
 LICENSE_PERMS_AngryFly-Royalty-Free-License=	auto-accept dist-mirror pkg-mirror
 
+BROKEN=		Fails to build with CMake 4
+
 # BUILD_DEPENDS for glm is commented out because the system glm (1.0.x) is
 # incompatible with EmptyEpsilon's code. The bundled glm 0.9.9.8 is used instead
 # via git submodule to avoid API incompatibilities (missing radians, degrees,
