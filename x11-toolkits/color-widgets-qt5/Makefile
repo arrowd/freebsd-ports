@@ -10,6 +10,8 @@ WWW=		https://gitlab.com/mattia.basaglia/Qt-Color-Widgets
 LICENSE=	LGPL3
 LICENSE_FILE=	${WRKSRC}/COPYING
 
+BROKEN=		Fails to build with CMake 4
+
 USES=		cmake compiler:c++11-lang pkgconfig qt:5
 USE_QT=		core gui widgets buildtools:build qmake:build
 USE_LDCONFIG=	yes
