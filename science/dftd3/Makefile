@@ -12,6 +12,8 @@ WWW=		https://www.chemie.uni-bonn.de/pctc/mulliken-center/software/dft-d3
 LICENSE=	GPLv1+
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BROKEN=		Fails to build with CMake 4
+
 USES=		cmake fortran
 
 USE_GITHUB=	yes
