@@ -13,6 +13,7 @@ LICENSE_NAME=	TADS FREEWARE SOURCE CODE LICENSE
 LICENSE_FILE=	${WRKSRC}/tads3/LICENSE.TXT
 LICENSE_PERMS=	dist-mirror pkg-mirror auto-accept
 
+BROKEN=		Fails to build with CMake 4
 DEPRECATED=	No release in years, does not build with CMake 4
 EXPIRATION_DATE=2026-11-30
 
