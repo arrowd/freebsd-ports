@@ -12,6 +12,7 @@ LICENSE=	GPLv2+ CC-BY-SA-3.0 CC-BY-SA-4.0
 LICENSE_COMB=	multi
 LICENSE_FILE_GPLv2+ =	${WRKSRC}/COPYING.txt
 
+BROKEN=		Fails to build with CMake 4
 DEPRECATED=	No release in 9 years, does not build with CMake 4
 EXPIRATION_DATE=2026-11-30
 
