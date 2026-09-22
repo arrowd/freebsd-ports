@@ -11,6 +11,7 @@ WWW=		https://software.intel.com/content/www/us/en/develop/tools/oneapi/componen
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BROKEN=		Fails to build with CMake 4
 DEPRECATED=	Upstream has been renamed to libvpl and libvpl-tools. Use multimedia/libvpl and multimedia/libvpl-tools instead.
 EXPIRATION_DATE=	2026-09-30
 
