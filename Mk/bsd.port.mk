@@ -2599,6 +2599,8 @@ PKGREPOSITORY?=		${PACKAGES}/${PKGREPOSITORYSUBDIR}
 
 # The "latest version" link -- ${PKGNAME} minus everthing after the last '-'
 PKGLATESTREPOSITORY?=	${PACKAGES}/Latest
+PKGPROVIDESDIR?=	${PACKAGES}/provides
+PKGSHLIBSPROVIDEDDIR?=	${PACKAGES}/shlibs_provided
 PKGBASE?=			${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}
 PKGLATESTFILE=		${PKGLATESTREPOSITORY}/${PKGBASE}${PKG_SUFX}
 .    if ${PKG_COMPRESSION_FORMAT} == txz
@@ -3438,6 +3440,8 @@ do-test:
 .    if defined(_HAVE_PACKAGES)
 _EXTRA_PACKAGE_TARGET_DEP+= ${PKGFILE}
 _PORTS_DIRECTORIES+=	${PKGREPOSITORY}
+_PORTS_DIRECTORIES+=	${PKGPROVIDESDIR}
+_PORTS_DIRECTORIES+=	${PKGSHLIBSPROVIDEDDIR}
 
 .      if ${PKGORIGIN} == "ports-mgmt/pkg" || ${PKGORIGIN} == "ports-mgmt/pkg-devel"
 _EXTRA_PACKAGE_TARGET_DEP+=	${PKGLATESTREPOSITORY}
@@ -3473,6 +3477,13 @@ _EXTRA_PACKAGE_TARGET_DEP+=	${WRKDIR_PKGFILE${_SP.${sp}}}
 ${PKGFILE${_SP.${sp}}}: ${WRKDIR_PKGFILE${_SP.${sp}}}
 	@${LN} -f ${WRKDIR_PKGFILE${_SP.${sp}}} ${PKGFILE${_SP.${sp}}} 2>/dev/null \
 		|| ${CP} -f ${WRKDIR_PKGFILE${_SP.${sp}}} ${PKGFILE${_SP.${sp}}}
+	@_pkgfile="${PKGFILE${_SP.${sp}}}"; \
+	for _p in $$(${PKG_QUERY} -F $${_pkgfile} '%y' 2>/dev/null); do \
+		${INSTALL} -l rs $${_pkgfile} ${PKGPROVIDESDIR}/$${_p}; \
+	done; \
+	for _p in $$(${PKG_QUERY} -F $${_pkgfile} '%b' 2>/dev/null); do \
+		${INSTALL} -l rs $${_pkgfile} ${PKGSHLIBSPROVIDEDDIR}/$${_p}; \
+	done
 
 _EXTRA_PACKAGE_TARGET_DEP+=	${PKGFILE${_SP.${sp}}}
 .      endif
