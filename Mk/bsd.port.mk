@@ -3479,10 +3479,34 @@ ${PKGFILE${_SP.${sp}}}: ${WRKDIR_PKGFILE${_SP.${sp}}}
 		|| ${CP} -f ${WRKDIR_PKGFILE${_SP.${sp}}} ${PKGFILE${_SP.${sp}}}
 	@_pkgfile="${PKGFILE${_SP.${sp}}}"; \
 	for _p in $$(${PKG_QUERY} -F $${_pkgfile} '%y' 2>/dev/null); do \
-		${INSTALL} -l rs $${_pkgfile} ${PKGPROVIDESDIR}/$${_p}; \
+		if [ ! -L "${PKGPROVIDESDIR}/$${_p}" ]; then \
+			${INSTALL} -l rs $${_pkgfile} ${PKGPROVIDESDIR}/$${_p}; \
+		else \
+			echo "===> ZZZ ${PKGPROVIDESDIR}/$${_p} is already provided by"; \
+			file ${PKGPROVIDESDIR}/$${_p}; \
+			if [ $$(basename $$(readlink ${PKGPROVIDESDIR}/$${_p})) = $$(basename $${_pkgfile}) ]; then \
+				echo "===> same package, ok"; \
+			else \
+				false; \
+			fi \
+		fi \
 	done; \
+	echo "===> Adding shlibs_provided to ${PKGSHLIBSPROVIDEDDIR}, already present:"; \
+	ls ${PKGSHLIBSPROVIDEDDIR}; \
 	for _p in $$(${PKG_QUERY} -F $${_pkgfile} '%b' 2>/dev/null); do \
-		${INSTALL} -l rs $${_pkgfile} ${PKGSHLIBSPROVIDEDDIR}/$${_p}; \
+		if [ ! -L "${PKGSHLIBSPROVIDEDDIR}/$${_p}" ]; then \
+			echo "===> ${PKGSHLIBSPROVIDEDDIR}/$${_p} does not exist, installing"; \
+			${INSTALL} -l rs $${_pkgfile} ${PKGSHLIBSPROVIDEDDIR}/$${_p}; \
+		else \
+			echo "===> ZZZ ${PKGSHLIBSPROVIDEDDIR}/$${_p} is already provided by"; \
+			file ${PKGSHLIBSPROVIDEDDIR}/$${_p}; \
+			if [ $$(basename $$(readlink ${PKGSHLIBSPROVIDEDDIR}/$${_p})) = $$(basename $${_pkgfile}) ]; then \
+				echo "===> same package, ok"; \
+			else \
+				echo "===> and not by the same package, fail"; \
+				false; \
+			fi \
+		fi \
 	done
 
 _EXTRA_PACKAGE_TARGET_DEP+=	${PKGFILE${_SP.${sp}}}
