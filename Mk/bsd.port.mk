@@ -1476,13 +1476,15 @@ IGNORE=	has an unknown flavor '${FLAVOR}', possible flavors: ${FLAVORS}
 .    endif
 
 .    if !empty(FLAVORS) && empty(FLAVOR)
-FLAVOR=	${FLAVORS:[1]}
+FLAVOR=			${FLAVORS:[1]}
 .    endif
 
 # Reorder FLAVORS so the default is first if set by the port.
 .    if empty(_FLAVOR) && !empty(FLAVORS) && !empty(FLAVOR)
 FLAVORS:=	${FLAVOR} ${FLAVORS:N${FLAVOR}}
 .    endif
+
+PROVIDING_FLAVOR?=	${FLAVORS:[1]}
 
 .    if !empty(FLAVOR) && !defined(_DID_FLAVORS_HELPERS)
 _DID_FLAVORS_HELPERS=	yes
@@ -2609,6 +2611,9 @@ PKGOLDLATESTFILE=		${PKGLATESTREPOSITORY}/${PKGBASE}.${PKG_COMPRESSION_FORMAT}
 # have a bootstrap which handles the pkg extension.
 PKGOLDSIGFILE=			${PKGLATESTREPOSITORY}/${PKGBASE}.${PKG_COMPRESSION_FORMAT}.sig
 .    endif
+.    if !empty(FLAVORS)
+PROVIDING_FLAVOR?=	${FLAVORS:[1]}
+.    endif
 
 
 _PKGS=	${PKGBASE}
@@ -3477,6 +3482,7 @@ _EXTRA_PACKAGE_TARGET_DEP+=	${WRKDIR_PKGFILE${_SP.${sp}}}
 ${PKGFILE${_SP.${sp}}}: ${WRKDIR_PKGFILE${_SP.${sp}}}
 	@${LN} -f ${WRKDIR_PKGFILE${_SP.${sp}}} ${PKGFILE${_SP.${sp}}} 2>/dev/null \
 		|| ${CP} -f ${WRKDIR_PKGFILE${_SP.${sp}}} ${PKGFILE${_SP.${sp}}}
+.if empty(FLAVOR) || (${FLAVOR} == ${PROVIDING_FLAVOR})
 	@_pkgfile="${PKGFILE${_SP.${sp}}}"; \
 	for _p in $$(${PKG_QUERY} -F $${_pkgfile} '%y' 2>/dev/null); do \
 		if [ ! -L "${PKGPROVIDESDIR}/$${_p}" ]; then \
@@ -3508,6 +3514,7 @@ ${PKGFILE${_SP.${sp}}}: ${WRKDIR_PKGFILE${_SP.${sp}}}
 			fi \
 		fi \
 	done
+.endif
 
 _EXTRA_PACKAGE_TARGET_DEP+=	${PKGFILE${_SP.${sp}}}
 .      endif
