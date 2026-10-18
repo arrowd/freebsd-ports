@@ -28,4 +28,10 @@ do-install:
 		--prefix "${PREFIX}" \
 		${CARGO_INSTALL_ARGS}
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if ${EBUR128_DEFAULT} != "rust"
+SKIP_SHLIB_PROVIDES_IN_FAVOR=  libebur128.so.1:audio/libebur128
+.endif
+
+.include <bsd.port.post.mk>

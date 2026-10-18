@@ -59,6 +59,12 @@ CMAKE_ARGS+=	-DLLVM_ENABLE_LIBEDIT=OFF
 CMAKE_ARGS+=	-DLLVM_TARGETS_TO_BUILD="${LLVM_TARGETS}"
 CMAKE_FLAGS+=	-DLLVM_DEFAULT_TARGET_TRIPLE=riscv32-unknown-unknown
 
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libLLVM.so.21.1:devel/llvm21 \
+				libLTO.so.21.1:devel/llvm21 \
+				libRemarks.so.21.1:devel/llvm21 \
+				libclang-cpp.so.21.1:devel/llvm21 \
+				libclang.so.21.1:devel/llvm21
+
 .ifndef USE_GITLAB
 USE_GITHUB=	yes
 GH_PROJECT?=	llvm-project
@@ -184,6 +190,8 @@ _USES_PYTHON?=	python:build
 USES+=		${_USES_PYTHON}
 
 .include <bsd.port.pre.mk>
+
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libLLVM.so.21.1:devel/llvm21
 
 .if exists(${PATCHDIR}/llvm${LLVM_MAJOR})
 EXTRA_PATCHES+=	${PATCHDIR}/llvm${LLVM_MAJOR}

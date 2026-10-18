@@ -61,6 +61,18 @@ CMAKE_ARGS+=	-DLLVM_ENABLE_LIBXML2=OFF
 CMAKE_ARGS+=	-DLLVM_ENABLE_LIBEDIT=OFF
 CMAKE_ARGS+=	-DLLVM_TARGETS_TO_BUILD="${LLVM_TARGETS}"
 
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libarcher.so:devel/llvm${LLVM_DEFAULT} \
+				libomp.so:devel/llvm${LLVM_DEFAULT} \
+				libomptarget*:devel/llvm18
+.ifdef MASTERDIR
+SKIP_SHLIB_PROVIDES_IN_FAVOR+=	libLLVM-${LLVM_MAJOR}git.so:devel/llvm-cheri \
+				libLTO.so.${LLVM_MAJOR}git:devel/llvm-cheri \
+				libRemarks.so.${LLVM_MAJOR}git:devel/llvm-cheri \
+				libclang-cpp.so.${LLVM_MAJOR}git:devel/llvm-cheri \
+				libclang.so.${LLVM_MAJOR}git:devel/llvm-cheri \
+				libclang_cxx.so.${LLVM_MAJOR}git:devel/llvm-cheri
+.endif
+
 .ifndef USE_GITLAB
 USE_GITHUB=	yes
 GH_PROJECT?=	llvm-project

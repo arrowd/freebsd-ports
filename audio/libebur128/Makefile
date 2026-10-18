@@ -17,4 +17,10 @@ USE_LDCONFIG=	yes
 
 CONFLICTS_INSTALL=	ebur128
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+
+.if ${EBUR128_DEFAULT} != "legacy"
+SKIP_SHLIB_PROVIDES_IN_FAVOR=  libebur128.so.1:audio/ebur128
+.endif
+
+.include <bsd.port.post.mk>

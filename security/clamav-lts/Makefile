@@ -34,6 +34,8 @@ CMAKE_ON=	ENABLE_EXTERNAL_MSPACK
 TEST_TARGET=	check
 
 CONFLICTS_INSTALL=	clamav-lts
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libclamav.so.12:security/clamav \
+				libclamunrar_iface.so.12:security/clamav
 
 SUB_FILES=	pkg-message
 SUB_LIST+=	CHMOD=${CHMOD} \

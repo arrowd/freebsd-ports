@@ -42,6 +42,7 @@ PLIST_SUB=	VERSION=${GCC_VERSION}
 WITHOUT_CPU_CFLAGS=	This is a cross-compiler.
 
 CONFLICTS=	avr-gcc-devel*
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libcc1.so.0:lang/gcc${GCC_DEFAULT}
 
 INFO=		cpp gcc gccint cppinternals gccinstall
 

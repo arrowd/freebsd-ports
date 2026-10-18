@@ -31,6 +31,8 @@ MAKE_ENV=		PYTHONHASHSEED=1
 LDFLAGS+=		-Wl,--undefined-version
 
 CONFLICTS_INSTALL=	talloc talloc[0-9]*
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libpytalloc-util.cpython-312.so.2:devel/talloc \
+				libtalloc.so.2:devel/talloc
 
 PLIST_SUB+=	PKGCONFIGDIR=${PKGCONFIGDIR:S;^${PREFIX}/;;}
 

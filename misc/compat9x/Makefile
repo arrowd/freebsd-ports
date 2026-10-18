@@ -15,6 +15,7 @@ PLIST=		${PKGDIR}/pkg-plist.${ARCH}
 TARGET_DIR=	${PREFIX}/lib/compat
 TARGET32_DIR=	${PREFIX}/lib32/compat
 USE_LDCONFIG=	${TARGET_DIR}
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libstdc++.so.6*:lang/gcc${GCC_DEFAULT}
 
 .include <bsd.port.pre.mk>
 

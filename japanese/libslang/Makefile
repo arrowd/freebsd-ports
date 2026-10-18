@@ -20,6 +20,7 @@ USE_LDCONFIG=	yes
 MAKE_JOBS_UNSAFE=	yes
 
 CONFLICTS=	libslang2 libslang-1.*[^j]*
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libslang.so.2:devel/libslang2
 
 DOCSDIR=	${PREFIX}/share/doc/slang
 

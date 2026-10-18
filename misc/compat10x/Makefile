@@ -16,7 +16,8 @@ PLIST=		${PKGDIR}/pkg-plist.${ARCH}
 TARGET_DIR=	${PREFIX}/lib/compat
 TARGET32_DIR=	${PREFIX}/lib32/compat
 USE_LDCONFIG=	${TARGET_DIR}
-NO_SHLIB_PROVIDES_GLOB= libreadline.so.* libhistory.so.*
+NO_SHLIB_PROVIDES_GLOB=	libreadline.so.* libhistory.so.*
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libgomp.so.1*:lang/gcc${GCC_DEFAULT}
 
 .include <bsd.port.pre.mk>
 

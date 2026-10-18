@@ -33,7 +33,11 @@ LUAJIT_SOVERSION=	2.1.1756211046
 
 PLIST_SUB+=	VERSION=${LUAJIT_VERSION} SOVERSION=${LUAJIT_SOVERSION}
 
-.include <bsd.port.options.mk>
+.include <bsd.port.pre.mk>
+
+.if ${LUAJIT_DEFAULT} != "luajit-openresty"
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libluajit-5.1.so.2:lang/luajit
+.endif
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/${PORTNAME}-${LUAJIT_SOVERSION}

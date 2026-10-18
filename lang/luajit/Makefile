@@ -28,9 +28,15 @@ LUAJIT_SOVERSION=	2.1.1788856981 # see ${WRKSRC}/.relver
 
 PLIST_SUB+=	VERSION=${LUAJIT_VERSION} SOVERSION=${LUAJIT_SOVERSION}
 
+.include <bsd.port.pre.mk>
+
+.if ${LUAJIT_DEFAULT} != luajit-openresty
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libluajit-5.1.so.2:lang/luajit
+.endif
+
 post-install:
 	${LN} -sf ${PORTNAME}-${LUAJIT_SOVERSION} \
 		${STAGEDIR}${PREFIX}/bin/${PORTNAME}
 	${INSTALL_MAN} ${WRKSRC}/etc/luajit.1 ${STAGEDIR}${PREFIX}/share/man/man1
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>
