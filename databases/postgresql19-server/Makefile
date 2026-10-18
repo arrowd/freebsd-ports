@@ -186,6 +186,13 @@ CFLAGS+=	-msse2
 INSTALL_DIRS+=		src/backend/jit/llvm
 .endif
 
+.if defined(CLIENT_ONLY) && ${DISTVERSION:C/([0-9][0-9]).*/\1/g} != ${PGSQL_DEFAULT}
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libecpg.so.6:databases/postgresql${PGSQL_DEFAULT}-client \
+				libecpg_compat.so.3:databases/postgresql${PGSQL_DEFAULT}-client \
+				libpgtypes.so.3:databases/postgresql${PGSQL_DEFAULT}-client \
+				libpq.so.5:databases/postgresql${PGSQL_DEFAULT}-client
+.endif
+
 .if defined(SERVER_ONLY)
 pre-build:
 	@${SH} ${PKGINSTALL} ${PORTNAME} PRE-INSTALL

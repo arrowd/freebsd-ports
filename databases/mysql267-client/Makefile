@@ -20,6 +20,8 @@ PLIST=		${.CURDIR}/pkg-plist
 CONFLICTS_INSTALL=	mysql*-client \
 			mariadb*-client \
 			percona*-client
+# TODO: unhardcode "mysql84"
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libmysqlclient.so.24:databases/mysql84-client
 
 CMAKE_ARGS+=	-DWITHOUT_SERVER=1 -DINSTALL_SUPPORTFILESDIR=0
 

@@ -20,6 +20,7 @@ LIB_DEPENDS=	libsasl2.so:security/cyrus-sasl2 \
 		libuuid.so:misc/libuuid
 
 CONFLICTS_INSTALL=	cyrus-imapd2? cyrus-imapd3[013-] cyrus-imapd3[013-]-http
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libcyrus.so.0:mail/cyrus-imapd34
 
 USES=		compiler:c11 cpe gmake libtool perl5 pkgconfig ssl
 USE_RC_SUBR=	imapd

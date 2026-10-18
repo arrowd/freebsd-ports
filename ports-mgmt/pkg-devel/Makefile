@@ -27,6 +27,8 @@ CONFIGURE_ENV=	CC_FOR_BUILD="${CC}"
 # so that pkg-static is used from the wrkdir
 USE_SUBMAKE=	yes
 
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libpkg.so.4:ports-mgmt/pkg
+
 OPTIONS_DEFINE=	DOCS SAN
 SAN_DESC=	Enable sanitizers (ASAN and UBSAN)
 

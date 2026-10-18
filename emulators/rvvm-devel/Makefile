@@ -37,6 +37,8 @@ MAKE_ENV+=	BUILDDIR=${BUILDDIR} \
 TEST_TARGET=	test
 SUB_FILES=	pkg-message
 
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	librvvm.so.0:emulators/rvvm-devel
+
 OPTIONS_DEFINE=	FDT FPU GDBSTUB JIT JNI LOCK_DEBUG NET PCI RV64 RVV SOUND
 OPTIONS_DEFAULT=	FDT FPU JIT JNI LOCK_DEBUG NET PCI RV64
 # src/bindings/jni/rvvm_jni.c:8:10: fatal error: 'devices/riscv-aclint.h' file not found

@@ -34,6 +34,7 @@ LDFLAGS+=		-Wl,--undefined-version
 # tdb1 links with installed tdb libraries, so we need to set
 # CONFLICTS instead of just CONFLICTS_INSTALL.
 CONFLICTS=	tdb tdb14*
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libtdb.so.1:devel/tdb
 
 PLIST_SUB+=	PKGCONFIGDIR=${PKGCONFIGDIR:S;^${PREFIX}/;;}
 

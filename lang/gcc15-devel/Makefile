@@ -40,6 +40,18 @@ SUFFIX=		${PORTVERSION:C/([0-9]+).*/\1/}
 CFLAGS:=	${CFLAGS:N-mretpoline} -D__USE_ISOC11
 CXXFLAGS:=	${CXXFLAGS:N-mretpoline}
 
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libasan.so.8*:lang/gcc${GCC_DEFAULT} \
+				libatomic.so.1*:lang/gcc${GCC_DEFAULT} \
+				libcc1.so.0:lang/gcc${GCC_DEFAULT} \
+				libgcc_s.so.1*:lang/gcc${GCC_DEFAULT} \
+				libgccjit.so.0:lang/gcc${GCC_DEFAULT} \
+				libgfortran.so.5*:lang/gcc${GCC_DEFAULT} \
+				libgomp.so.1*:lang/gcc${GCC_DEFAULT} \
+				libitm.so.1*:lang/gcc${GCC_DEFAULT} \
+				libquadmath.so.0*:lang/gcc${GCC_DEFAULT} \
+				libstdc++.so.6*:lang/gcc${GCC_DEFAULT} \
+				libubsan.so.1*:lang/gcc${GCC_DEFAULT}
+
 OPTIONS_DEFINE=		GRAPHITE
 OPTIONS_DEFAULT_aarch64=STANDARD_BOOTSTRAP
 OPTIONS_DEFAULT_armv6=	STANDARD_BOOTSTRAP

@@ -27,6 +27,17 @@ USE_BINUTILS=	yes
 USE_PERL5=	build
 
 CONFLICTS=	gcc13-devel
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libasan.so.8*:lang/gcc${GCC_DEFAULT} \
+				libatomic.so.1*:lang/gcc${GCC_DEFAULT} \
+				libcc1.so.0:lang/gcc${GCC_DEFAULT} \
+				libgcc_s.so.1*:lang/gcc${GCC_DEFAULT} \
+				libgccjit.so.0:lang/gcc${GCC_DEFAULT} \
+				libgfortran.so.5*:lang/gcc${GCC_DEFAULT} \
+				libgomp.so.1*:lang/gcc${GCC_DEFAULT} \
+				libitm.so.1*:lang/gcc${GCC_DEFAULT} \
+				libquadmath.so.0*:lang/gcc${GCC_DEFAULT} \
+				libstdc++.so.6*:lang/gcc${GCC_DEFAULT} \
+				libubsan.so.1*:lang/gcc${GCC_DEFAULT}
 
 CPE_VENDOR=	gnu
 CPE_VERSION=	${GCC_VERSION}

@@ -57,6 +57,7 @@ LDFLAGS+=	-L${LOCALBASE}/lib -L${OPENSSLLIB}
 
 CONFLICTS_INSTALL=	dovecot dovecot-cdb dovecot-ldap dovecot-mysql \
 			dovecot-pgsql dovecot-sqlite3
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	lib01_acl_plugin.so:mail/dovecot
 
 .if ${FLAVOR} == default
 CONFLICTS_INSTALL+=	dovecot24-cdb dovecot24-ldap dovecot24-mysql \

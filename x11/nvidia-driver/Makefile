@@ -80,6 +80,9 @@ USE_XORG+=	xorg-server
 CONFLICTS_BUILD+=	xlibre-server
 .endif
 
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libGL.so.1:graphics/libglvnd \
+				libGLESv2.so.2:graphics/libglvnd
+
 USE_LDCONFIG=	yes
 
 PIE_UNSAFE=	yes

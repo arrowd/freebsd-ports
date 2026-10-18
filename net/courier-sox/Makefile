@@ -30,6 +30,8 @@ GNU_CONFIGURE_MANPREFIX=${PREFIX}/share
 INSTALL_TARGET=	install-strip
 TEST_TARGET=	check
 
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libsocks.so.0:net/dante
+
 post-stage:
 		@(cd ${STAGEDIR}/${PREFIX}/etc/socksrc/ && \
 			${MV} system system.sample)

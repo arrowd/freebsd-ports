@@ -20,6 +20,7 @@ LIB_DEPENDS=	libsasl2.so:security/cyrus-sasl2 \
 		libpcre.so:devel/pcre
 
 CONFLICTS_INSTALL=	cyrus-imapd2? cyrus-imapd3? cyrus-imapd3?-http
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libcyrus.so.0:mail/cyrus-imapd34
 
 USES=		cpe libtool perl5 ssl
 USE_RC_SUBR=	imapd

@@ -67,6 +67,18 @@ PLIST_SUB=	ASSET_FILE=${_ASSET_FILE} \
 		GNAT_SO_VERSION=${_GCC_VER:R} \
 		VER=${DISTVERSION}
 
+SKIP_SHLIB_PROVIDES_IN_FAVOR=	libasan.so.8*:lang/gcc${GCC_DEFAULT} \
+				libatomic.so.1*:lang/gcc${GCC_DEFAULT} \
+				libcc1.so.0:lang/gcc${GCC_DEFAULT} \
+				libgcc_s.so.1*:lang/gcc${GCC_DEFAULT} \
+				libgccjit.so.0:lang/gcc${GCC_DEFAULT} \
+				libgfortran.so.5*:lang/gcc${GCC_DEFAULT} \
+				libgomp.so.1*:lang/gcc${GCC_DEFAULT} \
+				libitm.so.1*:lang/gcc${GCC_DEFAULT} \
+				libquadmath.so.0*:lang/gcc${GCC_DEFAULT} \
+				libstdc++.so.6*:lang/gcc${GCC_DEFAULT} \
+				libubsan.so.1*:lang/gcc${GCC_DEFAULT}
+
 OPTIONS_DEFINE=			ASSETS NLS
 .if exists(/usr/lib32/libc.so)
 OPTIONS_DEFINE_amd64+=	MULTILIB
