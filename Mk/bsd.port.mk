@@ -3509,11 +3509,15 @@ ${PKGFILE${_SP.${sp}}}: ${WRKDIR_PKGFILE${_SP.${sp}}}
 			if [ $$(basename $$(readlink ${PKGSHLIBSPROVIDEDDIR}/$${_p})) = $$(basename $${_pkgfile}) ]; then \
 				echo "===> same package, ok"; \
 			else \
-				echo "===> and not by the same package, fail"; \
-				false; \
+				case "${SKIP_SHLIB_PROVIDES_IN_FAVOR:C/:.*//}" in \
+					*$${_p}*) echo "===> skipping in favor ${SKIP_SHLIB_PROVIDES_IN_FAVOR}"; ;; \
+					*) echo "===> and not by the same package, fail"; false ;; \
+				esac; \
 			fi \
 		fi \
 	done
+.else
+	@echo "===> not a providing flavor, skip";
 .endif
 
 _EXTRA_PACKAGE_TARGET_DEP+=	${PKGFILE${_SP.${sp}}}
@@ -4874,6 +4878,12 @@ check-orphans: check-plist
 stage-qa:
 	@${ECHO_MSG} "====> Running Q/A tests (stage-qa)"
 	@${SETENV} ${QA_ENV} ${SH} ${SCRIPTSDIR}/qa.sh
+.      for _port in ${SKIP_SHLIB_PROVIDES_IN_FAVOR:C/.*://}
+.        if !exists(${PORTSDIR}/${_port})
+	@${ECHO_CMD} "The port skips providing shlibs in favor of ${_port}, but it doesn't exist"
+	@false
+.        endif
+.      endfor
 .      if !defined(DEVELOPER)
 	@${ECHO_MSG} "/!\\ To run stage-qa automatically add DEVELOPER=yes to your environment /!\\"
 .      endif
