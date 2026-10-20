@@ -3488,8 +3488,8 @@ ${PKGFILE${_SP.${sp}}}: ${WRKDIR_PKGFILE${_SP.${sp}}}
 		if [ ! -L "${PKGPROVIDESDIR}/$${_p}" ]; then \
 			${INSTALL} -l rs $${_pkgfile} ${PKGPROVIDESDIR}/$${_p}; \
 		else \
-			echo "===> ZZZ ${PKGPROVIDESDIR}/$${_p} is already provided by"; \
-			file ${PKGPROVIDESDIR}/$${_p}; \
+			echo -n "===> ZZZ ${PKGPROVIDESDIR}/$${_p} is already provided by "; \
+			readlink ${PKGPROVIDESDIR}/$${_p}; \
 			if [ $$(basename $$(readlink ${PKGPROVIDESDIR}/$${_p})) = $$(basename $${_pkgfile}) ]; then \
 				echo "===> same package, ok"; \
 			else \
@@ -3497,27 +3497,50 @@ ${PKGFILE${_SP.${sp}}}: ${WRKDIR_PKGFILE${_SP.${sp}}}
 			fi \
 		fi \
 	done; \
-	echo "===> Adding shlibs_provided to ${PKGSHLIBSPROVIDEDDIR}, already present:"; \
-	ls ${PKGSHLIBSPROVIDEDDIR}; \
+	_should_fail=no; \
 	for _p in $$(${PKG_QUERY} -F $${_pkgfile} '%b' 2>/dev/null); do \
+		_should_provide=yes; \
+		for _s in ${SKIP_SHLIB_PROVIDES_IN_FAVOR:C/:.*//} ; do \
+			case "$${_p}" in \
+				$${_s}) _should_provide=no; \
+					break; \
+					;; \
+			esac; \
+		done; \
+		if [ -L "${PKGSHLIBSPROVIDEDDIR}/$${_p}" ]; then \
+			if [ $$(basename $$(readlink ${PKGSHLIBSPROVIDEDDIR}/$${_p})) = "removeme" ]; then \
+				rm ${PKGSHLIBSPROVIDEDDIR}/$${_p}; \
+			fi \
+		fi; \
 		if [ ! -L "${PKGSHLIBSPROVIDEDDIR}/$${_p}" ]; then \
-			echo "===> ${PKGSHLIBSPROVIDEDDIR}/$${_p} does not exist, installing"; \
-			${INSTALL} -l rs $${_pkgfile} ${PKGSHLIBSPROVIDEDDIR}/$${_p}; \
+			if [ $$_should_provide = yes ]; then \
+				echo "===> ${PKGSHLIBSPROVIDEDDIR}/$${_p} does not exist, installing"; \
+				${INSTALL} -l rs $${_pkgfile} ${PKGSHLIBSPROVIDEDDIR}/$${_p}; \
+			fi; \
 		else \
-			echo "===> ZZZ ${PKGSHLIBSPROVIDEDDIR}/$${_p} is already provided by"; \
-			file ${PKGSHLIBSPROVIDEDDIR}/$${_p}; \
+			echo -n "===> ZZZ ${PKGSHLIBSPROVIDEDDIR}/$${_p} is already provided by "; \
+			readlink ${PKGSHLIBSPROVIDEDDIR}/$${_p}; \
 			if [ $$(basename $$(readlink ${PKGSHLIBSPROVIDEDDIR}/$${_p})) = $$(basename $${_pkgfile}) ]; then \
 				echo "===> same package, ok"; \
+				if [ $$_should_provide = no ]; then \
+					echo "should not provide in favor of other, removing"; \
+					rm ${PKGSHLIBSPROVIDEDDIR}/$${_p}; \
+					${INSTALL} -l rs removeme ${PKGSHLIBSPROVIDEDDIR}/$${_p}; \
+				fi; \
 			else \
-				case "${SKIP_SHLIB_PROVIDES_IN_FAVOR:C/:.*//}" in \
-					*$${_p}*) echo "===> skipping in favor ${SKIP_SHLIB_PROVIDES_IN_FAVOR}"; ;; \
-					*) echo "===> and not by the same package, fail"; false ;; \
-				esac; \
-			fi \
-		fi \
-	done
+				if [ $$_should_provide = yes ]; then \
+					echo "===> and not by the same package"; \
+					_should_fail=yes; \
+				else \
+					echo "===> skipping $${_p} in favor of ${SKIP_SHLIB_PROVIDES_IN_FAVOR:C/.*://}"; \
+				fi; \
+			fi; \
+		fi; \
+	done; \
+	if [ $$_should_fail = yes ]; then false; fi
 .else
 	@echo "===> not a providing flavor, skip";
+	@echo "TODO: cleanup"
 .endif
 
 _EXTRA_PACKAGE_TARGET_DEP+=	${PKGFILE${_SP.${sp}}}
