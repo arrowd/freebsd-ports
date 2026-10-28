@@ -5,11 +5,11 @@
  				"${PACKAGES:?}/.npkg/${pkgname:?}" \
  				"${mnt:?}/.npkg"
 +			mkdir "${mnt:?}/.npkg/provides"
-+			mkdir "${mnt:?}/.npkg/shlibs_provided"
++			mkdir "${mnt:?}/.npkg/shlibs"
 +			# cp -R ${POUDRIERE_DATA:?}/packages/${MASTERNAME}/provides/* "${mnt:?}/.npkg/provides/"
-+			# cp -R ${POUDRIERE_DATA:?}/packages/${MASTERNAME}/shlibs_provided/* "${mnt:?}/.npkg/shlibs_provided/"
++			# cp -R ${POUDRIERE_DATA:?}/packages/${MASTERNAME}/shlibs/* "${mnt:?}/.npkg/shlibs/"
 +			cp -R ${PACKAGES:?}/provides/* "${mnt:?}/.npkg/provides/"
-+			cp -R ${PACKAGES:?}/shlibs_provided/* "${mnt:?}/.npkg/shlibs_provided/"
++			cp -R ${PACKAGES:?}/shlibs/* "${mnt:?}/.npkg/shlibs/"
  			chown -R ${JUSER} "${mnt:?}/.npkg"
  			:> "${mnt:?}/.npkg_mounted"
  
@@ -18,7 +18,7 @@
  		# everything was fine we can copy the package to the package
  		# directory
 +		# rm -f "${PACKAGES:?}/.npkg/provides"
-+		# rm -f "${PACKAGES:?}/.npkg/shlibs_provided"
++		# rm -f "${PACKAGES:?}/.npkg/shlibs"
  		find "${PACKAGES:?}/.npkg/${pkgname}" \
  		    -mindepth 1 \( -type f -or -type l \) |
  		    while mapfile_read_loop_redir pkg_path; do
@@ -27,7 +27,7 @@
  		fi
  		rm -rfx "${PACKAGES:?}/.npkg/${pkgname:?}"
 +		rm -f "${PACKAGES:?}/.npkg/provides"
-+		rm -f "${PACKAGES:?}/.npkg/shlibs_provided"
++		rm -f "${PACKAGES:?}/.npkg/shlibs"
  
  		if [ "${PORTTESTING}" -eq 1 ]; then
  			if jail_has_processes; then

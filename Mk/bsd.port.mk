@@ -2602,7 +2602,7 @@ PKGREPOSITORY?=		${PACKAGES}/${PKGREPOSITORYSUBDIR}
 # The "latest version" link -- ${PKGNAME} minus everthing after the last '-'
 PKGLATESTREPOSITORY?=	${PACKAGES}/Latest
 PKGPROVIDESDIR?=	${PACKAGES}/provides
-PKGSHLIBSPROVIDEDDIR?=	${PACKAGES}/shlibs_provided
+PKGSHLIBSDIR?=	${PACKAGES}/shlibs
 PKGBASE?=			${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}
 PKGLATESTFILE=		${PKGLATESTREPOSITORY}/${PKGBASE}${PKG_SUFX}
 .    if ${PKG_COMPRESSION_FORMAT} == txz
@@ -3446,7 +3446,7 @@ do-test:
 _EXTRA_PACKAGE_TARGET_DEP+= ${PKGFILE}
 _PORTS_DIRECTORIES+=	${PKGREPOSITORY}
 _PORTS_DIRECTORIES+=	${PKGPROVIDESDIR}
-_PORTS_DIRECTORIES+=	${PKGSHLIBSPROVIDEDDIR}
+_PORTS_DIRECTORIES+=	${PKGSHLIBSDIR}
 
 .      if ${PKGORIGIN} == "ports-mgmt/pkg" || ${PKGORIGIN} == "ports-mgmt/pkg-devel"
 _EXTRA_PACKAGE_TARGET_DEP+=	${PKGLATESTREPOSITORY}
@@ -3507,25 +3507,25 @@ ${PKGFILE${_SP.${sp}}}: ${WRKDIR_PKGFILE${_SP.${sp}}}
 					;; \
 			esac; \
 		done; \
-		if [ -L "${PKGSHLIBSPROVIDEDDIR}/$${_p}" ]; then \
-			if [ $$(basename $$(readlink ${PKGSHLIBSPROVIDEDDIR}/$${_p})) = "removeme" ]; then \
-				rm ${PKGSHLIBSPROVIDEDDIR}/$${_p}; \
+		if [ -L "${PKGSHLIBSDIR}/$${_p}" ]; then \
+			if [ $$(basename $$(readlink ${PKGSHLIBSDIR}/$${_p})) = "removeme" ]; then \
+				rm ${PKGSHLIBSDIR}/$${_p}; \
 			fi \
 		fi; \
-		if [ ! -L "${PKGSHLIBSPROVIDEDDIR}/$${_p}" ]; then \
+		if [ ! -L "${PKGSHLIBSDIR}/$${_p}" ]; then \
 			if [ $$_should_provide = yes ]; then \
-				echo "===> ${PKGSHLIBSPROVIDEDDIR}/$${_p} does not exist, installing"; \
-				${INSTALL} -l rs $${_pkgfile} ${PKGSHLIBSPROVIDEDDIR}/$${_p}; \
+				echo "===> ${PKGSHLIBSDIR}/$${_p} does not exist, installing"; \
+				${INSTALL} -l rs $${_pkgfile} ${PKGSHLIBSDIR}/$${_p}; \
 			fi; \
 		else \
-			echo -n "===> ZZZ ${PKGSHLIBSPROVIDEDDIR}/$${_p} is already provided by "; \
-			readlink ${PKGSHLIBSPROVIDEDDIR}/$${_p}; \
-			if [ $$(basename $$(readlink ${PKGSHLIBSPROVIDEDDIR}/$${_p})) = $$(basename $${_pkgfile}) ]; then \
+			echo -n "===> ZZZ ${PKGSHLIBSDIR}/$${_p} is already provided by "; \
+			readlink ${PKGSHLIBSDIR}/$${_p}; \
+			if [ $$(basename $$(readlink ${PKGSHLIBSDIR}/$${_p})) = $$(basename $${_pkgfile}) ]; then \
 				echo "===> same package, ok"; \
 				if [ $$_should_provide = no ]; then \
 					echo "should not provide in favor of other, removing"; \
-					rm ${PKGSHLIBSPROVIDEDDIR}/$${_p}; \
-					${INSTALL} -l rs removeme ${PKGSHLIBSPROVIDEDDIR}/$${_p}; \
+					rm ${PKGSHLIBSDIR}/$${_p}; \
+					${INSTALL} -l rs removeme ${PKGSHLIBSDIR}/$${_p}; \
 				fi; \
 			else \
 				if [ $$_should_provide = yes ]; then \
