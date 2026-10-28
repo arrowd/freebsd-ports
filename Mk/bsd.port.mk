@@ -4411,9 +4411,6 @@ PACKAGE-DEPENDS-LIST?= \
 .    for sp in ${_PKGS}
 ACTUAL-PACKAGE-DEPENDS${_SP.${sp}}?= \
 	depfiles="" ; \
-	for lib in ${LIB_DEPENDS${_SP.${sp}}:C/\:.*//}; do \
-		depfiles="$$depfiles `${SETENV} LIB_DIRS="${LIB_DIRS}" LOCALBASE="${LOCALBASE}" ${SH} ${SCRIPTSDIR}/find-lib.sh $${lib}`" ; \
-	done ; \
 	for self in ${SELF_DEPENDS${_SP.${sp}}}; do \
 		if [ "$$self" = "main" ]; then \
 			printf "\"%s\": {origin: \"%s\", version: \"%s\"}\n" ${PKGBASE} ${PKGORIGIN} ${PKGVERSION}; \
