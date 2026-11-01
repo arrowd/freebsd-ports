@@ -1,5 +1,6 @@
 PORTNAME=	gtk-doc
 DISTVERSION=	1.36.1
+PORTREVISION=	1
 CATEGORIES=	textproc
 MASTER_SITES=	GNOME
 DIST_SUBDIR=	gnome
@@ -15,7 +16,8 @@ BUILD_DEPENDS=	${PYTHON_PKGNAMEPREFIX}pygments>0:textproc/py-pygments@${PY_FLAVO
 		${PYTHON_PKGNAMEPREFIX}parameterized>0:devel/py-parameterized@${PY_FLAVOR} \
 		docbook-xml>0:textproc/docbook-xml \
 		docbook-xsl>0:textproc/docbook-xsl
-RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}pygments>0:textproc/py-pygments@${PY_FLAVOR} \
+RUN_DEPENDS=	xsltproc:textproc/libxslt \
+		${PYTHON_PKGNAMEPREFIX}pygments>0:textproc/py-pygments@${PY_FLAVOR} \
 		docbook-xml>0:textproc/docbook-xml \
 		docbook-xsl>0:textproc/docbook-xsl
 TEST_DEPENDS=	${PYTHON_PKGNAMEPREFIX}lxml>0:devel/py-lxml@${PY_FLAVOR}
