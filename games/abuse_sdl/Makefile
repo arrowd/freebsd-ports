@@ -1,6 +1,6 @@
 PORTNAME=	abuse_sdl
 PORTVERSION=	0.8
-PORTREVISION=	9
+PORTREVISION=	10
 CATEGORIES=	games
 MASTER_SITES=	http://abuse.zoy.org/raw-attachment/wiki/download/
 DISTNAME=	abuse-${DISTVERSION}
@@ -21,7 +21,7 @@ USES=		cpe gl localbase:ldflags pathfix sdl
 CPE_VENDOR=	abuse
 CPE_PRODUCT=	abuse-sdl
 USE_CXXSTD=	c++14
-USE_GL=		gl
+USE_GL=		gl glu
 USE_SDL=	mixer sdl
 
 GNU_CONFIGURE=	yes
