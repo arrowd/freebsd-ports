@@ -13,6 +13,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 BUILD_DEPENDS=	dotnet>=${DOTNET_VER}:lang/dotnet
 LIB_DEPENDS=	libbrotlienc.so:archivers/brotli \
+		libicuuc.so:devel/icu \
 		libinotify.so:devel/libinotify \
 		libunwind.so:devel/libunwind
 RUN_DEPENDS=	dotnet:lang/dotnet-host \
