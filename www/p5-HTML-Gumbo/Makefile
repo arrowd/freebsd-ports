@@ -15,6 +15,7 @@ LICENSE_COMB=	dual
 BUILD_DEPENDS=	p5-Alien-Build>0:devel/p5-Alien-Build \
 		p5-Alien-LibGumbo>0:devel/p5-Alien-LibGumbo \
 		p5-PkgConfig>0:devel/p5-PkgConfig
+LIB_DEPENDS=	libgumbo.so:devel/gumbo
 RUN_DEPENDS=	p5-Alien-LibGumbo>0:devel/p5-Alien-LibGumbo
 
 USES=		perl5
