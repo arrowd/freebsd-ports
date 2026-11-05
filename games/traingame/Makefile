@@ -1,6 +1,6 @@
 PORTNAME=	traingame
 PORTVERSION=	0.3
-PORTREVISION=	38
+PORTREVISION=	39
 CATEGORIES=	games
 
 MAINTAINER=	ports@FreeBSD.org
@@ -26,7 +26,7 @@ USES=		cmake:insource compiler:c++11-lib dos2unix gl gnome pkgconfig \
 DOS2UNIX_GLOB=	*.mtl *.obj
 USE_CXXSTD=	c++11
 USE_SDL=	sdl image
-USE_GL=		glew
+USE_GL=		glew glu
 
 LDFLAGS+=	-L${LOCALBASE}/lib
 CFLAGS+=	-Wno-return-type
