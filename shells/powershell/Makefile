@@ -1,7 +1,6 @@
 PORTNAME=	powershell
 DISTVERSIONPREFIX=v
-DISTVERSION=	7.5.5
-PORTREVISION=	1
+DISTVERSION=	7.6.9
 CATEGORIES=	shells
 
 MAINTAINER=	arrowd@FreeBSD.org
@@ -26,7 +25,7 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	PowerShell
 GH_PROJECT=	PowerShell
 
-DOTNET_VER=	9.0.14
+DOTNET_VER=	10.0.10
 DOTNET_ARCH=	${ARCH:S/amd64/x64/:S/aarch64/arm64/}
 
 NUGET_GROUPS=	NUGET PWSH
@@ -158,7 +157,7 @@ post-patch:
 		${WRKSRC}/nuget.config
 	${REINPLACE_CMD} -e 's|%%PORTVERSION%%|${PORTVERSION}|' \
 		${WRKSRC}/PowerShell.Common.props
-	${REINPLACE_CMD} -e 's|9.0.312|9.0.111|' ${WRKSRC}/global.json
+	${REINPLACE_CMD} -e 's|10.0.403|10.0.110|' ${WRKSRC}/global.json
 
 do-build:
 	cd ${WRKSRC}/src/ResGen && \
